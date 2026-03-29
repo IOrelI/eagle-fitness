@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eagle Fitness Studio — Кольцово</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:300,300i,400,400i|raleway:300,400,500|jost:300,400,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--rose:#b89090;--dk:#6b5a55;--sand:#d4c5b5;--charcoal:#635A56;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;--nt:#9e3a3a;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Jost',sans-serif;color:var(--td);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:8px 48px;background:rgba(245,240,235,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(151,137,127,0.18);}
+.nav-logo img{height:66px;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--td);}
+.nav-cta{padding:10px 24px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.nav-cta:hover{opacity:.82;}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px;}
+.burger span{width:22px;height:1.5px;background:var(--td);display:block;}
+.mob-menu{position:fixed;inset:0;background:var(--bg);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mob-menu.open{opacity:1;pointer-events:all;}
+.mob-menu a{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--td);text-decoration:none;}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;background-image:url('https://res.cloudinary.com/dve1ywzim/image/upload/_DSF2822_3_cigstg.jpg');background-size:cover;background-position:center;}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(20,16,12,0.65);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(151,137,127,0.08) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,78px);font-weight:300;line-height:1.1;letter-spacing:.04em;color:#ffffff !important;animation:fadeD .9s .1s ease both;}
+.hero-tag em{font-style:italic;color:#d4c5b5 !important;}
+.hero-sub{margin-top:18px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.85) !important;animation:fadeD 1s .2s ease both;}
+.hero-logo{width:380px;margin-bottom:28px;animation:fadeD .8s ease both;}
+.hero-tag{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,78px);font-weight:300;line-height:1.1;letter-spacing:.04em;color:var(--td);animation:fadeD .9s .1s ease both;}
+.hero-tag em{font-style:italic;color:var(--taupe);}
+.hero-sub{margin-top:18px;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--tm);animation:fadeD 1s .2s ease both;}
+.hero-btns{display:flex;gap:14px;margin-top:44px;animation:fadeD 1s .3s ease both;}
+.btn-p{padding:13px 34px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.btn-p:hover{opacity:.82;}
+.btn-long{white-space:nowrap;padding:13px 24px;font-size:10px;letter-spacing:.12em;}
+.btn-dl{padding:12px 28px;border-radius:100px;border:1.5px solid var(--taupe);background:transparent;color:var(--tm);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.btn-dl:hover{background:var(--beige);border-color:var(--beige);color:var(--td);}
+.btn-o{padding:13px 34px;border-radius:100px;border:1.5px solid rgba(245,240,235,0.6);color:rgba(245,240,235,0.9);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.btn-o:hover{background:rgba(245,240,235,0.15);border-color:rgba(245,240,235,0.9);}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,235,0.5);animation:fadeD 1s .5s ease both;margin-top:48px;}
+.scroll-line{width:1px;height:36px;background:rgba(245,240,235,0.4);animation:sline 1.6s ease infinite;}
+@keyframes sline{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.3}}
+section{padding:96px 24px;}
+.si{max-width:1100px;margin:0 auto;}
+.slabel{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.stitle{font-family:'Raleway',sans-serif;font-weight:300;font-size:clamp(26px,4vw,46px);letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:44px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-text p{font-size:15px;line-height:1.9;color:var(--tm);margin-bottom:18px;}
+.about-ph{aspect-ratio:4/5;border-radius:24px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:40px;}
+.stat{padding:22px;background:var(--beige);border-radius:14px;text-align:center;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--td);line-height:1;}
+.stat-l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-top:5px;}
+.dir-bg{background:var(--bg-dark);}
+.dir-bg .stitle{color:var(--tl);}
+.dir-bg .slabel{color:var(--beige);}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.dcard{padding:26px 22px;border-radius:16px;border:1px solid rgba(245,240,235,0.1);transition:border-color .2s,transform .2s;cursor:default;}
+.dcard:hover{border-color:rgba(245,240,235,0.28);transform:translateY(-2px);}
+.dcard.fit{background:rgba(151,137,127,0.18);}
+.dcard.dance{background:rgba(99,90,86,0.22);}
+.dcard.yoga{background:rgba(184,144,144,0.18);}
+.dcard.kids{background:rgba(212,197,181,0.08);}
+.dcard.special{background:rgba(184,144,144,0.28);border-color:rgba(184,144,144,0.35);}
+.dn{font-family:'Raleway',sans-serif;font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--tl);margin-bottom:8px;}
+.dd{font-size:12px;line-height:1.7;color:rgba(245,240,235,0.5);}
+.tr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px;}
+.tcard{text-align:center;}
+.tphoto{width:100%;aspect-ratio:3/4;border-radius:18px;background:var(--beige);margin-bottom:14px;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tm);}
+.tname{font-family:'Raleway',sans-serif;font-weight:400;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:3px;}
+.trole{font-size:12px;color:var(--tm);}
+.sch-bg{background:#f0ebe4;}
+.tabs-w{margin-bottom:20px;}
+.tabs-r{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;}
+.tabr{padding:8px 18px;border-radius:100px;border:1.5px solid var(--taupe);background:transparent;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tm);cursor:pointer;transition:all .2s;}
+.tabr:hover{background:var(--beige);border-color:var(--beige);color:var(--td);}
+.tabr.active{background:var(--dk);border-color:var(--dk);color:var(--tl);}
+.dpanel{display:none;max-width:540px;margin:0 auto;animation:fadeU .3s ease;}
+.dpanel.active{display:block;}
+.dtitle{font-family:'Raleway',sans-serif;font-weight:400;font-size:19px;letter-spacing:.2em;text-transform:uppercase;text-align:center;color:#6b5a55;margin-bottom:8px;}
+.sc{display:flex;align-items:center;gap:13px;padding:10px 14px;border-radius:13px;margin-bottom:6px;transition:transform .15s;}
+.sc:hover{transform:translateY(-1px);}
+.sc.beige{background:var(--beige);}
+.sc.taupe{background:var(--taupe);}
+.sc.rose{background:var(--rose);}
+.sc.dark{background:var(--dk);}
+.sc.sand{background:var(--sand);}
+.sc.charcoal{background:var(--charcoal);}
+.sc-t{font-size:12px;font-weight:500;color:var(--tl);min-width:48px;flex-shrink:0;}
+.sc.beige .sc-t,.sc.sand .sc-t{color:var(--td);opacity:.7;}
+.sc-i{flex:1;}
+.sc-n{font-size:12px;color:var(--tl);line-height:1.3;}
+.sc.beige .sc-n,.sc.sand .sc-n{color:var(--td);}
+.sc-m{font-size:11px;color:rgba(245,240,235,.7);margin-top:1px;}
+.sc.beige .sc-m,.sc.sand .sc-m{color:var(--tm);}
+.nbadge{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:500;color:var(--nt);text-transform:uppercase;flex-shrink:0;}
+.sdiv{display:flex;align-items:center;gap:10px;margin:10px 0 6px;}
+.sdiv-l{flex:1;height:1px;background:var(--beige);}
+.sdiv-t{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--tm);opacity:.7;}
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.pr-grid--personal{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;justify-content:center;}
+.pcard{padding:30px 26px;border-radius:20px;background:var(--beige);}
+.pcard.feat{background:var(--dk);}
+.pcat{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--tm);margin-bottom:18px;}
+.pcard.feat .pcat{color:rgba(245,240,235,.55);}
+.prow{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid rgba(90,74,68,.1);}
+.pcard.feat .prow{border-bottom-color:rgba(245,240,235,.1);}
+.prow:last-of-type{border-bottom:none;}
+.pname{font-size:13px;color:var(--td);}
+.pcard.feat .pname{color:var(--tl);}
+.pamt{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--td);white-space:nowrap;}
+.pcard.feat .pamt{color:var(--tl);}
+.pnotes{margin-top:32px;padding:22px;border-radius:14px;background:var(--beige);font-size:13px;line-height:1.9;color:var(--tm);}
+.pnotes p{margin-bottom:6px;}
+.pnotes p:last-child{margin-bottom:0;}
+.onl-bg{background:var(--bg-dark);}
+.onl-ph{border:1px dashed rgba(245,240,235,.15);border-radius:22px;padding:72px 32px;text-align:center;color:rgba(245,240,235,.3);font-size:12px;letter-spacing:.18em;text-transform:uppercase;}
+.onl-ph .big{font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:300;color:rgba(245,240,235,.1);letter-spacing:.08em;display:block;margin-bottom:14px;}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.cblock{margin-bottom:32px;}
+.clabel{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--taupe);margin-bottom:8px;}
+.cval{font-size:15px;color:var(--td);text-decoration:none;display:block;line-height:1.6;}
+.cval:hover{color:var(--taupe);}
+.socials{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.sbtn{padding:9px 18px;border-radius:100px;border:1.5px solid var(--taupe);color:var(--tm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.sbtn:hover{background:var(--beige);color:var(--td);}
+.map-ph{aspect-ratio:4/3;border-radius:18px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);}
+footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.fl img{height:32px;opacity:.5;}
+.ft{font-size:11px;color:rgba(245,240,235,.7);letter-spacing:.06em;}
+.flinks{display:flex;gap:20px;}
+.flinks a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,235,.7);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:#fff;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}.no-js .reveal{opacity:1;transform:none;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@keyframes fadeD{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Большие десктопы (1400px+) */
+@media(min-width:1400px){
+  .si{max-width:1200px;}
+  .pr-grid{gap:24px;}
+}
+
+/* Планшеты в ландшафтной ориентации и маленькие десктопы (1024px - 1199px) */
+@media(max-width:1199px){
+  .pr-grid{grid-template-columns:repeat(2,1fr);gap:18px;}
+  .pr-grid--personal{grid-template-columns:1fr 1fr;}
+  .about-grid{gap:48px;}
+  nav{padding:8px 32px;}
+  .nav-links{gap:18px;}
+  .nav-links a{font-size:10px;letter-spacing:.14em;}
+}
+
+/* Планшеты (768px - 1023px) */
+@media(max-width:1023px){
+  .pr-grid{grid-template-columns:repeat(2,1fr);}
+  .pr-grid--personal{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .about-ph{max-width:500px;margin:0 auto;}
+  .ct-grid{gap:48px;}
+  .tr-grid{grid-template-columns:repeat(3,1fr);gap:18px;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  section{padding:80px 24px;}
+  .hero-logo{width:min(340px,70vw);}
+  footer{padding:36px 32px;}
+}
+
+/* Мобильные устройства (до 767px) */
+@media(max-width:767px){
+  .btn-long{font-size:9px;padding:12px 18px;letter-spacing:.1em;}
+  .btn-dl{font-size:10px;padding:10px 20px;letter-spacing:.1em;}
+  .hero{min-height:auto;padding:100px 24px 60px;}
+  .scroll-hint{display:none;}
+  nav{padding:13px 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:flex;}
+  .nav-logo{height:40px;overflow:hidden;}
+  .nav-logo img{height:40px;width:auto;max-width:120px;}
+  section{padding:64px 18px;}
+  .about-grid,.ct-grid{grid-template-columns:1fr;gap:36px;}
+  .pr-grid{grid-template-columns:1fr;}
+  .pr-grid--personal{grid-template-columns:1fr;}
+  .about-ph,.map-ph{display:none;}
+  .hero-tag{font-size:clamp(28px,8vw,40px);}
+  .hero-logo{width:min(320px,80vw);}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .hero-btns a{width:100%;max-width:280px;text-align:center;}
+  .tr-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .tphoto{aspect-ratio:1/1;}
+  .tname{font-size:12px;}
+  .trole{font-size:11px;}
+  .tabs-r{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;justify-content:flex-start;scrollbar-width:none;}
+  .tabs-r::-webkit-scrollbar{display:none;}
+  .tabr{flex-shrink:0;}
+  .dir-grid{grid-template-columns:1fr;}
+  .stitle{font-size:clamp(20px,5vw,26px);margin-bottom:28px;}
+  .pnotes{font-size:12px;padding:16px;}
+  .stat-n{font-size:clamp(28px,8vw,40px);}
+  .stats{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .stat{padding:16px 12px;}
+  .stat-l{font-size:9px;}
+  footer{flex-direction:column;text-align:center;padding:32px 20px;}
+  .flinks{justify-content:center;}
+  .onl-ph{padding:48px 20px;}
+  .onl-ph .big{font-size:clamp(32px,10vw,54px);}
+  .pcard{padding:24px 20px;}
+  .pamt{font-size:clamp(17px,4vw,21px);}
+  .cblock{margin-bottom:24px;}
+}
+
+/* Маленькие мобильные (до 480px) */
+@media(max-width:480px){
+  .btn-long{font-size:9px;padding:12px 16px;letter-spacing:.08em;}
+  .btn-dl{font-size:9px;padding:10px 16px;letter-spacing:.08em;}
+  section{padding:48px 16px;}
+  .hero{padding:90px 16px 50px;}
+  .hero-sub{font-size:10px;letter-spacing:.2em;}
+  .btn-p,.btn-o{padding:12px 28px;font-size:10px;}
+  .tr-grid{gap:10px;}
+  .tname{font-size:11px;letter-spacing:.06em;}
+  .stats{gap:10px;}
+  .stat{padding:14px 10px;}
+  .stat-n{font-size:28px;}
+  .stat-l{font-size:8px;letter-spacing:.1em;}
+  .slabel{font-size:9px;letter-spacing:.25em;}
+  .dcard{padding:20px 16px;}
+  .dn{font-size:12px;}
+  .dd{font-size:11px;}
+  .sc{padding:8px 10px;gap:10px;}
+  .sc-t{font-size:11px;min-width:42px;}
+  .sc-n{font-size:11px;}
+  .sc-m{font-size:10px;}
+  .nbadge{width:28px;height:28px;font-size:7px;}
+  .prow{padding:8px 0;}
+  .pname{font-size:12px;}
+  .pcat{font-size:9px;margin-bottom:14px;}
+  .socials{gap:8px;}
+  .sbtn{padding:8px 14px;font-size:10px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="#hero"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/logo_qreeb6.svg" alt="Eagle"></a></div>
+  <ul class="nav-links">
+    <li><a href="#about">О студии</a></li>
+    <li><a href="#directions">Направления</a></li>
+    <li><a href="#trainers">Тренеры</a></li>
+    <li><a href="#schedule">Расписание</a></li>
+    <li><a href="#prices">Цены</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+  </ul>
+  <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="nav-cta">Записаться</a>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="cm()">О студии</a>
+  <a href="#directions" onclick="cm()">Направления</a>
+  <a href="#trainers" onclick="cm()">Тренеры</a>
+  <a href="#schedule" onclick="cm()">Расписание</a>
+  <a href="#prices" onclick="cm()">Цены</a>
+  <a href="#contacts" onclick="cm()">Контакты</a>
+  <a href="tel:89609613556" style="color:var(--taupe);">📞 +7 960 961-35-56</a>
+</div>
+
+<section id="hero" class="hero">
+  <h1 class="hero-tag">Место, где<br>находят <em>себя</em></h1>
+  <p class="hero-sub">Fitness Studio · Наукоград Кольцово</p>
+  <div class="hero-btns">
+    <a href="#schedule" class="btn-p">Расписание</a>
+    <a href="#about" class="btn-o">О студии</a>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
+</section>
+
+<section id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="slabel">О студии</div>
+        <h2 class="stitle">Eagle Fitness Studio</h2>
+        <p>У нас каждый найдёт своё направление — от йоги и пилатеса до танцев и функционального тренинга.</p>
+        <p>Наши тренеры — профессионалы с индивидуальным подходом. Мы верим, что движение должно приносить радость и результат.</p>
+        <p style="color:var(--taupe);font-size:13px;font-style:italic;">— Мы создали студию, в которую хочется возвращаться — не потому что надо, а потому что нравится.</p>
+        <div class="stats" style="grid-template-columns:repeat(2,1fr);">
+          <div class="stat">
+            <div class="stat-n">12+</div>
+            <div class="stat-l">Фитнес направлений</div>
+            <div style="font-size:11px;color:var(--tm);margin-top:6px;line-height:1.5;">По одному абонементу</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">8</div>
+            <div class="stat-l">Танцевальных направлений</div>
+            <div style="font-size:11px;color:var(--tm);margin-top:6px;line-height:1.5;">Для взрослых и детей</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">10+</div>
+            <div class="stat-l">Тренеров</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">7</div>
+            <div class="stat-l">Дней в неделю</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-ph reveal" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/studio_tpdabm.jpg" loading="lazy" alt="Eagle Fitness Studio" style="width:100%;height:100%;object-fit:cover;border-radius:24px;"></div>
+    </div>
+  </div>
+</section>
+
+<section id="directions" class="dir-bg">
+  <div class="si">
+    <div class="slabel reveal">Чем мы занимаемся</div>
+    <h2 class="stitle reveal">Направления</h2>
+    <div class="dir-grid">
+      <div class="dcard fit reveal"><div class="dn">Круговые тренировки</div><div class="dd">Ягодицы и ноги · Пресс, руки и спина · Всё тело. Эффективный формат для всего тела.</div></div>
+      <div class="dcard fit reveal"><div class="dn">Здоровая спина</div><div class="dd">Укрепление мышц спины, коррекция осанки и избавление от болей. Подходит для всех уровней.</div></div>
+      <div class="dcard fit reveal"><div class="dn">Функциональный тренинг</div><div class="dd">Тренировки на всё тело с акцентом на силу, выносливость и координацию движений.</div></div>
+      <div class="dcard yoga reveal"><div class="dn">Пилатес</div><div class="dd">Глубокая проработка мышц кора, улучшение осанки и гибкости. Для всех уровней подготовки.</div></div>
+      <div class="dcard yoga reveal"><div class="dn">Растяжка и МФР</div><div class="dd">Стретчинг и миофасциальный релиз для снятия напряжения, восстановления и гибкости.</div></div>
+      <div class="dcard fit reveal"><div class="dn">Fit Cardio</div><div class="dd">Высокоинтенсивное кардио для похудения, укрепления сердечно-сосудистой системы и прилива энергии.</div></div>
+      <div class="dcard yoga reveal"><div class="dn">Йога, акробатика и растяжка в гамаках</div><div class="dd">Воздушная акробатика, йога и глубокая растяжка в гамаках. Развивает силу, гибкость и координацию.</div></div>
+      <div class="dcard dance reveal"><div class="dn">Танцы</div><div class="dd">Strip Choreo, Latina Solo, High Heels, Female Heels. Для тех, кто хочет двигаться красиво, чувствовать своё тело и получать удовольствие от танца.</div></div>
+      <div class="dcard kids reveal"><div class="dn">Детские занятия</div><div class="dd">Детский танец, йога, Teen Choreo. Для детей от 3 до 16 лет.</div></div>
+      <div class="dcard fit reveal"><div class="dn">Аштанга йога и стойки на руках</div><div class="dd">Динамичная практика йоги и воркаут с элементами акробатики. Сила тела и баланс. Не входит в фитнес-абонемент.</div></div>
+      <div class="dcard special reveal"><div class="dn">Персональные занятия</div><div class="dd">Индивидуальные тренировки по любому направлению студии, а также классический и тайский бокс.</div></div>
+      <div class="dcard special reveal"><div class="dn">Аренда зала</div><div class="dd">Сдаём зал в аренду для личных тренировок, персональных и групповых занятий, практик, лекций и мероприятий.</div></div>
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="directions.html" class="btn-p btn-long reveal">Хочу узнать о направлениях подробнее</a>
+    </div>
+  </div>
+</section>
+
+<section id="trainers">
+  <div class="si">
+    <div class="slabel reveal">Команда</div>
+    <h2 class="stitle reveal">Наши тренеры</h2>
+                <div class="tr-grid">
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-oryol-new_ahkgcs.webp" loading="lazy" alt="Анастасия Орёл" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Анастасия Орёл</div><div class="trole">Основатель, руководитель и тренер студии</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/anna-moiseeva-new_cm8rke.webp" loading="lazy" alt="Анна Моисеева" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Анна Моисеева</div><div class="trole">Администратор студии</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp" loading="lazy" alt="Алиса Куприй" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Алиса Куприй</div><div class="trole">Фитнес направления</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp" loading="lazy" alt="Екатерина Гусева" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Екатерина Гусева</div><div class="trole">Фитнес направления</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp" loading="lazy" alt="Мария Карамышева" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Мария Карамышева</div><div class="trole">Strip Choreo, High Heels</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-kolesnikova-new_pwyvev.webp" loading="lazy" alt="Дарья Колесникова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Дарья Колесникова</div><div class="trole">Йога в гамаках</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp" loading="lazy" alt="Мария Меренкова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Мария Меренкова</div><div class="trole">Пилатес, интенсивные круговые</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/irina-ursul-new_kphfq5.webp" loading="lazy" alt="Ирина Урсул" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Ирина Урсул</div><div class="trole">Йога для подростков</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/tatyana-klevtsova-new_wmfuj0.webp" loading="lazy" alt="Татьяна Клевцова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Татьяна Клевцова</div><div class="trole">Детский танец</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-bratton-new_l4lpau.webp" loading="lazy" alt="Мария Браттон" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Мария Браттон</div><div class="trole">Latina Solo</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp" loading="lazy" alt="Анджелина Пергамент" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Анджелина Пергамент</div><div class="trole">Choreo Weekend</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp" loading="lazy" alt="Дарья Коршакова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Дарья Коршакова</div><div class="trole">Strip Plastic, акробатика в гамаках</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp" loading="lazy" alt="Мария Депутатова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Мария Депутатова</div><div class="trole">Zumba</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-kolmogorova_spitkv.webp" loading="lazy" alt="Анастасия Колмогорова" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Анастасия Колмогорова</div><div class="trole">Аштанга йога, Стойки на руках</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/dmitriy-vasilev_zpwbzj.webp" loading="lazy" alt="Дмитрий Васильев" style="width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:18px;"></div><div class="tname">Дмитрий Васильев</div><div class="trole">Персональный тренер по классическому боксу</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="schedule" class="sch-bg">
+  <div class="si">
+    <div class="slabel reveal">Когда приходить</div>
+    <h2 class="stitle reveal">Расписание</h2>
+    <div class="tabs-w reveal"><div class="tabs-r" id="tabsR"></div></div>
+    <div id="schedR"></div>
+    <div style="max-width:540px;margin:12px auto 0;font-size:11px;color:var(--taupe);letter-spacing:.06em;text-align:center;">Количество мест ограничено, предварительная запись обязательна!</div>
+    <div style="text-align:center;margin-top:24px;">
+      <button id="dlBtn" class="btn-dl" onclick="downloadSchedule()">⬇ Скачать расписание на день</button>
+    </div>
+    <div style="text-align:center;margin-top:12px;">
+      <button id="dlAllBtn" class="btn-dl" onclick="downloadFullSchedule()">⬇ Скачать полное расписание студии</button>
+    </div>
+    <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--taupe);letter-spacing:.06em;"></div>
+  </div>
+</section>
+
+<section id="prices">
+  <div class="si">
+    <div class="slabel reveal">Стоимость</div>
+    <h2 class="stitle reveal">Абонементы</h2>
+    <div class="pr-grid">
+      <div class="pcard reveal">
+        <div class="pcat">Разовые занятия</div>
+        <div class="prow"><span class="pname">Пробное занятие</span><span class="pamt">400 ₽</span></div>
+        <div class="prow"><span class="pname">Разовое занятие</span><span class="pamt">700 ₽</span></div>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(107,90,85,0.08);border-radius:10px;font-size:12px;line-height:1.7;color:var(--tm);">🎁 При покупке абонемента в день пробного занятия — пробное <strong>бесплатно</strong></div>
+      </div>
+      <div class="pcard reveal">
+        <div class="pcat">Фитнес — абонементы</div>
+        <div class="prow"><span class="pname">4 занятия</span><span class="pamt">2 200 ₽</span></div>
+        <div class="prow"><span class="pname">8 занятий</span><span class="pamt">3 800 ₽</span></div>
+        <div class="prow"><span class="pname">12 занятий</span><span class="pamt">4 600 ₽</span></div>
+        <div class="prow"><span class="pname">16 занятий</span><span class="pamt">5 200 ₽</span></div>
+        <div class="prow"><span class="pname">«Безлимит» 30 дней</span><span class="pamt">7 500 ₽</span></div>
+      </div>
+      <div class="pcard feat reveal">
+        <div class="pcat">Танцевальный абонемент</div>
+        <div class="prow"><span class="pname">4 занятия по 2 часа</span><span class="pamt">3 800 ₽</span></div>
+        <div class="prow"><span class="pname">8 занятий по 1 часу</span><span class="pamt">3 800 ₽</span></div>
+        <div class="pcat" style="margin-top:20px;">Танцы + фитнес</div>
+        <div class="prow"><span class="pname">16 занятий (8+8)</span><span class="pamt">6 400 ₽</span></div>
+        <div class="pcat" style="margin-top:20px;">Дополнительно</div>
+        <div class="prow"><span class="pname">Продление (7 дней)</span><span class="pamt">600 ₽</span></div>
+      </div>
+    
+      <div class="pcard reveal">
+          <div class="pcat">Аштанга йога и стойки на руках — Анастасия Колмогорова</div>
+          <div class="prow"><span class="pname">Разовое занятие</span><span class="pamt">900 ₽</span></div>
+          <div class="pcat" style="margin-top:20px;">Абонементы</div>
+          <div class="prow"><span class="pname">4 занятия</span><span class="pamt">2 700 ₽</span></div>
+          <div class="prow"><span class="pname">8 занятий</span><span class="pamt">4 400 ₽</span></div>
+          <div style="margin-top:14px;font-size:11px;color:var(--tm);letter-spacing:.05em;">Срок действия — 4 недели · Только занятия Анастасии Колмогоровой</div>
+        </div>
+    </div>
+    <div class="pnotes reveal">
+      <p>Срок действия любого абонемента — 4 недели, за исключением «Безлимита» (30 дней).</p>
+      <p>Купи новый абонемент, пока старый ещё действует — и получи скидку 10% (кроме абонементов на Аштанга йогу).</p>
+      <p>При наличии фитнес-абонемента — скидка 10% на танцевальный, и наоборот.</p>
+    </div>
+
+    <div style="margin-top:48px;">
+      <div class="slabel reveal">Персональные занятия</div>
+      <h3 class="stitle reveal" style="font-size:clamp(20px,3vw,32px);margin-bottom:32px;">Персональный тренинг</h3>
+      <div class="pr-grid pr-grid--personal">
+        <div class="pcard reveal">
+          <div class="pcat">Персональные занятия — фитнес</div>
+          <div class="prow"><span class="pname">Ведение по питанию (30 дней)</span><span class="pamt">5 000 ₽</span></div>
+          <div class="pcat" style="margin-top:20px;">Абонементы</div>
+          <div class="prow"><span class="pname">4 занятия</span><span class="pamt">6 400 ₽</span></div>
+          <div class="prow"><span class="pname">8 занятий</span><span class="pamt">11 500 ₽</span></div>
+          <div class="prow"><span class="pname">12 занятий</span><span class="pamt">16 000 ₽</span></div>
+          <div style="margin-top:14px;font-size:11px;color:var(--tm);letter-spacing:.05em;">Срок действия — 6 недель</div>
+        </div>
+
+        <div class="pcard feat reveal">
+          <div class="pcat">Бокс классический — Дмитрий Васильев</div>
+          <div class="prow"><span class="pname">Разовое занятие</span><span class="pamt">2 000 ₽</span></div>
+          <div class="prow"><span class="pname">Разовое сплит-занятие</span><span class="pamt">2 400 ₽</span></div>
+          <div class="pcat" style="margin-top:20px;">Абонементы / сплит</div>
+          <div class="prow"><span class="pname">4 занятия</span><span class="pamt">7 400 / 8 600 ₽</span></div>
+          <div class="prow"><span class="pname">8 занятий</span><span class="pamt">13 000 / 15 000 ₽</span></div>
+          <div class="prow"><span class="pname">12 занятий</span><span class="pamt">18 000 / 20 400 ₽</span></div>
+          <div class="pcat" style="margin-top:20px;">Тайский бокс — Александр Пелик</div>
+          <div class="prow"><span class="pname">Разовое занятие</span><span class="pamt">2 500 ₽</span></div>
+          <div class="prow"><span class="pname">Разовое сплит-занятие</span><span class="pamt">2 900 ₽</span></div>
+          <div class="pcat" style="margin-top:20px;">Абонементы / сплит</div>
+          <div class="prow"><span class="pname">4 занятия</span><span class="pamt">9 400 / 10 600 ₽</span></div>
+          <div class="prow"><span class="pname">8 занятий</span><span class="pamt">17 000 / 19 000 ₽</span></div>
+          <div class="prow"><span class="pname">12 занятий</span><span class="pamt">24 000 / 26 400 ₽</span></div>
+          <div style="margin-top:14px;font-size:11px;color:rgba(245,240,235,.55);letter-spacing:.05em;">Срок действия — 6 недель</div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<section id="online" class="onl-bg">
+  <div class="si">
+    <div class="slabel reveal" style="color:var(--beige);">Скоро</div>
+    <h2 class="stitle reveal" style="color:var(--tl);">Онлайн-курсы</h2>
+    <div class="onl-ph reveal"><span class="big">Скоро</span>Онлайн-курсы в разработке</div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="si">
+    <div class="slabel reveal">Где нас найти</div>
+    <h2 class="stitle reveal">Контакты</h2>
+    <div class="ct-grid">
+      <div class="reveal">
+        <div class="cblock"><div class="clabel">Адрес</div><span class="cval">Наукоград Кольцово, мкр. Спектр, дом 4</span></div>
+        <div class="cblock"><div class="clabel">Телефон</div><a href="tel:89609613556" class="cval">+7 960 961-35-56</a><div style="font-size:12px;color:var(--taupe);margin-top:4px;">позвонить и просто спросить</div></div>
+        <div class="cblock">
+          <div class="clabel">Социальные сети</div>
+          <div class="socials">
+            <a href="https://t.me/eaglefitstudiochannel" target="_blank" class="sbtn">Telegram</a>
+            <a href="https://vk.com/eagle.fit.studio" target="_blank" class="sbtn">VK</a>
+            <a href="https://www.instagram.com/eaglefitstudio" target="_blank" class="sbtn">Instagram</a>
+            <a href="https://max.ru/u/f9LHodD0cOLAUZweQmoueQ-UqM9ToouhfojM2SWpyVxX2xdQdl7O6BuZlUs" target="_blank" class="sbtn">Max</a>
+          </div>
+          <div style="font-size:12px;color:var(--taupe);margin-top:8px;">написать и просто спросить</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-ph reveal" style="padding:0;overflow:hidden;">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=83.202986%2C54.934334&z=16&pt=83.202986,54.934334,pm2rdm&text=Eagle%20Fitness%20Studio" width="100%" height="100%" style="border:none;border-radius:18px;display:block;" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl"><svg style="height:44px;width:auto;opacity:.85;" width="1336" height="251" viewBox="0 0 1336 251" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M59.2196 156.305C53.4076 159.379 42.0936 165.868 43.3528 174.172C44.2763 173.417 47.7351 170.901 54.1825 166.874L50.1529 170.649C50.5726 172.075 50.0017 174.927 44.3602 174.927C43.5207 175.515 41.6906 177.394 41.0861 180.212C40.5464 182.729 42.3454 188.265 52.1677 184.994C49.6491 184.071 47.6343 179.709 55.6936 175.682C67.5308 170.649 120.924 160.08 172.05 184.994C170.791 181.722 162.48 163.351 136.035 158.318C140.065 157.479 151.398 153.788 157.946 144.225C150.475 148.923 133.516 156.305 112.361 153.033C131.753 153.033 170.791 146.742 173.057 110.252C167.181 119.06 151.146 137.682 120.924 138.689C132.257 135.669 157.694 128.069 170.791 104.715C174.065 98.0045 178.346 82.0663 170.791 67.2186C170.791 77.2848 166.006 101.947 122.687 129.126C130.998 122.667 150.391 106.98 160.213 87.0994C161.998 83.4854 164.309 77.2848 164.494 68.4769C164.662 60.5078 160.465 42.4556 142.331 34C144.682 47.3378 145.706 79.2981 130.998 100.437C129.739 104.044 121.276 115.436 97.5014 134.159C88.1828 141.498 67.7826 151.775 59.2196 156.305Z" fill="#C8C4BF"/>
+<path d="M123.93 64.4562C144.747 91.1191 117.66 122.607 68 148C83.4665 131.071 108.882 86.8022 90.0711 35C103.531 38.1318 125.435 54.2989 116.657 92.8966C119.917 88.8337 123.93 79.6921 123.93 64.4562Z" fill="#C8C4BF"/>
+<path d="M282.795 109.588V117.526H255.887V130.928H280.011V138.454H255.887V151.959H283.619V160H247.331V109.588H282.795ZM311.612 148.557L306.56 160H297.488L319.756 109.588H328.828L350.993 160H341.921L336.87 148.557H311.612ZM333.468 140.619L324.292 119.897L315.117 140.619H333.468ZM402.963 135.464H411.416V152.68C406.674 157.973 399.87 160.619 391.004 160.619C383.512 160.619 377.258 158.144 372.241 153.196C367.224 148.247 364.715 142.062 364.715 134.639C364.715 127.216 367.258 120.997 372.344 115.979C377.499 110.893 383.719 108.351 391.004 108.351C398.289 108.351 404.337 110.447 409.148 114.639L404.612 121.134C401.107 118.179 396.811 116.701 391.726 116.701C386.571 116.701 382.241 118.385 378.736 121.753C375.299 125.052 373.581 129.347 373.581 134.639C373.581 139.931 375.231 144.227 378.53 147.526C381.897 150.756 386.055 152.371 391.004 152.371C395.815 152.371 399.801 151.34 402.963 149.278V135.464ZM432.702 160V109.588H441.258V151.959H464.248V160H432.702ZM518.986 109.588V117.526H492.079V130.928H516.202V138.454H492.079V151.959H519.811V160H483.522V109.588H518.986Z" fill="#C8C4BF"/>
+<path d="M576.463 117.526V131.34H598.835V139.175H576.463V160H567.907V109.588H601.515L601.412 117.526H576.463ZM617.559 109.588H626.116V160H617.559V109.588ZM665.092 117.32V160H656.536V117.32H641.278V109.588H680.35V117.32H665.092ZM733.507 109.588H741.961V160H732.786L704.229 123.196V160H695.672V109.588H704.229L733.507 147.216V109.588ZM797.488 109.588V117.526H770.581V130.928H794.704V138.454H770.581V151.959H798.313V160H762.024V109.588H797.488ZM821.996 122.268C821.996 124.399 822.786 125.945 824.367 126.907C825.948 128.076 829.316 129.278 834.47 130.515C839.9 131.821 843.852 133.608 846.326 135.876C848.869 138.144 850.14 141.409 850.14 145.67C850.14 150.137 848.457 153.746 845.089 156.495C841.79 159.244 837.46 160.619 832.099 160.619C824.333 160.619 817.323 157.869 811.068 152.371L816.429 145.979C821.652 150.447 826.945 152.68 832.305 152.68C834.986 152.68 837.151 152.096 838.8 150.928C840.45 149.691 841.274 148.11 841.274 146.186C841.274 144.261 840.518 142.749 839.006 141.649C837.563 140.55 834.951 139.553 831.171 138.66C824.642 137.148 820.106 135.361 817.563 133.299C814.608 131.031 813.13 127.56 813.13 122.887C813.13 118.351 814.78 114.811 818.079 112.268C821.378 109.656 825.604 108.351 830.759 108.351C837.701 108.351 843.646 110.378 848.594 114.433L844.058 120.825C842.546 119.45 840.518 118.351 837.975 117.526C835.433 116.632 832.924 116.186 830.45 116.186C827.907 116.186 825.845 116.735 824.264 117.835C822.752 118.866 821.996 120.344 821.996 122.268ZM873.504 122.268C873.504 124.399 874.294 125.945 875.875 126.907C877.456 128.076 880.823 129.278 885.978 130.515C891.408 131.821 895.36 133.608 897.834 135.876C900.377 138.144 901.648 141.409 901.648 145.67C901.648 150.137 899.964 153.746 896.597 156.495C893.298 159.244 888.968 160.619 883.607 160.619C875.841 160.619 868.83 157.869 862.576 152.371L867.937 145.979C873.16 150.447 878.452 152.68 883.813 152.68C886.494 152.68 888.659 152.096 890.308 150.928C891.957 149.691 892.782 148.11 892.782 146.186C892.782 144.261 892.026 142.749 890.514 141.649C889.071 140.55 886.459 139.553 882.679 138.66C876.15 137.148 871.614 135.361 869.071 133.299C866.116 131.031 864.638 127.56 864.638 122.887C864.638 118.351 866.287 114.811 869.586 112.268C872.885 109.656 877.112 108.351 882.267 108.351C889.208 108.351 895.153 110.378 900.102 114.433L895.566 120.825C894.054 119.45 892.026 118.351 889.483 117.526C886.94 116.632 884.432 116.186 881.957 116.186C879.415 116.186 877.353 116.735 875.772 117.835C874.26 118.866 873.504 120.344 873.504 122.268ZM950.836 122.268C950.836 124.399 951.626 125.945 953.207 126.907C954.788 128.076 958.156 129.278 963.31 130.515C968.74 131.821 972.692 133.608 975.166 135.876C977.709 138.144 978.98 141.409 978.98 145.67C978.98 150.137 977.296 153.746 973.929 156.495C970.63 159.244 966.3 160.619 960.939 160.619C953.173 160.619 946.162 157.869 939.908 152.371L945.269 145.979C950.492 150.447 955.784 152.68 961.145 152.68C963.826 152.68 965.991 152.096 967.64 150.928C969.29 149.691 970.114 148.11 970.114 146.186C970.114 144.261 969.358 142.749 967.846 141.649C966.403 140.55 963.791 139.553 960.011 138.66C953.482 137.148 948.946 135.361 946.403 133.299C943.448 131.031 941.97 127.56 941.97 122.887C941.97 118.351 943.619 114.811 946.918 112.268C950.217 109.656 954.444 108.351 959.599 108.351C966.54 108.351 972.485 110.378 977.434 114.433L972.898 120.825C971.386 119.45 969.358 118.351 966.815 117.526C964.272 116.632 961.764 116.186 959.29 116.186C956.747 116.186 954.685 116.735 953.104 117.835C951.592 118.866 950.836 120.344 950.836 122.268ZM1014.61 117.32V160H1006.06V117.32H990.797V109.588H1029.87V117.32H1014.61ZM1065.91 152.474C1069.83 152.474 1072.92 151.134 1075.19 148.454C1077.53 145.773 1078.7 142.131 1078.7 137.526V109.588H1087.25V137.835C1087.25 144.983 1085.3 150.55 1081.38 154.536C1077.46 158.522 1072.31 160.515 1065.91 160.515C1059.52 160.515 1054.37 158.522 1050.45 154.536C1046.53 150.55 1044.57 144.983 1044.57 137.835V109.588H1053.03V137.526C1053.03 142.199 1054.2 145.842 1056.53 148.454C1058.8 151.134 1061.93 152.474 1065.91 152.474ZM1123.98 109.588C1132.98 109.588 1139.93 111.787 1144.81 116.186C1149.68 120.515 1152.12 126.632 1152.12 134.536C1152.12 142.577 1149.72 148.832 1144.91 153.299C1140.1 157.766 1132.91 160 1123.36 160H1106.66V109.588H1123.98ZM1123.67 117.423H1115.22V151.959H1124.6C1130.78 151.959 1135.49 150.515 1138.72 147.629C1141.95 144.674 1143.57 140.378 1143.57 134.742C1143.57 123.196 1136.94 117.423 1123.67 117.423ZM1169.01 109.588H1177.57V160H1169.01V109.588ZM1220.77 116.082C1215.75 116.082 1211.52 117.869 1208.09 121.443C1204.65 125.017 1202.93 129.347 1202.93 134.433C1202.93 139.519 1204.65 143.849 1208.09 147.423C1211.52 150.928 1215.75 152.68 1220.77 152.68C1225.79 152.68 1230.01 150.928 1233.45 147.423C1236.89 143.849 1238.6 139.519 1238.6 134.433C1238.6 129.347 1236.89 125.017 1233.45 121.443C1230.01 117.869 1225.79 116.082 1220.77 116.082ZM1220.77 160.515C1213.21 160.515 1206.89 158.041 1201.8 153.093C1196.71 148.076 1194.17 141.856 1194.17 134.433C1194.17 127.01 1196.71 120.825 1201.8 115.876C1206.89 110.859 1213.21 108.351 1220.77 108.351C1228.33 108.351 1234.65 110.859 1239.74 115.876C1244.82 120.825 1247.37 127.01 1247.37 134.433C1247.37 141.856 1244.79 148.041 1239.63 152.99C1234.48 158.007 1228.19 160.515 1220.77 160.515Z" fill="#C8C4BF"/>
+</svg></div>
+  <div class="ft">© 2025 Eagle Fitness Studio · Наукоград Кольцово</div>
+  <div class="flinks">
+    <a href="#about">О студии</a>
+    <a href="#schedule">Расписание</a>
+    <a href="#prices">Цены</a>
+    <a href="#contacts">Контакты</a>
+  </div>
+</footer>
+<script>
+const SCHEDULE = {
+
+  mon: [
+    { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "15:00", name: "Йога для подростков 10+",           trainer: "Ирина Урсул",           hall: "Большой зал", isNew: false, color: "rose"  },
+    { time: "18:00", name: "Пилатес для подростков 10–14 лет",  trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "rose" },
+    { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "18:20", name: "Детский танец 3–5 лет",             trainer: "Татьяна Клевцова",      hall: "Малый зал",   isNew: false, color: "rose" },
+    { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "19:20", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
+    { time: "20:30", name: "Круговая. Ягодицы и ноги",          trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
+    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
+  ],
+
+  tue: [
+    { time: "8:40",        name: "Круговая. Пресс, руки, спина", trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:00",       name: "Пилатес",                      trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "10:00",       name: "Здоровая спина",               trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: true,  color: "taupe" },
+    { time: "11:10",       name: "ZUMBA",                        trainer: "Мария Депутатова",      hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "11:10",       name: "Fit Cardio",                   trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: true,  color: "taupe" },
+    { time: "16:50",       name: "Teen Choreo 12+",              trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: true,  color: "rose"  },
+    { time: "18:00",       name: "Растяжка в гамаках",           trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: true,  color: "taupe"  },
+    { time: "18:30–20:00", name: "Аштанга йога",                 trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
+    { time: "19:10",       name: "Круговая. Ягодицы и ноги",     trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:20",       name: "Здоровая спина",               trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
+    { time: "20:20",       name: "Растяжка",                     trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false, color: "taupe"  },
+    { time: "20:30",       name: "High Heels 18+",               trainer: "Мария Карамышева",      hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:30",       name: "Strip Choreo 18+",             trainer: "Мария Карамышева",      hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:30",       name: "Female Heels 16+",             trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "charcoal"  },
+  ],
+
+  wed: [
+    { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "taupe" },
+    { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "charcoal"  },
+    { time: "18:00", name: "Пилатес для подростков 10–14 лет",  trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "rose"  },
+    { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "18:20", name: "Детский танец 3–5 лет",             trainer: "Татьяна Клевцова",      hall: "Малый зал",   isNew: false, color: "rose" },
+    { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "19:20", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
+    { time: "20:30", name: "Круговая. Пресс, руки, спина",      trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
+    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
+  ],
+
+  thu: [
+    { time: "8:40",        name: "Круговая. Ягодицы и ноги",    trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:00",       name: "Пилатес",                     trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:00",       name: "Здоровая спина",              trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: true,  color: "taupe" },
+    { time: "11:10",       name: "ZUMBA",                       trainer: "Мария Депутатова",      hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "11:10",       name: "Fit Cardio",                  trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: true,  color: "taupe" },
+    { time: "15:00",       name: "Йога для подростков 10+",     trainer: "Ирина Урсул",           hall: "Большой зал", isNew: false, color: "rose"  },
+    { time: "16:50",       name: "Teen Choreo 12+",             trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false, color: "rose"  },
+    { time: "18:30–20:00", name: "Аштанга йога",                trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
+    { time: "19:10",       name: "Круговая. Пресс, руки, спина",trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:20",       name: "Здоровая спина",              trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
+    { time: "20:20",       name: "Растяжка",                    trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false, color: "taupe"  },
+    { time: "20:30",       name: "High Heels 18+",              trainer: "Мария Карамышева",      hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:30",       name: "Strip Choreo 18+",            trainer: "Мария Карамышева",      hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "21:30",       name: "Female Heels 16+",            trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "charcoal"  },
+  ],
+
+  fri: [
+    { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "taupe" },
+    { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "charcoal"  },
+    { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "18:30", name: "Детская йога 5–10 лет",             trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
+    { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "19:30", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:30", name: "Табата + МФР",                      trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
+    { time: "20:30", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
+  ],
+
+  sat: [
+    { time: "10:00",       name: "Воркаут: Стойка на руках",   trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
+    { time: "10:00",       name: "Пилатес",                    trainer: "Мария Меренкова",       hall: "Малый зал",   isNew: false, color: "taupe" },
+    { time: "11:10",       name: "Круговая. Всё тело",         trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "11:10",       name: "ZUMBA",                      trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "12:30–14:30", name: "Choreo Weekend 16+",         trainer: "Анжелина Пергамент",    hall: "Большой зал", isNew: false, color: "charcoal"  },
+  ],
+
+  sun: [
+    { time: "18:00", name: "Fit Cardio",          trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "18:00", name: "Детская йога 5–10 лет", trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
+    { time: "19:10", name: "Растяжка",            trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
+  ],
+
+};
+const DAYS=[
+  {key:"mon",label:"Пн",title:"Понедельник"},
+  {key:"tue",label:"Вт",title:"Вторник"},
+  {key:"wed",label:"Ср",title:"Среда"},
+  {key:"thu",label:"Чт",title:"Четверг"},
+  {key:"fri",label:"Пт",title:"Пятница"},
+  {key:"sat",label:"Сб",title:"Суббота"},
+  {key:"sun",label:"Вс",title:"Воскресенье"},
+];
+function gm(t){const s=t.split("–")[0].trim();const[h,m]=s.split(":").map(Number);return h*60+(m||0);}
+function sdiv(l){return`<div class="sdiv"><div class="sdiv-l"></div><span class="sdiv-t">${l}</span><div class="sdiv-l"></div></div>`;}
+function scard(i){const b=i.isNew?`<span class="nbadge">NEW</span>`:"";const tp=i.time.includes('–')?i.time.split('–'):[i.time,null];const thtml=tp[1]?`<span class="sc-t" style="line-height:1.3;">${tp[0]}<br><span style="opacity:.65">${tp[1]}</span></span>`:`<span class="sc-t">${tp[0]}</span>`;return`<div class="sc ${i.color}">${thtml}<div class="sc-i"><div class="sc-n">${i.name}</div><div class="sc-m">${i.trainer} · ${i.hall}</div></div>${b}</div>`;}
+function build(){
+  const te=document.getElementById("tabsR");
+  const se=document.getElementById("schedR");
+  DAYS.forEach(d=>{
+    const b=document.createElement("button");
+    b.className="tabr";b.textContent=d.label;b.dataset.key=d.key;
+    b.addEventListener("click",()=>show(d.key));
+    te.appendChild(b);
+    const p=document.createElement("div");
+    p.className="dpanel";p.id="dp-"+d.key;
+    const items=SCHEDULE[d.key]||[];
+    const hm=items.some(i=>gm(i.time)<16*60);
+    let h=`<div class="dtitle">${d.title}</div>`;
+    if(hm)h+=sdiv("Утро");
+    let he=false;
+    items.forEach(i=>{
+      if(gm(i.time)>=16*60&&!he){he=true;h+=sdiv("Вечер");}
+      h+=scard(i);
+    });
+    p.innerHTML=h;se.appendChild(p);
+  });
+}
+function show(key){
+  document.querySelectorAll(".dpanel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tabr").forEach(t=>t.classList.remove("active"));
+  const p=document.getElementById("dp-"+key);
+  const b=document.querySelector(`.tabr[data-key="${key}"]`);
+  if(p)p.classList.add("active");
+  if(b){b.classList.add("active");b.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});}
+}
+build();
+const dk=["sun","mon","tue","wed","thu","fri","sat"];
+const tk=dk[new Date().getDay()];
+show(document.getElementById("dp-"+tk)?tk:"mon");
+document.getElementById("burger").addEventListener("click",()=>document.getElementById("mobMenu").classList.toggle("open"));
+function cm(){document.getElementById("mobMenu").classList.remove("open");}
+// On mobile: skip animation entirely
+if(window.innerWidth<=768){
+  document.querySelectorAll(".reveal").forEach(r=>r.classList.add("visible"));
+}else{
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");});},{threshold:0.05,rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(r=>obs.observe(r));
+}
+</script>
+<script>
+function loadHtml2Canvas(cb) {
+  if (window.html2canvas) { cb(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  s.onload = cb;
+  document.head.appendChild(s);
+}
+function downloadSchedule() {
+  loadHtml2Canvas(function() { _downloadSchedule(); });
+}
+function _downloadSchedule() {
+  const activeDay = document.querySelector('.tabr.active');
+  if (!activeDay) return;
+  const dayKey = activeDay.dataset.key;
+  const dayName = activeDay.textContent;
+  const btn = document.getElementById('dlBtn');
+  btn.textContent = '⏳ Подготовка...';
+  btn.disabled = true;
+
+  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
+  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+
+  const items = SCHEDULE[dayKey] || [];
+  let cardsHtml = '';
+  let lastPeriod = null;
+  items.forEach(function(i) {
+    const mins = (function(t){ const s=t.split('–')[0].trim(); const p=s.split(':'); return parseInt(p[0])*60+(parseInt(p[1])||0); })(i.time);
+    const period = mins < 16*60 ? 'Утро' : 'Вечер';
+    if (period !== lastPeriod) {
+      cardsHtml += '<div style="display:flex;align-items:center;gap:10px;margin:10px 0 6px;"><div style="flex:1;height:1px;background:#d4c5b5;"></div><span style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#5a4a44;opacity:.7;">' + period + '</span><div style="flex:1;height:1px;background:#d4c5b5;"></div></div>';
+      lastPeriod = period;
+    }
+    const bg = colorBg[i.color] || '#97897f';
+    const tc = colorTxt[i.color] || '#f5f0eb';
+    const timeParts = i.time.includes('–') ? i.time.split('–') : [i.time, null];
+    const timeHtml = timeParts[1]
+      ? '<div style="min-width:52px;flex-shrink:0;line-height:1.3;"><div style="font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div><div style="font-size:11px;color:' + tc + ';opacity:.65;white-space:nowrap;">' + timeParts[1] + '</div></div>'
+      : '<div style="min-width:52px;flex-shrink:0;font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div>';
+    const newBadge = i.isNew ? '<div style="width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
+    cardsHtml += '<div style="display:flex;align-items:center;gap:10px;background:' + bg + ';border-radius:12px;padding:9px 11px;margin-bottom:6px;">' + timeHtml + '<div style="flex:1;"><div style="font-size:12px;color:' + tc + ';line-height:1.3;">' + i.name + '</div><div style="font-size:11px;color:' + tc + ';opacity:.7;margin-top:2px;">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
+  });
+
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:480px;background:#f5f0eb;padding:28px 24px;font-family:Jost,sans-serif;box-sizing:border-box;';
+  wrapper.innerHTML = '<div style="text-align:center;font-family:Raleway,sans-serif;font-size:15px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#2c2320;margin-bottom:18px;">' + (dayTitles[dayKey]||dayName) + '</div>' + cardsHtml;
+  document.body.appendChild(wrapper);
+
+  html2canvas(wrapper, { backgroundColor: '#f5f0eb', scale: 2, useCORS: true, logging: false, width: 480 })
+    .then(function(canvas) {
+      document.body.removeChild(wrapper);
+      const link = document.createElement('a');
+      link.download = 'расписание-' + dayName + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      btn.textContent = '⬇ Скачать расписание на день';
+      btn.disabled = false;
+    }).catch(function() {
+      document.body.removeChild(wrapper);
+      btn.textContent = '⬇ Скачать расписание на день';
+      btn.disabled = false;
+    });
+}
+
+function downloadFullSchedule() {
+  loadHtml2Canvas(function() { _downloadFullSchedule(); });
+}
+function _downloadFullSchedule() {
+  const btn = document.getElementById('dlAllBtn');
+  btn.textContent = '⏳ Подготовка...';
+  btn.disabled = true;
+
+  const colW = 320, gap = 14, pad = 28, cols = 3;
+  const totalW = cols * colW + (cols - 1) * gap + pad * 2;
+
+  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
+  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+
+  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const now = new Date();
+  const dateStr = 'от ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+
+  function buildDayCol(dayKey, dayTitle, fixedWidth) {
+    const items = SCHEDULE[dayKey] || [];
+    const wStyle = fixedWidth ? 'width:' + colW + 'px;' : 'flex:1;';
+    let html = '<div style="background:#fff;border-radius:14px;padding:12px;' + wStyle + '">';
+    html += '<div style="text-align:center;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#5a4a44;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #e8e0d8;">' + dayTitle + '</div>';
+    items.forEach(function(i) {
+      const bg = colorBg[i.color] || '#97897f';
+      const tc = colorTxt[i.color] || '#f5f0eb';
+      const timeParts = i.time.includes('\u2013') ? i.time.split('\u2013') : (i.time.includes('-') ? i.time.split('-') : [i.time, null]);
+      const timeHtml = timeParts[1]
+        ? '<div style="min-width:38px;flex-shrink:0;line-height:1.25;"><div style="font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;white-space:nowrap;">' + timeParts[1] + '</div></div>'
+        : '<div style="min-width:38px;flex-shrink:0;font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div>';
+      const newBadge = i.isNew ? '<div style="width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;letter-spacing:.04em;">NEW</div>' : '';
+      html += '<div style="display:flex;align-items:center;gap:6px;background:' + bg + ';border-radius:8px;padding:6px 7px;margin-bottom:4px;">' + timeHtml + '<div style="flex:1;min-width:0;"><div style="font-size:10px;color:' + tc + ';line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.name + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.trainer + ' | ' + i.hall + '</div></div>' + newBadge + '</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+  const rows = [['mon','tue','wed'], ['thu','fri','sat']];
+
+  let rowsHtml = '';
+  rows.forEach(function(row) {
+    rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
+    row.forEach(function(key) { rowsHtml += buildDayCol(key, dayTitles[key], false); });
+    rowsHtml += '</div>';
+  });
+  // Sunday under Saturday — same 3-column row, Thu+Fri+[Sat/Sun stacked]
+  // Already handled above, but let's put Sun in a sub-column under Sat
+  // Rebuild last row: Thu, Fri, Sat+Sun stacked
+  rowsHtml = '';
+  // Row 1: Mon Tue Wed
+  rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
+  ['mon','tue','wed'].forEach(function(key){ rowsHtml += buildDayCol(key, dayTitles[key], false); });
+  rowsHtml += '</div>';
+  // Row 2: Thu, Fri, Sat+Sun stacked
+  rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
+  ['thu','fri'].forEach(function(key){ rowsHtml += buildDayCol(key, dayTitles[key], false); });
+  rowsHtml += '<div style="flex:1;display:flex;flex-direction:column;gap:' + gap + 'px;">' + buildDayCol('sat', dayTitles['sat'], false).replace('flex:1;','') + buildDayCol('sun', dayTitles['sun'], false).replace('flex:1;','') + '</div>';
+  rowsHtml += '</div>';
+
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Jost,sans-serif;box-sizing:border-box;';
+  wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + rowsHtml + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo Weekend 14+, предварительная запись обязательна!</div>';
+  document.body.appendChild(wrapper);
+
+  html2canvas(wrapper, { backgroundColor: '#f5f0eb', scale: 2, useCORS: true, logging: false, width: totalW })
+    .then(function(canvas) {
+      document.body.removeChild(wrapper);
+      const link = document.createElement('a');
+      link.download = 'расписание-Eagle-Fitness.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      btn.textContent = '⬇ Скачать полное расписание студии';
+      btn.disabled = false;
+    }).catch(function() {
+      document.body.removeChild(wrapper);
+      btn.textContent = '⬇ Скачать полное расписание студии';
+      btn.disabled = false;
+    });
+}
+</script>
+</body>
+</html>
