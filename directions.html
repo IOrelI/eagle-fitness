@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Направления — Eagle Fitness Studio</title>
+<link href="https://fonts.bunny.net" rel="preconnect"/>
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:300,300i,400,400i|raleway:300,400,500|jost:300,400,500&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--rose:#b89090;--dk:#6b5a55;--charcoal:#635A56;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Jost',sans-serif;color:var(--td);}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:8px 48px;background:rgba(245,240,235,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(151,137,127,0.18);}
+.nav-logo{height:66px;overflow:hidden;}
+.nav-logo img{height:66px;width:auto;}
+.nav-back{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--td);}
+.nav-cta{padding:10px 24px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.nav-cta:hover{opacity:.82;}
+.hero-dir{padding:140px 24px 60px;text-align:center;}
+.slabel{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.hero-dir h1{font-family:'Raleway',sans-serif;font-weight:300;font-size:clamp(32px,5vw,56px);letter-spacing:.1em;text-transform:uppercase;color:var(--td);}
+.section-title{max-width:1100px;margin:48px auto 0;padding:0 24px;font-family:'Raleway',sans-serif;font-weight:300;font-size:clamp(18px,2.5vw,28px);letter-spacing:.12em;text-transform:uppercase;color:var(--td);}
+.directions-list{max-width:1100px;margin:0 auto;padding:0 24px 48px;}
+.dir-item{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;padding:56px 0;border-bottom:1px solid rgba(151,137,127,0.2);}
+.dir-item:last-child{border-bottom:none;}
+.dir-item:nth-child(even) .dir-content{order:2;}
+.dir-item:nth-child(even) .dir-info{order:1;}
+.dir-cat{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--taupe);margin-bottom:10px;}
+.dir-title{font-family:'Raleway',sans-serif;font-weight:300;font-size:clamp(20px,2.5vw,32px);letter-spacing:.08em;text-transform:uppercase;color:var(--td);margin-bottom:18px;}
+.dir-desc{font-size:14px;line-height:1.85;color:var(--tm);margin-bottom:22px;}
+.dir-for{background:var(--beige);border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.7;color:var(--tm);margin-bottom:22px;}
+.dir-for strong{display:block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);margin-bottom:5px;}
+.dir-complexity{font-size:12px;color:var(--taupe);margin-bottom:22px;}
+.btn-p{display:inline-block;padding:12px 30px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.btn-p:hover{opacity:.82;}
+.dir-info{display:flex;flex-direction:column;gap:12px;}
+.dir-info .btn-p{align-self:flex-start;margin-top:8px;}
+.info-block{padding:18px 20px;border-radius:14px;background:#fff;}
+.info-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);margin-bottom:10px;}
+.info-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid rgba(90,74,68,.08);font-size:13px;color:var(--td);}
+.info-row:last-child{border-bottom:none;}
+.info-row span:last-child{font-family:'Cormorant Garamond',serif;font-size:18px;}
+.trainer-mini{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.trainer-mini:last-child{margin-bottom:0;}
+.trainer-mini img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top center;flex-shrink:0;background:var(--beige);}
+.trainer-mini img[src=""]{display:none;}
+.trainer-mini-name{font-size:12px;font-family:'Raleway',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--td);}
+.trainer-mini-role{font-size:11px;color:var(--taupe);margin-top:2px;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+.pill{padding:4px 11px;border-radius:100px;background:var(--beige);font-size:11px;color:var(--tm);}
+.pill.dark{background:var(--dk);color:var(--tl);}
+.difficulty{display:flex;align-items:center;gap:8px;margin-bottom:22px;}
+.difficulty-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);}
+.dots{display:flex;gap:5px;}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--beige);}
+.dot.filled{background:var(--dk);}
+.dot.half{background:linear-gradient(to right, var(--dk) 50%, var(--beige) 50%);}
+
+.filter-bar{position:sticky;top:82px;z-index:100;background:rgba(245,240,235,0.95);backdrop-filter:blur(12px);padding:14px 24px;border-bottom:1px solid rgba(151,137,127,0.15);}
+.filter-inner{max-width:1100px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
+.ftab{padding:8px 18px;border-radius:100px;border:1.5px solid var(--taupe);background:transparent;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tm);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.ftab:hover{background:var(--beige);border-color:var(--beige);color:var(--td);}
+.ftab.active{background:var(--dk);border-color:var(--dk);color:var(--tl);}
+.dir-item{transition:opacity .2s;}
+.dir-item.hidden{display:none;}
+
+/* Планшеты в ландшафтной ориентации и маленькие десктопы (1024px - 1199px) */
+@media(max-width:1199px){
+  nav{padding:8px 32px;}
+  .dir-item{gap:48px;padding:48px 0;}
+  .info-block{padding:16px 18px;}
+}
+
+/* Планшеты (768px - 1023px) */
+@media(max-width:1023px){
+  nav{padding:10px 24px;}
+  .nav-logo{height:50px;}
+  .nav-logo img{height:50px;}
+  .dir-item{gap:36px;padding:44px 0;}
+  .dir-title{font-size:clamp(18px,3vw,28px);}
+  .hero-dir{padding:130px 24px 50px;}
+  .filter-bar{top:70px;}
+}
+
+/* Мобильные устройства (до 767px) */
+@media(max-width:767px){
+  nav{padding:12px 18px;}
+  .nav-logo{height:36px;overflow:hidden;}
+  .nav-logo img{height:36px;width:auto;max-width:100px;}
+  .nav-back{font-size:10px;letter-spacing:.12em;}
+  .nav-cta{padding:8px 16px;font-size:10px;}
+  .dir-item{grid-template-columns:1fr;gap:28px;padding:40px 0;}
+  .dir-item:nth-child(even) .dir-content{order:1;}
+  .dir-item:nth-child(even) .dir-info{order:2;}
+  .hero-dir{padding:100px 18px 36px;}
+  .hero-dir h1{font-size:clamp(24px,7vw,36px);}
+  .section-title{margin-top:32px;padding:0 18px;font-size:clamp(16px,4vw,22px);}
+  .directions-list{padding:0 18px 32px;}
+  .filter-bar{top:60px;padding:10px 18px;}
+  .filter-inner{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none;}
+  .filter-inner::-webkit-scrollbar{display:none;}
+  .ftab{flex-shrink:0;padding:7px 14px;font-size:10px;}
+  .dir-title{font-size:clamp(18px,5vw,26px);}
+  .dir-desc{font-size:13px;line-height:1.75;}
+  .dir-for{padding:12px 14px;font-size:12px;}
+  .info-block{padding:14px 16px;}
+  .info-row{font-size:12px;}
+  .info-row span:last-child{font-size:16px;}
+  .trainer-mini img{width:40px;height:40px;}
+  .trainer-mini-name{font-size:11px;}
+  .trainer-mini-role{font-size:10px;}
+  .pill{padding:3px 9px;font-size:10px;}
+  .dir-info{display:flex;flex-direction:column;gap:10px;}
+  .dir-info .btn-p{display:block;width:100%;text-align:center;margin-top:6px;}
+  .btn-p{padding:11px 24px;font-size:10px;}
+}
+
+/* Маленькие мобильные (до 480px) */
+@media(max-width:480px){
+  nav{padding:10px 14px;}
+  .nav-logo{height:32px;}
+  .nav-logo img{height:32px;max-width:90px;}
+  .nav-back{font-size:9px;letter-spacing:.1em;}
+  .nav-cta{padding:7px 12px;font-size:9px;letter-spacing:.1em;}
+  .hero-dir{padding:90px 14px 30px;}
+  .hero-dir h1{font-size:clamp(22px,6vw,32px);}
+  .slabel{font-size:9px;letter-spacing:.25em;}
+  .section-title{padding:0 14px;font-size:clamp(14px,4vw,18px);}
+  .directions-list{padding:0 14px 28px;}
+  .filter-bar{top:52px;padding:8px 14px;}
+  .ftab{padding:6px 12px;font-size:9px;letter-spacing:.08em;}
+  .dir-item{padding:32px 0;gap:24px;}
+  .dir-cat{font-size:9px;letter-spacing:.25em;}
+  .dir-title{font-size:clamp(16px,5vw,22px);}
+  .dir-desc{font-size:12px;}
+  .dir-for{padding:10px 12px;font-size:11px;}
+  .dir-for strong{font-size:8px;}
+  .info-block{padding:12px 14px;}
+  .info-label{font-size:8px;letter-spacing:.18em;}
+  .info-row{padding:6px 0;font-size:11px;}
+  .info-row span:last-child{font-size:15px;}
+  .trainer-mini{gap:10px;}
+  .trainer-mini img{width:36px;height:36px;}
+  .pill{padding:3px 8px;font-size:9px;}
+  .btn-p{padding:10px 20px;font-size:9px;}
+  .difficulty-label{font-size:8px;}
+  .dot{width:10px;height:10px;}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-logo"><a href="index.html"><img alt="Eagle" src="https://res.cloudinary.com/dve1ywzim/image/upload/logo_qreeb6.svg"/></a></div>
+<a class="nav-back" href="index.html">← На главную</a>
+<a class="nav-cta" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a>
+</nav>
+<div class="hero-dir">
+<div class="slabel">Eagle Fitness Studio · Кольцово</div>
+<h1>Направления</h1>
+</div>
+<div class="filter-bar">
+<div class="filter-inner">
+<button class="ftab active" data-filter="all">Все</button>
+<button class="ftab" data-filter="fitness">Фитнес</button>
+<button class="ftab" data-filter="soft">Мягкий фитнес</button>
+<button class="ftab" data-filter="yoga">Йога</button>
+<button class="ftab" data-filter="hammock">Гамаки</button>
+<button class="ftab" data-filter="dance">Танцы</button>
+<button class="ftab" data-filter="kids">Детские занятия</button>
+</div>
+</div>
+<div class="section-title" data-section="fitness soft yoga hammock">Фитнес</div>
+<div class="directions-list">
+<div class="dir-item" data-cat="fitness">
+<div class="dir-content">
+<div class="dir-cat">Фитнес</div>
+<h2 class="dir-title">Круговые тренировки</h2>
+<p class="dir-desc">Круговая тренировка — это занятие, в основной части которого упражнения выполняются по кругу с небольшим отдыхом. Три программы: ягодицы и ноги, пресс и руки и спина, всё тело. Такой формат эффективно укрепляет все группы мышц и заряжает энергией. В конце занятия предусмотрен комплекс на расслабление и растяжку проработанных групп мышц.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех уровней подготовки. Подходит тем, кто хочет укрепить тело и повысить выносливость.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренеры</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-oryol-new_ahkgcs.webp"/><div><div class="trainer-mini-name">Анастасия Орёл</div><div class="trainer-mini-role">Основатель, тренер фитнес направлений</div></div></div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"/><div><div class="trainer-mini-name">Мария Меренкова</div><div class="trainer-mini-role">Тренер пилатеса и круговых тренировок</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;font-weight:normal;">(фитнес-абонемент)</span></div>
+<div class="info-row"><span>4 занятия</span><span>2 200 ₽</span></div>
+<div class="info-row"><span>8 занятий</span><span>3 800 ₽</span></div>
+<div class="info-row"><span>12 занятий</span><span>4 600 ₽</span></div>
+<div class="info-row"><span>16 занятий</span><span>5 200 ₽</span></div>
+<div class="info-row"><span>Безлимит 30 дней</span><span>7 500 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 20:30</span><span class="pill">Вт 8:40, 19:10</span><span class="pill">Ср 20:30</span><span class="pill">Чт 8:40, 19:10</span><span class="pill">Сб 11:10</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="soft">
+<div class="dir-content">
+<div class="dir-cat">Фитнес</div>
+<h2 class="dir-title">Здоровая спина</h2>
+<p class="dir-desc">Здоровая спина — это тренировка, главная цель которой — укрепление мышц спины и кора, улучшение осанки и снятие мышечного напряжения. Занятие включает мягкие упражнения на подвижность, стабилизацию и растяжку, подходит для любого уровня подготовки и особенно полезно при малоподвижном образе жизни.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех уровней. Особенно полезно при малоподвижном образе жизни и болях в спине.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренеры</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-oryol-new_ahkgcs.webp"/><div><div class="trainer-mini-name">Анастасия Орёл</div><div class="trainer-mini-role">Основатель, тренер фитнес направлений</div></div></div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"/><div><div class="trainer-mini-name">Алиса Куприй</div><div class="trainer-mini-role">Тренер фитнес направлений</div></div></div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер фитнес направлений</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 9:00, 19:20</span><span class="pill">Вт 10:00, 20:20</span><span class="pill">Ср 9:00, 19:20</span><span class="pill">Чт 10:00, 20:20</span><span class="pill">Пт 9:00, 19:20</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="fitness">
+<div class="dir-content">
+<div class="dir-cat">Фитнес</div>
+<h2 class="dir-title">Функциональный тренинг</h2>
+<p class="dir-desc">Функциональный тренинг — это тренировка, главная цель которой — подготовить тело к нагрузкам реальной жизни за счёт укрепления ключевых двигательных паттернов и улучшения координации между различными группами мышц.</p>
+<div class="dir-for"><strong>Для кого</strong>Для тех, кто хочет быть в хорошей физической форме и улучшить общее самочувствие.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренеры</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"/><div><div class="trainer-mini-name">Алиса Куприй</div><div class="trainer-mini-role">Тренер фитнес направлений</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 10:10</span><span class="pill">Ср 10:10, 18:10</span><span class="pill">Пт 10:10, 18:10</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="soft">
+<div class="dir-content">
+<div class="dir-cat">Мягкий фитнес</div>
+<h2 class="dir-title">Пилатес</h2>
+<p class="dir-desc">Пилатес — это система упражнений для глубокой проработки мышц кора, улучшения осанки и гибкости. Занятия направлены на осознанное движение, контроль тела и дыхание. Подходит для восстановления после травм, коррекции осанки и как дополнение к любому виду спорта.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех уровней подготовки. Особенно подходит тем, кто хочет улучшить осанку и укрепить глубокие мышцы.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"/><div><div class="trainer-mini-name">Мария Меренкова</div><div class="trainer-mini-role">Тренер пилатеса и круговых тренировок</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 20:30</span><span class="pill">Вт 10:00</span><span class="pill">Ср 20:30</span><span class="pill">Чт 10:00</span><span class="pill">Сб 10:00</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="soft">
+<div class="dir-content">
+<div class="dir-cat">Мягкий фитнес</div>
+<h2 class="dir-title">Растяжка и МФР</h2>
+<p class="dir-desc">Стретчинг и миофасциальный релиз — занятие, направленное на снятие мышечного напряжения, восстановление после нагрузок и улучшение гибкости. МФР помогает прорабатывать глубокие слои мышц и фасций с помощью роллов и мячей. Идеально как самостоятельная тренировка или восстановление после интенсивных занятий.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех. Особенно полезно тем, кто много тренируется или ведёт сидячий образ жизни.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренеры</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-oryol-new_ahkgcs.webp"/><div><div class="trainer-mini-name">Анастасия Орёл</div><div class="trainer-mini-role">Основатель, тренер фитнес направлений</div></div></div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер фитнес направлений</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 21:40</span><span class="pill">Вт 20:20</span><span class="pill">Ср 21:40</span><span class="pill">Чт 20:20</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="fitness">
+<div class="dir-content">
+<div class="dir-cat">Фитнес</div>
+<h2 class="dir-title">Fit Cardio</h2>
+<p class="dir-desc">Fit Cardio — высокоинтенсивная кардиотренировка для сжигания калорий, укрепления сердечно-сосудистой системы и прилива энергии. Динамичный формат сочетает кардио-интервалы с силовыми элементами для максимального эффекта за минимальное время.</p>
+<div class="dir-for"><strong>Для кого</strong>Для тех, кто хочет повысить выносливость и зарядиться энергией.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер фитнес направлений</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 11:10</span><span class="pill">Чт 11:10</span><span class="pill">Вс 18:00</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="fitness">
+<div class="dir-content">
+<div class="dir-cat">Фитнес</div>
+<h2 class="dir-title">Zumba</h2>
+<p class="dir-desc">Zumba — это танцевальная фитнес-тренировка в ритме латиноамериканской музыки. Сочетает элементы сальсы, меренге, кумбии и других стилей. Тренировка одновременно сжигает калории и поднимает настроение — заниматься весело, не замечаешь, как пролетает час.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех, кто любит двигаться под музыку. Уровень подготовки не важен.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp"/><div><div class="trainer-mini-name">Мария Депутатова</div><div class="trainer-mini-role">Тренер Zumba</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 11:10</span><span class="pill">Чт 11:10</span><span class="pill">Сб 11:10</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+</div>
+<div class="section-title" data-section="yoga hammock">Йога и стойки на руках</div>
+<div class="directions-list">
+<div class="dir-item" data-cat="yoga">
+<div class="dir-content">
+<div class="dir-cat">Йога</div>
+<h2 class="dir-title">Аштанга йога и стойки на руках</h2>
+<p class="dir-desc">Аштанга йога — динамичная практика с фиксированной последовательностью поз, которая развивает силу, гибкость и концентрацию. Стойки на руках — воркаут с элементами акробатики: балансировка, укрепление плечевого пояса и кора. Направления ведёт Анастасия Колмогорова — мастер спорта по художественной гимнастике.</p>
+<div class="dir-for"><strong>Для кого</strong>Для тех, кто готов к регулярной осознанной практике. Требует базового уровня физической подготовки.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-kolmogorova_spitkv.webp"/><div><div class="trainer-mini-name">Анастасия Колмогорова</div><div class="trainer-mini-role">Тренер аштанга йоги и стоек на руках</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(отдельный абонемент)</span></div>
+<div class="info-row"><span>Разовое занятие</span><span>900 ₽</span></div>
+<div class="info-row"><span>4 занятия</span><span>2 700 ₽</span></div>
+<div class="info-row"><span>8 занятий</span><span>4 400 ₽</span></div>
+<div style="margin-top:8px;font-size:11px;color:var(--taupe);">Не входит в фитнес-абонемент</div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 18:30–20:00</span><span class="pill">Чт 18:30–20:00</span><span class="pill">Сб 10:00 (стойки)</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="hammock">
+<div class="dir-content">
+<div class="dir-cat">Гамаки</div>
+<h2 class="dir-title">Йога в гамаках</h2>
+<p class="dir-desc">Йога в гамаках — это воздушная практика, которая сочетает классические асаны с поддержкой подвесного гамака. Позволяет глубже проработать растяжку, снять нагрузку с позвоночника и почувствовать лёгкость в теле. Перевёрнутые положения помогают расслабить спину и улучшить кровообращение.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех — от новичков до практикующих йогу. Особенно понравится тем, кто хочет добавить лёгкости в тренировки.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot half"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-kolesnikova-new_pwyvev.webp"/><div><div class="trainer-mini-name">Дарья Колесникова</div><div class="trainer-mini-role">Тренер йоги в гамаках</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 19:20</span><span class="pill">Ср 19:20</span><span class="pill">Пт 19:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="hammock">
+<div class="dir-content">
+<div class="dir-cat">Гамаки</div>
+<h2 class="dir-title">Растяжка в гамаках</h2>
+<p class="dir-desc">Глубокая растяжка в гамаках — занятие, которое сочетает работу с гибкостью и расслаблением мышц в подвешенном состоянии. Гамак помогает безопасно и эффективно раскрыть тело, снять мышечное напряжение и улучшить подвижность суставов.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех — независимо от уровня подготовки и возраста.</div>
+<div class="difficulty"><span class="difficulty-label">Сложность</span><div class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span></div></div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренеры</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер растяжки в гамаках</div></div></div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp"/><div><div class="trainer-mini-name">Дарья Коршакова</div><div class="trainer-mini-role">Тренер растяжки в гамаках</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 18:00</span><span class="pill">Ср 11:20</span><span class="pill">Чт 18:00</span><span class="pill">Пт 11:20</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+</div>
+
+<div class="section-title">Танцы</div>
+<div class="directions-list">
+<div class="dir-item" data-cat="dance">
+<div class="dir-content">
+<div class="dir-cat">Танцы 18+</div>
+<h2 class="dir-title">Strip Choreo и High Heels</h2>
+<p class="dir-desc">Strip Choreo — баланс уверенности и женственности. Направление объединяет в себе много разных стилей, несмотря на то, что исполняется в партере. Strip-Choreo подходит как новичкам, так и танцовщицам с опытом. Этот стиль помогает не только улучшить физическую форму и координацию, но и прокачать уверенность, раскрыть свою харизму и научиться чувствовать себя в кадре и на сцене.</p>
+<div class="dir-for"><strong>Для кого</strong>Для женщин от 18 лет. Специальной подготовки не требуется.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp"/><div><div class="trainer-mini-name">Мария Карамышева</div><div class="trainer-mini-role">Тренер Strip Choreo и High Heels</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(танцевальный абонемент)</span></div>
+<div class="info-row"><span>Пробное занятие</span><span>400 ₽</span></div>
+<div class="info-row"><span>8 занятий по 1 часу</span><span>3 800 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 20:30, 21:30</span><span class="pill">Чт 20:30, 21:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="dance">
+<div class="dir-content">
+<div class="dir-cat">Танцы 18+</div>
+<h2 class="dir-title">Strip Plastic</h2>
+<p class="dir-desc">Strip Plastic — это мягкая хореография, растяжка и работа с пластикой тела. Занятия учат двигаться плавно и уверенно, чувствовать музыку и своё тело.</p>
+<div class="dir-for"><strong>Для кого</strong>Для женщин от 18 лет. Специальной подготовки не нужно — важно желание двигаться.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp"/><div><div class="trainer-mini-name">Дарья Коршакова</div><div class="trainer-mini-role">Тренер Strip Plastic</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(танцевальный абонемент)</span></div>
+<div class="info-row"><span>Пробное занятие</span><span>400 ₽</span></div>
+<div class="info-row"><span>8 занятий по 1 часу</span><span>3 800 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Ср 12:30</span><span class="pill">Пт 12:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="dance">
+<div class="dir-content">
+<div class="dir-cat">Танцы 16+</div>
+<h2 class="dir-title">Female Heels</h2>
+<p class="dir-desc">Female Heels 16+ — это танцевальное направление, которое подразумевает развитие уверенности в себе, пластики и женственности. Занятия проходят на каблуках, в специальных туфлях. В ходе тренировки идёт развитие красивой походки, координации движений, сохранения баланса и осознанного движения тела. На занятиях разучивается хореография, а по завершении — съёмка готового танца.</p>
+<div class="dir-for"><strong>Для кого</strong>Для девушек от 16 лет. Главное — желание чувствовать себя красиво, уверенно и свободно в движении.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер Female Heels и фитнес направлений</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(танцевальный абонемент)</span></div>
+<div class="info-row"><span>Пробное занятие</span><span>400 ₽</span></div>
+<div class="info-row"><span>8 занятий по 1 часу</span><span>3 800 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 21:30</span><span class="pill">Чт 21:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="dance">
+<div class="dir-content">
+<div class="dir-cat">Танцы 14+</div>
+<h2 class="dir-title">Latina Solo</h2>
+<p class="dir-desc">Latina Solo — горячее танцевальное направление, в котором латиноамериканская страсть встречается с женственностью и энергией! На занятиях вы изучите движения и связки в стиле сальсы, бачаты, ча-ча-ча и самбы, разовьёте чувство ритма, пластику и уверенность в себе.</p>
+<div class="dir-for"><strong>Для кого</strong>Для всех уровней. Главное — желание двигаться и получать удовольствие от танца. От 14 лет.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-bratton-new_l4lpau.webp"/><div><div class="trainer-mini-name">Мария Браттон</div><div class="trainer-mini-role">Тренер Latina Solo</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(танцевальный абонемент)</span></div>
+<div class="info-row"><span>Пробное занятие</span><span>400 ₽</span></div>
+<div class="info-row"><span>8 занятий по 1 часу</span><span>3 800 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 21:40</span><span class="pill">Ср 21:40</span><span class="pill">Пт 20:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="dance">
+<div class="dir-content">
+<div class="dir-cat">Танцы 16+</div>
+<h2 class="dir-title">Тренер Choreo Weekend</h2>
+<p class="dir-desc">Choreo Weekend — двухчасовое занятие по хореографии в формате выходного дня. За одно занятие разучивается полноценная постановка: работа с техникой, музыкальностью, пластикой и выразительностью. Отличный способ погрузиться в хореографию глубже, чем на обычном часовом занятии.</p>
+<div class="dir-for"><strong>Для кого</strong>Для девушек от 16 лет. Приветствуются все уровни подготовки — от новичков до тех, кто уже танцует.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp"/><div><div class="trainer-mini-name">Анджелина Пергамент</div><div class="trainer-mini-role">Тренер Choreo Weekend</div></div></div>
+</div>
+<div class="info-block">
+<div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(танцевальный абонемент)</span></div>
+<div class="info-row"><span>Пробное занятие (2 часа)</span><span>800 ₽</span></div>
+<div class="info-row"><span>4 занятия по 2 часа</span><span>3 800 ₽</span></div>
+</div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill dark">Сб 12:30–14:30</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+</div>
+
+<div class="section-title">Детские и подростковые занятия</div>
+<div class="directions-list">
+<div class="dir-item" data-cat="kids">
+<div class="dir-content">
+<div class="dir-cat">Дети 3–5 лет</div>
+<h2 class="dir-title">Детский танец</h2>
+<p class="dir-desc">Детский танец — это первые шаги в мир музыки и движения. На занятиях дети в игровой форме развивают чувство ритма, координацию, гибкость и артистичность. Танцы помогают раскрыть творческие способности и дарят радость общения со сверстниками.</p>
+<div class="dir-for"><strong>Для кого</strong>Для детей от 3 до 5 лет. Подходит активным малышам — занятия в игровой форме развивают координацию, память и любовь к движению.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/tatyana-klevtsova-new_wmfuj0.webp"/><div><div class="trainer-mini-name">Татьяна Клевцова</div><div class="trainer-mini-role">Детский хореограф</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 18:20</span><span class="pill">Ср 18:20</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="kids">
+<div class="dir-content">
+<div class="dir-cat">Дети 5–10 лет</div>
+<h2 class="dir-title">Тренер детской йоги</h2>
+<p class="dir-desc">Занятия детской йогой развивают гибкость, координацию и концентрацию внимания в игровой форме. Дети учатся расслабляться, дышать и чувствовать своё тело.</p>
+<div class="dir-for"><strong>Для кого</strong>Для детей от 5 до 10 лет. Занятия помогают развить координацию, укрепить мышцы, улучшить осанку и познакомить ребёнка с осознанным движением.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-kolmogorova_spitkv.webp"/><div><div class="trainer-mini-name">Анастасия Колмогорова</div><div class="trainer-mini-role">Тренер детской йоги</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пт 18:30</span><span class="pill">Вс 18:00</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="kids">
+<div class="dir-content">
+<div class="dir-cat">Подростки 10+</div>
+<h2 class="dir-title">Тренер йоги для подростков</h2>
+<p class="dir-desc">Занятия йогой помогают подросткам развить гибкость, улучшить осанку, снять напряжение и научиться концентрироваться. Мягкий и осознанный подход к телу.</p>
+<div class="dir-for"><strong>Для кого</strong>Для подростков от 10 лет — особенно тем, кто много сидит за учёбой. Занятия помогают снять напряжение, выровнять осанку и развить гибкость.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/irina-ursul-new_kphfq5.webp"/><div><div class="trainer-mini-name">Ирина Урсул</div><div class="trainer-mini-role">Тренер йоги для подростков</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 15:00</span><span class="pill">Чт 15:00</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="soft">
+<div class="dir-content">
+<div class="dir-cat">Подростки 10–14 лет</div>
+<h2 class="dir-title">Пилатес для подростков</h2>
+<p class="dir-desc">Пилатес для подростков (10–14 лет) — это тренировки, которые помогают укрепить мышцы, развить гибкость и скорректировать осанку. Занятия проходят в формате, близком к силовому тренингу: контроль тела, баланс и дыхание. Делают подростков сильнее, выносливее и увереннее в себе.</p>
+<div class="dir-for"><strong>Для кого</strong>Для подростков от 10 до 14 лет. Подходит тем, кто хочет стать сильнее, выровнять осанку и научиться успокаиваться — пилатес мягко работает с нервной системой и учит управлять своим телом.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"/><div><div class="trainer-mini-name">Мария Меренкова</div><div class="trainer-mini-role">Тренер пилатеса и круговых тренировок</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены <span style="font-size:9px;color:var(--taupe);letter-spacing:.1em;text-transform:none;">(детский абонемент)</span></div><div class="info-row"><span>4 занятия</span><span>2 200 ₽</span></div><div class="info-row"><span>8 занятий</span><span>3 800 ₽</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Пн 18:00</span><span class="pill">Ср 18:00</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+<div class="dir-item" data-cat="kids">
+<div class="dir-content">
+<div class="dir-cat">Подростки 12+</div>
+<h2 class="dir-title">Teen Choreo</h2>
+<p class="dir-desc">Teen Choreo 12+ — современное танцевальное направление для подростков, где сочетаются энергия, стиль и свобода самовыражения. Занятия помогают развить координацию, чувство ритма, гибкость и уверенность в движениях. На тренировках изучаем современные хореографии, работаем над техникой и музыкальностью, развиваем тело и осанку, учимся выражать эмоции через танец.</p>
+<div class="dir-for"><strong>Для кого</strong>Для подростков от 12 лет. Уровень подготовки не важен — на занятиях развивают танцевальный навык, чувство стиля и уверенность в себе.</div>
+</div>
+<div class="dir-info">
+<div class="info-block">
+<div class="info-label">Тренер</div>
+<div class="trainer-mini"><img alt="" loading="lazy" src="https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"/><div><div class="trainer-mini-name">Екатерина Гусева</div><div class="trainer-mini-role">Тренер Teen Choreo и фитнес направлений</div></div></div>
+</div>
+<div class="info-block"><div class="info-label">Цены</div><div class="info-row"><span>Входит в фитнес-абонемент</span></div></div>
+<div class="info-block"><div class="info-label">В расписании</div><div class="pills"><span class="pill">Вт 16:50</span><span class="pill">Чт 16:50</span></div></div>
+<a class="btn-p" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a></div>
+
+</div>
+</div>
+<script>
+document.querySelectorAll('.trainer-mini img').forEach(img => {
+  img.addEventListener('error', function() {
+    const name = this.closest('.trainer-mini').querySelector('.trainer-mini-name');
+    const initials = name ? name.textContent.split(' ').map(w=>w[0]).slice(0,2).join('') : '?';
+    this.style.display = 'none';
+    const placeholder = document.createElement('div');
+    placeholder.style.cssText = 'width:40px;height:40px;border-radius:50%;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--tm);font-family:Raleway,sans-serif;letter-spacing:.05em;flex-shrink:0;';
+    placeholder.textContent = initials;
+    this.parentNode.insertBefore(placeholder, this);
+  });
+});
+</script>
+<script>
+const ftabs = document.querySelectorAll('.ftab');
+const items = document.querySelectorAll('.dir-item[data-cat]');
+const sections = document.querySelectorAll('.section-title');
+
+ftabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    ftabs.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    items.forEach(item => {
+      item.classList.toggle('hidden', f !== 'all' && !item.dataset.cat.split(' ').includes(f));
+    });
+    sections.forEach(s => {
+      const next = s.nextElementSibling;
+      if (next) {
+        const visible = next.querySelectorAll('.dir-item:not(.hidden)').length;
+        s.style.display = visible === 0 ? 'none' : '';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
