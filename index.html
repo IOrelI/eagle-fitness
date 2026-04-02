@@ -432,10 +432,10 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
     <div id="schedR"></div>
     <div style="max-width:540px;margin:12px auto 0;font-size:11px;color:var(--taupe);letter-spacing:.06em;text-align:center;">Количество мест ограничено, предварительная запись обязательна!</div>
     <div style="text-align:center;margin-top:24px;">
-      <button id="dlBtn" class="btn-dl" onclick="downloadSchedule()">⬇ Скачать расписание на день</button>
+      <button id="dlBtn" class="btn-dl" onclick="downloadSchedule()">📅 Открыть расписание на день</button>
     </div>
     <div style="text-align:center;margin-top:12px;">
-      <button id="dlAllBtn" class="btn-dl" onclick="downloadFullSchedule()">⬇ Скачать полное расписание студии</button>
+      <button id="dlAllBtn" class="btn-dl" onclick="downloadFullSchedule()">📅 Открыть полное расписание</button>
     </div>
     <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--taupe);letter-spacing:.06em;"></div>
   </div>
@@ -767,34 +767,11 @@ if(window.innerWidth<=768){
 }
 </script>
 <script>
-function loadHtml2Canvas(cb) {
-  if (window.html2canvas) { cb(); return; }
-  const s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
-  s.onload = cb;
-  s.onerror = function() {
-    // Резервный CDN
-    const s2 = document.createElement('script');
-    s2.src = 'https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js';
-    s2.onload = cb;
-    s2.onerror = function() {
-      alert('Не удалось загрузить скрипт. Проверьте интернет-соединение.');
-    };
-    document.head.appendChild(s2);
-  };
-  document.head.appendChild(s);
-}
 function downloadSchedule() {
-  loadHtml2Canvas(function() { _downloadSchedule(); });
-}
-function _downloadSchedule() {
   const activeDay = document.querySelector('.tabr.active');
   if (!activeDay) return;
   const dayKey = activeDay.dataset.key;
   const dayName = activeDay.textContent;
-  const btn = document.getElementById('dlBtn');
-  btn.textContent = '⏳ Подготовка...';
-  btn.disabled = true;
 
   const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
   const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
@@ -807,144 +784,61 @@ function _downloadSchedule() {
     const mins = (function(t){ const s=t.split('–')[0].trim(); const p=s.split(':'); return parseInt(p[0])*60+(parseInt(p[1])||0); })(i.time);
     const period = mins < 16*60 ? 'Утро' : 'Вечер';
     if (period !== lastPeriod) {
-      cardsHtml += '<div style="display:flex;align-items:center;gap:10px;margin:10px 0 6px;"><div style="flex:1;height:1px;background:#d4c5b5;"></div><span style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#5a4a44;opacity:.7;">' + period + '</span><div style="flex:1;height:1px;background:#d4c5b5;"></div></div>';
+      cardsHtml += '<div style="display:flex;align-items:center;gap:10px;margin:14px 0 8px;"><div style="flex:1;height:1px;background:#d4c5b5;"></div><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#5a4a44;opacity:.7;">' + period + '</span><div style="flex:1;height:1px;background:#d4c5b5;"></div></div>';
       lastPeriod = period;
     }
     const bg = colorBg[i.color] || '#97897f';
     const tc = colorTxt[i.color] || '#f5f0eb';
     const timeParts = i.time.includes('–') ? i.time.split('–') : [i.time, null];
     const timeHtml = timeParts[1]
-      ? '<div style="min-width:52px;flex-shrink:0;line-height:1.3;"><div style="font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div><div style="font-size:11px;color:' + tc + ';opacity:.65;white-space:nowrap;">' + timeParts[1] + '</div></div>'
-      : '<div style="min-width:52px;flex-shrink:0;font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div>';
-    const newBadge = i.isNew ? '<div style="width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
-    cardsHtml += '<div style="display:flex;align-items:center;gap:10px;background:' + bg + ';border-radius:12px;padding:9px 11px;margin-bottom:6px;">' + timeHtml + '<div style="flex:1;"><div style="font-size:12px;color:' + tc + ';line-height:1.3;">' + i.name + '</div><div style="font-size:11px;color:' + tc + ';opacity:.7;margin-top:2px;">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
+      ? '<div style="min-width:55px;flex-shrink:0;line-height:1.3;"><div style="font-size:13px;font-weight:500;color:' + tc + ';">' + timeParts[0] + '</div><div style="font-size:11px;color:' + tc + ';opacity:.65;">' + timeParts[1] + '</div></div>'
+      : '<div style="min-width:55px;flex-shrink:0;font-size:13px;font-weight:500;color:' + tc + ';">' + timeParts[0] + '</div>';
+    const newBadge = i.isNew ? '<div style="width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
+    cardsHtml += '<div style="display:flex;align-items:center;gap:12px;background:' + bg + ';border-radius:14px;padding:12px 14px;margin-bottom:8px;">' + timeHtml + '<div style="flex:1;"><div style="font-size:13px;color:' + tc + ';line-height:1.4;">' + i.name + '</div><div style="font-size:11px;color:' + tc + ';opacity:.75;margin-top:3px;">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
   });
 
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:480px;background:#f5f0eb;padding:28px 24px;font-family:Jost,sans-serif;box-sizing:border-box;';
-  wrapper.innerHTML = '<div style="text-align:center;font-family:Raleway,sans-serif;font-size:15px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#2c2320;margin-bottom:18px;">' + (dayTitles[dayKey]||dayName) + '</div>' + cardsHtml;
-  document.body.appendChild(wrapper);
-
-  html2canvas(wrapper, { backgroundColor: '#f5f0eb', scale: 2, useCORS: true, logging: false, width: 480 })
-    .then(function(canvas) {
-      document.body.removeChild(wrapper);
-      const dataUrl = canvas.toDataURL('image/png');
-      // На мобильных открываем в новой вкладке для ручного сохранения
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        const newTab = window.open();
-        if (newTab) {
-          newTab.document.write('<html><head><title>Расписание</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f5f0eb;"><img src="' + dataUrl + '" style="max-width:100%;height:auto;"><p style="position:fixed;bottom:20px;left:0;right:0;text-align:center;font-family:sans-serif;font-size:14px;color:#5a4a44;">Удерживайте изображение для сохранения</p></body></html>');
-          newTab.document.close();
-        } else {
-          // Fallback если popup заблокирован
-          window.location.href = dataUrl;
-        }
-      } else {
-        const link = document.createElement('a');
-        link.download = 'расписание-' + dayName + '.png';
-        link.href = dataUrl;
-        link.click();
-      }
-      btn.textContent = '⬇ Скачать расписание на день';
-      btn.disabled = false;
-    }).catch(function() {
-      document.body.removeChild(wrapper);
-      btn.textContent = '⬇ Скачать расписание на день';
-      btn.disabled = false;
-    });
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Расписание — ' + (dayTitles[dayKey]||dayName) + '</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;background:#f5f0eb;padding:24px;max-width:500px;margin:0 auto;}</style></head><body><div style="text-align:center;font-size:18px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:#2c2320;margin-bottom:20px;">' + (dayTitles[dayKey]||dayName) + '</div>' + cardsHtml + '<div style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #d4c5b5;font-size:11px;color:#97897f;">Eagle Fitness Studio · eagle-fitness.ru</div><div style="text-align:center;margin-top:20px;font-size:12px;color:#5a4a44;">📱 Сделайте скриншот или сохраните страницу</div></body></html>';
+  
+  const newTab = window.open('', '_blank');
+  if (newTab) {
+    newTab.document.write(html);
+    newTab.document.close();
+  }
 }
 
 function downloadFullSchedule() {
-  loadHtml2Canvas(function() { _downloadFullSchedule(); });
-}
-function _downloadFullSchedule() {
-  const btn = document.getElementById('dlAllBtn');
-  btn.textContent = '⏳ Подготовка...';
-  btn.disabled = true;
-
-  const colW = 320, gap = 14, pad = 28, cols = 3;
-  const totalW = cols * colW + (cols - 1) * gap + pad * 2;
-
   const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
   const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+  const dayOrder = ['mon','tue','wed','thu','fri','sat','sun'];
 
-  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-  const now = new Date();
-  const dateStr = 'от ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
-
-  function buildDayCol(dayKey, dayTitle, fixedWidth) {
+  let allHtml = '';
+  dayOrder.forEach(function(dayKey) {
     const items = SCHEDULE[dayKey] || [];
-    const wStyle = fixedWidth ? 'width:' + colW + 'px;' : 'flex:1;';
-    let html = '<div style="background:#fff;border-radius:14px;padding:12px;' + wStyle + '">';
-    html += '<div style="text-align:center;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#5a4a44;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #e8e0d8;">' + dayTitle + '</div>';
+    if (items.length === 0) return;
+    
+    allHtml += '<div style="margin-bottom:28px;"><div style="font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#6b5a55;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #d4c5b5;">' + dayTitles[dayKey] + '</div>';
+    
     items.forEach(function(i) {
       const bg = colorBg[i.color] || '#97897f';
       const tc = colorTxt[i.color] || '#f5f0eb';
-      const timeParts = i.time.includes('\u2013') ? i.time.split('\u2013') : (i.time.includes('-') ? i.time.split('-') : [i.time, null]);
-      const timeHtml = timeParts[1]
-        ? '<div style="min-width:38px;flex-shrink:0;line-height:1.25;"><div style="font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;white-space:nowrap;">' + timeParts[1] + '</div></div>'
-        : '<div style="min-width:38px;flex-shrink:0;font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + timeParts[0] + '</div>';
-      const newBadge = i.isNew ? '<div style="width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;letter-spacing:.04em;">NEW</div>' : '';
-      html += '<div style="display:flex;align-items:center;gap:6px;background:' + bg + ';border-radius:8px;padding:6px 7px;margin-bottom:4px;">' + timeHtml + '<div style="flex:1;min-width:0;"><div style="font-size:10px;color:' + tc + ';line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.name + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.trainer + ' | ' + i.hall + '</div></div>' + newBadge + '</div>';
+      const newBadge = i.isNew ? '<span style="background:#fff;color:#9e3a3a;font-size:7px;padding:2px 6px;border-radius:10px;margin-left:8px;">NEW</span>' : '';
+      allHtml += '<div style="display:flex;align-items:center;gap:10px;background:' + bg + ';border-radius:10px;padding:8px 12px;margin-bottom:5px;"><div style="min-width:45px;font-size:11px;font-weight:500;color:' + tc + ';">' + i.time.split('–')[0] + '</div><div style="flex:1;font-size:11px;color:' + tc + ';">' + i.name + newBadge + '<span style="opacity:.7;margin-left:6px;">· ' + i.trainer + '</span></div></div>';
     });
-    html += '</div>';
-    return html;
-  }
-
-  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
-  const rows = [['mon','tue','wed'], ['thu','fri','sat']];
-
-  let rowsHtml = '';
-  rows.forEach(function(row) {
-    rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
-    row.forEach(function(key) { rowsHtml += buildDayCol(key, dayTitles[key], false); });
-    rowsHtml += '</div>';
+    allHtml += '</div>';
   });
-  // Sunday under Saturday — same 3-column row, Thu+Fri+[Sat/Sun stacked]
-  // Already handled above, but let's put Sun in a sub-column under Sat
-  // Rebuild last row: Thu, Fri, Sat+Sun stacked
-  rowsHtml = '';
-  // Row 1: Mon Tue Wed
-  rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
-  ['mon','tue','wed'].forEach(function(key){ rowsHtml += buildDayCol(key, dayTitles[key], false); });
-  rowsHtml += '</div>';
-  // Row 2: Thu, Fri, Sat+Sun stacked
-  rowsHtml += '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">';
-  ['thu','fri'].forEach(function(key){ rowsHtml += buildDayCol(key, dayTitles[key], false); });
-  rowsHtml += '<div style="flex:1;display:flex;flex-direction:column;gap:' + gap + 'px;">' + buildDayCol('sat', dayTitles['sat'], false).replace('flex:1;','') + buildDayCol('sun', dayTitles['sun'], false).replace('flex:1;','') + '</div>';
-  rowsHtml += '</div>';
 
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Jost,sans-serif;box-sizing:border-box;';
-  wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + rowsHtml + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo Weekend 14+, предварительная запись обязательна!</div>';
-  document.body.appendChild(wrapper);
+  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  const now = new Date();
+  const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
 
-  html2canvas(wrapper, { backgroundColor: '#f5f0eb', scale: 2, useCORS: true, logging: false, width: totalW })
-    .then(function(canvas) {
-      document.body.removeChild(wrapper);
-      const dataUrl = canvas.toDataURL('image/png');
-      // На мобильных открываем в новой вкладке для ручного сохранения
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        const newTab = window.open();
-        if (newTab) {
-          newTab.document.write('<html><head><title>Расписание</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;display:flex;flex-direction:column;align-items:center;min-height:100vh;background:#f5f0eb;padding:20px;box-sizing:border-box;"><img src="' + dataUrl + '" style="max-width:100%;height:auto;"><p style="margin-top:20px;text-align:center;font-family:sans-serif;font-size:14px;color:#5a4a44;">Удерживайте изображение для сохранения</p></body></html>');
-          newTab.document.close();
-        } else {
-          window.location.href = dataUrl;
-        }
-      } else {
-        const link = document.createElement('a');
-        link.download = 'расписание-Eagle-Fitness.png';
-        link.href = dataUrl;
-        link.click();
-      }
-      btn.textContent = '⬇ Скачать полное расписание студии';
-      btn.disabled = false;
-    }).catch(function() {
-      document.body.removeChild(wrapper);
-      btn.textContent = '⬇ Скачать полное расписание студии';
-      btn.disabled = false;
-    });
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Расписание Eagle Fitness Studio</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;background:#f5f0eb;padding:24px;max-width:600px;margin:0 auto;}@media print{body{padding:12px;}}</style></head><body><div style="text-align:center;margin-bottom:24px;"><div style="font-size:16px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2c2320;">Расписание Eagle Studio</div><div style="font-size:11px;color:#97897f;margin-top:4px;">от ' + dateStr + '</div></div>' + allHtml + '<div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid #d4c5b5;font-size:10px;color:#97897f;">Предварительная запись обязательна · eagle-fitness.ru</div><div style="text-align:center;margin-top:16px;font-size:12px;color:#5a4a44;">📱 Сделайте скриншот или сохраните страницу</div></body></html>';
+  
+  const newTab = window.open('', '_blank');
+  if (newTab) {
+    newTab.document.write(html);
+    newTab.document.close();
+  }
 }
 </script>
 
