@@ -862,7 +862,7 @@ function downloadSchedule() {
     });
 
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:480px;background:#f5f0eb;padding:28px 24px;font-family:Arial,sans-serif;box-sizing:border-box;';
+    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:480px;background:#f5f0eb;padding:28px 24px;font-family:Jost,sans-serif;box-sizing:border-box;';
     wrapper.innerHTML = '<div style="text-align:center;font-size:15px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#2c2320;margin-bottom:18px;">' + (dayTitles[dayKey]||dayKey) + '</div>' + cardsHtml + '<div style="text-align:center;margin-top:18px;padding-top:12px;border-top:1px solid #d4c5b5;font-size:10px;color:#97897f;letter-spacing:.08em;">Eagle Fitness Studio · eagle-fitness.ru</div>';
     document.body.appendChild(wrapper);
 
@@ -923,11 +923,10 @@ function downloadFullSchedule() {
     const row2 = '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">' + buildDayCol('thu') + buildDayCol('fri') + '<div style="flex:1;display:flex;flex-direction:column;gap:' + gap + 'px;">' + buildDayCol('sat') + buildDayCol('sun') + '</div></div>';
 
     const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Arial,sans-serif;box-sizing:border-box;';
+    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Jost,sans-serif;box-sizing:border-box;';
     wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + row1 + row2 + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo 14+. Предварительная запись обязательна!</div>';
     document.body.appendChild(wrapper);
 
-    wrapper.style.cssText = wrapper.style.cssText.replace('Jost,sans-serif','Arial,sans-serif');
     html2canvas(wrapper, { backgroundColor:'#f5f0eb', scale:2, useCORS:false, allowTaint:true, logging:false, width:totalW, windowWidth:totalW })
       .then(function(canvas) {
         clearTimeout(timer);
