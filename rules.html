@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Правила посещения — Eagle Fitness Studio</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:300,300i,400,400i|raleway:300,400,500|jost:300,400,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--dk:#6b5a55;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:Jost,sans-serif;color:var(--td);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:8px 48px;background:rgba(245,240,235,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(151,137,127,0.18);}
+.nav-logo img{height:66px;}.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--td);}.nav-links a.active{color:var(--td);}
+.nav-cta{padding:10px 24px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:Jost,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.nav-cta:hover{opacity:.82;}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px;}
+.burger span{width:22px;height:1.5px;background:var(--td);display:block;}
+.mob-menu{position:fixed;inset:0;background:var(--bg);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mob-menu.open{opacity:1;pointer-events:all;}
+.mob-menu a{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--td);text-decoration:none;}
+.page-hero{padding:160px 24px 48px;text-align:center;}
+.slabel{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.page-hero h1{font-family:Raleway,sans-serif;font-weight:300;font-size:clamp(28px,5vw,52px);letter-spacing:.12em;text-transform:uppercase;color:var(--td);}
+.rules-wrap{max-width:800px;margin:0 auto;padding:0 24px 96px;}
+.rtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.rtab{padding:10px 20px;border-radius:100px;border:1.5px solid var(--taupe);background:transparent;font-family:Jost,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tm);cursor:pointer;transition:all .2s;}
+.rtab:hover{background:var(--beige);border-color:var(--beige);color:var(--td);}
+.rtab.active{background:var(--dk);border-color:var(--dk);color:var(--tl);}
+.rpanel{display:none;}.rpanel.active{display:block;}
+.rule-section{margin-bottom:48px;}
+.rule-section-title{font-family:Raleway,sans-serif;font-weight:400;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--taupe);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--beige);}
+.rule-item{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(151,137,127,0.12);}
+.rule-item:last-child{border-bottom:none;}
+.rule-num{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:300;color:var(--beige);flex-shrink:0;width:28px;line-height:1.2;text-align:right;}
+.rule-text{font-size:13.5px;line-height:1.85;color:var(--tm);padding-top:2px;}
+.rule-text strong{color:var(--td);font-weight:500;}
+.note-block{background:var(--beige);border-radius:16px;padding:22px 26px;margin-top:32px;font-size:13px;line-height:1.85;color:var(--tm);}
+footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.ft{font-size:11px;color:rgba(245,240,235,.7);letter-spacing:.06em;}
+.flinks{display:flex;gap:20px;}
+.flinks a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,235,.7);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:#fff;}
+@media(max-width:768px){
+  nav{padding:13px 20px;}.nav-links,.nav-cta{display:none;}.burger{display:flex;}.nav-logo img{height:40px;}
+  .page-hero{padding:120px 24px 40px;}.rules-wrap{padding:0 18px 64px;}.rule-text{font-size:13px;}
+  .rtabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none;}
+  .rtabs::-webkit-scrollbar{display:none;}.rtab{flex-shrink:0;}
+  footer{flex-direction:column;text-align:center;padding:32px 20px;}.flinks{justify-content:center;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo"><a href="index.html"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/logo_qreeb6.svg" alt="Eagle"></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html#about">О студии</a></li>
+    <li><a href="directions.html">Направления</a></li>
+    <li><a href="index.html#trainers">Тренеры</a></li>
+    <li><a href="index.html#schedule">Расписание</a></li>
+    <li><a href="index.html#prices">Цены</a></li>
+    <li><a href="index.html#app">Приложение</a></li>
+    <li><a href="index.html#contacts">Контакты</a></li>
+    <li><a href="rules.html" class="active">Правила</a></li>
+  </ul>
+  <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="nav-cta">Записаться</a>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html#about" onclick="cm()">О студии</a>
+  <a href="directions.html" onclick="cm()">Направления</a>
+  <a href="index.html#trainers" onclick="cm()">Тренеры</a>
+  <a href="index.html#schedule" onclick="cm()">Расписание</a>
+  <a href="index.html#prices" onclick="cm()">Цены</a>
+  <a href="index.html#app" onclick="cm()">Приложение</a>
+  <a href="index.html#contacts" onclick="cm()">Контакты</a>
+  <a href="rules.html" onclick="cm()">Правила посещения</a>
+  <a href="tel:89609613556" style="color:var(--taupe);">📞 +7 960 961-35-56</a>
+</div>
+
+<div class="page-hero">
+  <div class="slabel">Eagle Fitness Studio</div>
+  <h1>Правила посещения</h1>
+</div>
+
+<div class="rules-wrap">
+  <div class="rtabs">
+    <button class="rtab active" data-tab="fitness">Фитнес</button>
+    <button class="rtab" data-tab="dance">Танцы и детские</button>
+    <button class="rtab" data-tab="kolmogorova">Анастасия Колмогорова</button>
+  </div>
+
+  <div class="rpanel active" id="tab-fitness">
+    <div class="rule-section">
+      <div class="rule-section-title">Абонемент и активация</div>
+      <div class="rule-item"><div class="rule-num">1</div><div class="rule-text">По фитнес-абонементу доступно посещение любых фитнес-направлений студии, <strong>за исключением занятий Анастасии Колмогоровой.</strong></div></div>
+      <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>Первое пробное занятие бесплатно</strong> при покупке абонемента в день посещения. Абонемент активируется с даты первого посещения, следующей за пробным по расписанию.</div></div>
+      <div class="rule-item"><div class="rule-num">3</div><div class="rule-text">Абонемент можно активировать в течение 28 дней с момента покупки — иначе он активируется автоматически на 29-й день (за исключением льготных абонементов).</div></div>
+      <div class="rule-item"><div class="rule-num">4</div><div class="rule-text">Любой абонемент действует <strong>не более 4 недель</strong> с момента покупки. Срок продлевается при активации опции «Заморозка».</div></div>
+      <div class="rule-item"><div class="rule-num">5</div><div class="rule-text">В стоимость абонементов на 8, 12 и 16 занятий включена самостоятельная заморозка через приложение <strong>на срок до 7 дней.</strong> Активируется не позднее даты окончания абонемента.</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Запись и отмена</div>
+      <div class="rule-item"><div class="rule-num">6</div><div class="rule-text"><strong>Запись на занятия обязательна</strong> — самостоятельно через мобильное приложение или мессенджеры студии.</div></div>
+      <div class="rule-item"><div class="rule-num">7</div><div class="rule-text"><strong>Отмена записи — не менее чем за 4 часа</strong> до начала занятия. Занятия, пропущенные по личным причинам, сгорают без восстановления.</div></div>
+      <div class="rule-item"><div class="rule-num">8</div><div class="rule-text">При активации «Заморозки» необходимо самостоятельно отменить записи на период отсутствия через приложение или мессенджеры.</div></div>
+      <div class="rule-item"><div class="rule-num">9</div><div class="rule-text">Постоянная запись на занятия возможна только при оплаченном абонементе. Для сохранения места следующий абонемент нужно купить в дату последнего занятия по текущему. <strong>При отмене записи более 5 раз подряд — постоянная запись аннулируется.</strong></div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Пропуски и возврат</div>
+      <div class="rule-item"><div class="rule-num">10</div><div class="rule-text">После окончания срока действия абонемента деньги за неиспользованные занятия не возвращаются — услуга считается оказанной.</div></div>
+      <div class="rule-item"><div class="rule-num">11</div><div class="rule-text">При пропусках по причине <strong>серьёзных травм, операций или больничного</strong> — срок действия абонемента продлевается при предъявлении подтверждающих документов.</div></div>
+      <div class="rule-item"><div class="rule-num">12</div><div class="rule-text">При перерасчёте незавершённого абонемента посещённые тренировки засчитываются по стоимости разовых. Бесплатное пробное при перерасчёте засчитывается по прайсу.</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Общие условия</div>
+      <div class="rule-item"><div class="rule-num">13</div><div class="rule-text"><strong>Абонемент именной</strong> и не может быть передан другим лицам — даже родственникам.</div></div>
+      <div class="rule-item"><div class="rule-num">14</div><div class="rule-text">Об отменах занятий со стороны студии предупреждают заранее в чатах направления и в мессенджере.</div></div>
+      <div class="rule-item"><div class="rule-num">15</div><div class="rule-text">Студия вправе заменить преподавателя на другого квалифицированного специалиста.</div></div>
+      <div class="rule-item"><div class="rule-num">16</div><div class="rule-text">На направления Анастасии Колмогоровой пробное занятие не предусмотрено — действует отдельный прайс-лист.</div></div>
+      <div class="rule-item"><div class="rule-num">17</div><div class="rule-text"><strong>Скидка 10%</strong> на новый абонемент при покупке в период действия текущего. Период активации — 7 дней, на 8-й день автоматически.</div></div>
+    </div>
+    <div class="note-block">Соглашение с правилами автоматически пролонгируется покупкой следующего абонемента.</div>
+  </div>
+
+  <div class="rpanel" id="tab-dance">
+    <div class="rule-section">
+      <div class="rule-section-title">Абонемент и активация</div>
+      <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>Первое пробное занятие бесплатно</strong> при покупке абонемента в день посещения. Абонемент активируется с даты следующего занятия по расписанию. Если нужна отсрочка активации — пробное занятие оплачивается по прайсу.</div></div>
+      <div class="rule-item"><div class="rule-num">2</div><div class="rule-text">Любой абонемент действует <strong>не более 4 недель</strong> с момента покупки (за исключением дополнительно приобретённой заморозки). Более поздняя активация обговаривается с администратором.</div></div>
+      <div class="rule-item"><div class="rule-num">3</div><div class="rule-text">Каждому занятию присваивается дата по расписанию выбранного направления. <strong>Отработки в иные даты не предусмотрены.</strong> В исключительных случаях пропуск можно отработать в другой группе у того же преподавателя — по согласованию с администратором, до последнего занятия по абонементу.</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Пропуски и заморозка</div>
+      <div class="rule-item"><div class="rule-num">4</div><div class="rule-text">Занятия, пропущенные по личным причинам, сгорают без восстановления. Студия продлевает пропущенные занятия только при покупке опции <strong>«Заморозка».</strong> Продления активируются датой после последнего занятия. Пропуски «продлений» не восстанавливаются.</div></div>
+      <div class="rule-item"><div class="rule-num">5</div><div class="rule-text">После окончания срока действия абонемента деньги за неиспользованные занятия не возвращаются.</div></div>
+      <div class="rule-item"><div class="rule-num">6</div><div class="rule-text">Отмены занятий со стороны студии автоматически продлевают абонементы на соответствующее количество занятий. Об отменах предупреждают заранее в чатах и в мессенджере.</div></div>
+      <div class="rule-item"><div class="rule-num">7</div><div class="rule-text">Занятия, пропущенные по болезни, восстанавливаются при предъявлении справки — <strong>для детей до 12 лет на всех детских направлениях.</strong> При серьёзных травмах, операциях или больничном от 2 недель и более — восстанавливается до половины занятий (не для абонементов на 4 занятия).</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Общие условия</div>
+      <div class="rule-item"><div class="rule-num">8</div><div class="rule-text">При перерасчёте незавершённого абонемента посещённые занятия засчитываются по стоимости разовых. Бесплатное пробное при перерасчёте засчитывается по прайсу.</div></div>
+      <div class="rule-item"><div class="rule-num">9</div><div class="rule-text"><strong>Абонемент именной</strong> и не может быть передан другим лицам — даже родственникам.</div></div>
+      <div class="rule-item"><div class="rule-num">10</div><div class="rule-text">При закрытии направления или изменении расписания оставшиеся занятия можно реализовать на другом направлении идентичной стоимости по согласованию с администратором. Либо студия возвращает деньги за оставшиеся занятия по формуле: уплаченная сумма ÷ количество занятий.</div></div>
+      <div class="rule-item"><div class="rule-num">11</div><div class="rule-text">Студия вправе заменить преподавателя на другого квалифицированного специалиста.</div></div>
+      <div class="rule-item"><div class="rule-num">12</div><div class="rule-text">В группах, <strong>закрытых на лист ожидания,</strong> следующий абонемент нужно купить в дату последнего занятия по текущему — иначе место займёт человек из листа ожидания.</div></div>
+      <div class="rule-item"><div class="rule-num">13</div><div class="rule-text"><strong>Скидка 10%</strong> на новый абонемент при покупке в период действия текущего. Активация — через 7 дней, на 8-й день автоматически.</div></div>
+    </div>
+    <div class="note-block">Соглашение с правилами автоматически пролонгируется покупкой следующего абонемента.</div>
+  </div>
+
+  <div class="rpanel" id="tab-kolmogorova">
+    <div class="rule-section">
+      <div class="rule-section-title">Абонемент и активация</div>
+      <div class="rule-item"><div class="rule-num">1</div><div class="rule-text">По абонементу доступно посещение <strong>только взрослых направлений Анастасии Колмогоровой.</strong> Пробное занятие не предусмотрено.</div></div>
+      <div class="rule-item"><div class="rule-num">2</div><div class="rule-text">Абонемент можно активировать в течение 28 дней с момента покупки — иначе активируется автоматически на 29-й день.</div></div>
+      <div class="rule-item"><div class="rule-num">3</div><div class="rule-text">Любой абонемент действует <strong>не более 4 недель</strong> с момента покупки. Срок продлевается при активации опции «Заморозка».</div></div>
+      <div class="rule-item"><div class="rule-num">4</div><div class="rule-text">В стоимость абонемента на 8 занятий включена самостоятельная заморозка через приложение <strong>на срок до 7 дней.</strong> Активируется не позднее даты окончания абонемента.</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Запись и отмена</div>
+      <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>Запись обязательна</strong> — через мобильное приложение или мессенджеры студии.</div></div>
+      <div class="rule-item"><div class="rule-num">6</div><div class="rule-text"><strong>Отмена записи — не менее чем за 4 часа</strong> до начала занятия. При «Заморозке» необходимо самостоятельно отменить все записи.</div></div>
+      <div class="rule-item"><div class="rule-num">7</div><div class="rule-text">Занятия, пропущенные по личным причинам, сгорают без восстановления.</div></div>
+      <div class="rule-item"><div class="rule-num">8</div><div class="rule-text">Постоянная запись возможна только при оплаченном абонементе. Для сохранения места следующий абонемент нужно купить в дату последнего занятия по текущему. <strong>При отмене более 5 раз подряд — постоянная запись аннулируется.</strong></div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Пропуски и возврат</div>
+      <div class="rule-item"><div class="rule-num">9</div><div class="rule-text">После окончания срока действия абонемента деньги за неиспользованные занятия не возвращаются.</div></div>
+      <div class="rule-item"><div class="rule-num">10</div><div class="rule-text">Об отменах занятий со стороны студии предупреждают заранее в чатах и в мессенджере.</div></div>
+      <div class="rule-item"><div class="rule-num">11</div><div class="rule-text">При пропусках по причине <strong>серьёзных травм, операций или больничного</strong> — срок действия абонемента продлевается при предъявлении документов.</div></div>
+      <div class="rule-item"><div class="rule-num">12</div><div class="rule-text">При перерасчёте незавершённого абонемента посещённые тренировки засчитываются по стоимости разовых.</div></div>
+    </div>
+    <div class="rule-section">
+      <div class="rule-section-title">Общие условия</div>
+      <div class="rule-item"><div class="rule-num">13</div><div class="rule-text"><strong>Абонемент именной</strong> и не может быть передан другим лицам — даже родственникам.</div></div>
+      <div class="rule-item"><div class="rule-num">14</div><div class="rule-text">Клиентам, <strong>непрерывно посещающим занятия Анастасии Колмогоровой более 6 месяцев,</strong> предоставляется льготная стоимость абонемента — 4 100 ₽ вместо 4 400 ₽.</div></div>
+      <div class="rule-item"><div class="rule-num">15</div><div class="rule-text">Студия вправе заменить преподавателя на другого квалифицированного специалиста.</div></div>
+    </div>
+    <div class="note-block">Соглашение с правилами автоматически пролонгируется покупкой следующего абонемента.</div>
+  </div>
+</div>
+
+<footer>
+  <div style="opacity:.85;"><svg style="height:32px;width:auto;" width="1336" height="251" viewBox="0 0 1336 251" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M59.2196 156.305C53.4076 159.379 42.0936 165.868 43.3528 174.172C44.2763 173.417 47.7351 170.901 54.1825 166.874L50.1529 170.649C50.5726 172.075 50.0017 174.927 44.3602 174.927C43.5207 175.515 41.6906 177.394 41.0861 180.212C40.5464 182.729 42.3454 188.265 52.1677 184.994C49.6491 184.071 47.6343 179.709 55.6936 175.682C67.5308 170.649 120.924 160.08 172.05 184.994C170.791 181.722 162.48 163.351 136.035 158.318C140.065 157.479 151.398 153.788 157.946 144.225C150.475 148.923 133.516 156.305 112.361 153.033C131.753 153.033 170.791 146.742 173.057 110.252C167.181 119.06 151.146 137.682 120.924 138.689C132.257 135.669 157.694 128.069 170.791 104.715C174.065 98.0045 178.346 82.0663 170.791 67.2186C170.791 77.2848 166.006 101.947 122.687 129.126C130.998 122.667 150.391 106.98 160.213 87.0994C161.998 83.4854 164.309 77.2848 164.494 68.4769C164.662 60.5078 160.465 42.4556 142.331 34C144.682 47.3378 145.706 79.2981 130.998 100.437C129.739 104.044 121.276 115.436 97.5014 134.159C88.1828 141.498 67.7826 151.775 59.2196 156.305Z" fill="#C8C4BF"/><path d="M123.93 64.4562C144.747 91.1191 117.66 122.607 68 148C83.4665 131.071 108.882 86.8022 90.0711 35C103.531 38.1318 125.435 54.2989 116.657 92.8966C119.917 88.8337 123.93 79.6921 123.93 64.4562Z" fill="#C8C4BF"/></svg></div>
+  <div class="ft">© 2025 Eagle Fitness Studio · Наукоград Кольцово</div>
+  <div class="flinks">
+    <a href="index.html#about">О студии</a>
+    <a href="index.html#schedule">Расписание</a>
+    <a href="index.html#prices">Цены</a>
+    <a href="index.html#contacts">Контакты</a>
+  </div>
+</footer>
+<script>
+document.getElementById("burger").addEventListener("click",()=>document.getElementById("mobMenu").classList.toggle("open"));
+function cm(){document.getElementById("mobMenu").classList.remove("open");}
+document.querySelectorAll(".rtab").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".rtab").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".rpanel").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-"+btn.dataset.tab).classList.add("active");
+  });
+});
+</script>
+</body>
+</html>
