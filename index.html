@@ -138,6 +138,33 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
 .flinks a:hover{color:#fff;}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}.no-js .reveal{opacity:1;transform:none;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+/* Week modal */
+.wm{position:fixed;inset:0;z-index:300;background:var(--bg);display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .25s;}
+.wm.open{opacity:1;pointer-events:all;}
+.wm-head{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid rgba(151,137,127,.18);background:rgba(245,240,235,.97);backdrop-filter:blur(10px);flex-shrink:0;gap:12px;}
+.wm-title{font-family:'Raleway',sans-serif;font-weight:300;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--td);}
+.wm-close{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--taupe);background:transparent;cursor:pointer;color:var(--tm);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-family:inherit;}
+.wm-close:hover{background:var(--beige);color:var(--td);}
+.wm-body{flex:1;overflow-y:auto;padding:28px 24px;}
+.wm-day{max-width:540px;margin:0 auto 36px;}
+.wm-day-title{font-family:'Raleway',sans-serif;font-weight:400;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--td);text-align:center;padding-bottom:10px;border-bottom:1px solid var(--beige);margin-bottom:12px;}
+.wm-empty{max-width:540px;margin:0 auto;text-align:center;padding:40px 0;font-size:12px;color:var(--taupe);letter-spacing:.1em;}
+/* week grid inside modal */
+.wg-row{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;}
+.wg-col{flex:1;background:#fff;border-radius:14px;padding:12px;min-width:0;}
+.wg-col-sat{display:flex;flex-direction:column;gap:14px;flex:1;}
+.wg-title{text-align:center;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #e8e0d8;}
+.wg-card{display:flex;align-items:center;gap:6px;border-radius:8px;padding:6px 7px;margin-bottom:4px;}
+.wg-time{min-width:38px;flex-shrink:0;font-size:10px;font-weight:500;line-height:1.25;}
+.wg-info{flex:1;min-width:0;}
+.wg-name{font-size:10px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wg-trainer{font-size:9px;opacity:.7;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wg-new{width:22px;height:22px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;}
+.wg-footer{font-size:10px;color:var(--tm);line-height:1.7;margin-top:4px;}
+@media(max-width:600px){
+  .wg-row{flex-direction:column;}
+  .wg-col,.wg-col-sat{width:100%;}
+}
 @keyframes fadeD{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeU{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
@@ -302,6 +329,11 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
   .app-store-btn svg{width:20px;height:20px;}
   .app-store-btn span{font-size:11px;}
 }
+@media(max-width:768px){
+  .wm-head{padding:12px 16px;}
+  .wm-body{padding:20px 16px;}
+  .wm-title{font-size:11px;}
+}
 </style>
 </head>
 <body>
@@ -431,13 +463,10 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
     <div class="tabs-w reveal"><div class="tabs-r" id="tabsR"></div></div>
     <div id="schedR"></div>
     <div style="max-width:540px;margin:12px auto 0;font-size:11px;color:var(--taupe);letter-spacing:.06em;text-align:center;">Количество мест ограничено, предварительная запись обязательна!</div>
-    <div style="text-align:center;margin-top:24px;">
-      <button id="dlBtn" class="btn-dl" onclick="downloadSchedule()">📅 Открыть расписание на день</button>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;">
+      <button id="dlBtn" class="btn-dl" onclick="downloadSchedule()">⬇ Скачать расписание на день</button>
+      <button class="btn-p" style="cursor:pointer;border:none;" onclick="openWeekModal()">Расписание на неделю</button>
     </div>
-    <div style="text-align:center;margin-top:12px;">
-      <button id="dlAllBtn" class="btn-dl" onclick="downloadFullSchedule()">📅 Открыть полное расписание</button>
-    </div>
-    <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--taupe);letter-spacing:.06em;"></div>
   </div>
 </section>
 
@@ -620,6 +649,7 @@ const SCHEDULE = {
   mon: [
     { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "12:30", name: "Хатха-йога",                        trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: true,  color: "taupe"  },
     { time: "15:00", name: "Йога для подростков 10+",           trainer: "Ирина Урсул",           hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "18:00", name: "Пилатес для подростков 10–14 лет",  trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "rose" },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
@@ -671,6 +701,7 @@ const SCHEDULE = {
     { time: "10:00",       name: "Здоровая спина",              trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: true,  color: "taupe" },
     { time: "11:10",       name: "ZUMBA",                       trainer: "Мария Депутатова",      hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "11:10",       name: "Fit Cardio",                  trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: true,  color: "taupe" },
+    { time: "12:30",       name: "Хатха-йога",                  trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: true,  color: "taupe"  },
     { time: "15:00",       name: "Йога для подростков 10+",     trainer: "Ирина Урсул",           hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "16:50",       name: "Teen Choreo 12+",             trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "18:30–20:00", name: "Аштанга йога",                trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
@@ -767,78 +798,136 @@ if(window.innerWidth<=768){
 }
 </script>
 <script>
-function downloadSchedule() {
-  const activeDay = document.querySelector('.tabr.active');
-  if (!activeDay) return;
-  const dayKey = activeDay.dataset.key;
-  const dayName = activeDay.textContent;
+const isMobile = navigator.maxTouchPoints > 0 || /Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
-  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
-  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+function loadHtml2Canvas(cb) {
+  if (window.html2canvas) { cb(); return; }
+  const s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  s.onload = cb;
+  document.head.appendChild(s);
+}
 
-  const items = SCHEDULE[dayKey] || [];
-  let cardsHtml = '';
-  let lastPeriod = null;
-  items.forEach(function(i) {
-    const mins = (function(t){ const s=t.split('–')[0].trim(); const p=s.split(':'); return parseInt(p[0])*60+(parseInt(p[1])||0); })(i.time);
-    const period = mins < 16*60 ? 'Утро' : 'Вечер';
-    if (period !== lastPeriod) {
-      cardsHtml += '<div style="display:flex;align-items:center;gap:10px;margin:14px 0 8px;"><div style="flex:1;height:1px;background:#d4c5b5;"></div><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#5a4a44;opacity:.7;">' + period + '</span><div style="flex:1;height:1px;background:#d4c5b5;"></div></div>';
-      lastPeriod = period;
+function saveCanvas(canvas, filename) {
+  if (isMobile) {
+    const dataUrl = canvas.toDataURL('image/png');
+    const tab = window.open('', '_blank');
+    if (tab) {
+      tab.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;}body{background:#f5f0eb;}img{width:100%;display:block;}</style></head><body><img src="' + dataUrl + '"></body></html>');
+      tab.document.close();
     }
-    const bg = colorBg[i.color] || '#97897f';
-    const tc = colorTxt[i.color] || '#f5f0eb';
-    const timeParts = i.time.includes('–') ? i.time.split('–') : [i.time, null];
-    const timeHtml = timeParts[1]
-      ? '<div style="min-width:55px;flex-shrink:0;line-height:1.3;"><div style="font-size:13px;font-weight:500;color:' + tc + ';">' + timeParts[0] + '</div><div style="font-size:11px;color:' + tc + ';opacity:.65;">' + timeParts[1] + '</div></div>'
-      : '<div style="min-width:55px;flex-shrink:0;font-size:13px;font-weight:500;color:' + tc + ';">' + timeParts[0] + '</div>';
-    const newBadge = i.isNew ? '<div style="width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
-    cardsHtml += '<div style="display:flex;align-items:center;gap:12px;background:' + bg + ';border-radius:14px;padding:12px 14px;margin-bottom:8px;">' + timeHtml + '<div style="flex:1;"><div style="font-size:13px;color:' + tc + ';line-height:1.4;">' + i.name + '</div><div style="font-size:11px;color:' + tc + ';opacity:.75;margin-top:3px;">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
-  });
-
-  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Расписание — ' + (dayTitles[dayKey]||dayName) + '</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;background:#f5f0eb;padding:24px;max-width:500px;margin:0 auto;}</style></head><body><div style="text-align:center;font-size:18px;font-weight:300;letter-spacing:.15em;text-transform:uppercase;color:#2c2320;margin-bottom:20px;">' + (dayTitles[dayKey]||dayName) + '</div>' + cardsHtml + '<div style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid #d4c5b5;font-size:11px;color:#97897f;">Eagle Fitness Studio · eagle-fitness.ru</div><div style="text-align:center;margin-top:20px;font-size:12px;color:#5a4a44;">📱 Сделайте скриншот или сохраните страницу</div></body></html>';
-  
-  const newTab = window.open('', '_blank');
-  if (newTab) {
-    newTab.document.write(html);
-    newTab.document.close();
+  } else {
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
   }
 }
 
-function downloadFullSchedule() {
-  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
-  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
-  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
-  const dayOrder = ['mon','tue','wed','thu','fri','sat','sun'];
+/* ── Расписание на день ── */
+function downloadSchedule() {
+  loadHtml2Canvas(function() {
+    const activeDay = document.querySelector('.tabr.active');
+    if (!activeDay) return;
+    const dayKey = activeDay.dataset.key;
+    const btn = document.getElementById('dlBtn');
+    btn.textContent = '⏳ Подготовка...'; btn.disabled = true;
 
-  let allHtml = '';
-  dayOrder.forEach(function(dayKey) {
+    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
+    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+    const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+
     const items = SCHEDULE[dayKey] || [];
-    if (items.length === 0) return;
-    
-    allHtml += '<div style="margin-bottom:28px;"><div style="font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#6b5a55;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #d4c5b5;">' + dayTitles[dayKey] + '</div>';
-    
+    let cardsHtml = '';
+    let lastPeriod = null;
     items.forEach(function(i) {
+      const mins = (function(t){ const s=t.split('–')[0].trim(); const p=s.split(':'); return parseInt(p[0])*60+(parseInt(p[1])||0); })(i.time);
+      const period = mins < 16*60 ? 'Утро' : 'Вечер';
+      if (period !== lastPeriod) {
+        cardsHtml += '<div style="display:flex;align-items:center;gap:10px;margin:10px 0 6px;"><div style="flex:1;height:1px;background:#d4c5b5;"></div><span style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#5a4a44;opacity:.7;">' + period + '</span><div style="flex:1;height:1px;background:#d4c5b5;"></div></div>';
+        lastPeriod = period;
+      }
       const bg = colorBg[i.color] || '#97897f';
       const tc = colorTxt[i.color] || '#f5f0eb';
-      const newBadge = i.isNew ? '<span style="background:#fff;color:#9e3a3a;font-size:7px;padding:2px 6px;border-radius:10px;margin-left:8px;">NEW</span>' : '';
-      allHtml += '<div style="display:flex;align-items:center;gap:10px;background:' + bg + ';border-radius:10px;padding:8px 12px;margin-bottom:5px;"><div style="min-width:45px;font-size:11px;font-weight:500;color:' + tc + ';">' + i.time.split('–')[0] + '</div><div style="flex:1;font-size:11px;color:' + tc + ';">' + i.name + newBadge + '<span style="opacity:.7;margin-left:6px;">· ' + i.trainer + '</span></div></div>';
+      const tp = i.time.includes('–') ? i.time.split('–') : [i.time, null];
+      const timeHtml = tp[1]
+        ? '<div style="min-width:52px;flex-shrink:0;line-height:1.3;"><div style="font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + tp[0] + '</div><div style="font-size:11px;color:' + tc + ';opacity:.65;white-space:nowrap;">' + tp[1] + '</div></div>'
+        : '<div style="min-width:52px;flex-shrink:0;font-size:12px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + tp[0] + '</div>';
+      const newBadge = i.isNew ? '<div style="width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
+      cardsHtml += '<div style="display:flex;align-items:center;gap:10px;background:' + bg + ';border-radius:12px;padding:9px 11px;margin-bottom:6px;">' + timeHtml + '<div style="flex:1;"><div style="font-size:12px;color:' + tc + ';line-height:1.3;">' + i.name + '</div><div style="font-size:11px;color:' + tc + ';opacity:.7;margin-top:2px;">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
     });
-    allHtml += '</div>';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:480px;background:#f5f0eb;padding:28px 24px;font-family:Jost,sans-serif;box-sizing:border-box;';
+    wrapper.innerHTML = '<div style="text-align:center;font-family:Raleway,sans-serif;font-size:15px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:#2c2320;margin-bottom:18px;">' + (dayTitles[dayKey]||dayKey) + '</div>' + cardsHtml + '<div style="text-align:center;margin-top:18px;padding-top:12px;border-top:1px solid #d4c5b5;font-size:10px;color:#97897f;letter-spacing:.08em;">Eagle Fitness Studio · eagle-fitness.ru</div>';
+    document.body.appendChild(wrapper);
+
+    html2canvas(wrapper, { backgroundColor:'#f5f0eb', scale:2, useCORS:true, logging:false, width:480 })
+      .then(function(canvas) {
+        document.body.removeChild(wrapper);
+        saveCanvas(canvas, 'расписание-' + (dayTitles[dayKey]||dayKey) + '.png');
+        btn.textContent = '⬇ Скачать расписание на день'; btn.disabled = false;
+      }).catch(function() {
+        document.body.removeChild(wrapper);
+        btn.textContent = '⬇ Скачать расписание на день'; btn.disabled = false;
+      });
   });
+}
 
-  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-  const now = new Date();
-  const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+/* ── Полное расписание (3-колонная сетка) ── */
+function downloadFullSchedule() {
+  loadHtml2Canvas(function() {
+    const dlBtn = document.querySelector('.wm-head .btn-dl');
+    if (dlBtn) { dlBtn.textContent = '⏳...'; dlBtn.disabled = true; }
 
-  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Расписание Eagle Fitness Studio</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;background:#f5f0eb;padding:24px;max-width:600px;margin:0 auto;}@media print{body{padding:12px;}}</style></head><body><div style="text-align:center;margin-bottom:24px;"><div style="font-size:16px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#2c2320;">Расписание Eagle Studio</div><div style="font-size:11px;color:#97897f;margin-top:4px;">от ' + dateStr + '</div></div>' + allHtml + '<div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid #d4c5b5;font-size:10px;color:#97897f;">Предварительная запись обязательна · eagle-fitness.ru</div><div style="text-align:center;margin-top:16px;font-size:12px;color:#5a4a44;">📱 Сделайте скриншот или сохраните страницу</div></body></html>';
-  
-  const newTab = window.open('', '_blank');
-  if (newTab) {
-    newTab.document.write(html);
-    newTab.document.close();
-  }
+    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
+    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+    const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+
+    const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    const now = new Date();
+    const dateStr = 'от ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+
+    const colW = 320, gap = 14, pad = 28, cols = 3;
+    const totalW = cols * colW + (cols - 1) * gap + pad * 2;
+
+    function buildDayCol(dayKey) {
+      const items = SCHEDULE[dayKey] || [];
+      let html = '<div style="flex:1;background:#fff;border-radius:14px;padding:12px;">';
+      html += '<div style="text-align:center;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#5a4a44;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #e8e0d8;">' + dayTitles[dayKey] + '</div>';
+      items.forEach(function(i) {
+        const bg = colorBg[i.color] || '#97897f';
+        const tc = colorTxt[i.color] || '#f5f0eb';
+        const tp = i.time.includes('–') ? i.time.split('–') : [i.time, null];
+        const timeHtml = tp[1]
+          ? '<div style="min-width:38px;flex-shrink:0;line-height:1.25;"><div style="font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + tp[0] + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;white-space:nowrap;">' + tp[1] + '</div></div>'
+          : '<div style="min-width:38px;flex-shrink:0;font-size:10px;font-weight:500;color:' + tc + ';white-space:nowrap;">' + tp[0] + '</div>';
+        const newBadge = i.isNew ? '<div style="width:24px;height:24px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:6px;font-weight:600;color:#9e3a3a;text-transform:uppercase;flex-shrink:0;">NEW</div>' : '';
+        html += '<div style="display:flex;align-items:center;gap:6px;background:' + bg + ';border-radius:8px;padding:6px 7px;margin-bottom:4px;">' + timeHtml + '<div style="flex:1;min-width:0;"><div style="font-size:10px;color:' + tc + ';line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.name + '</div><div style="font-size:9px;color:' + tc + ';opacity:.7;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + i.trainer + ' | ' + i.hall + '</div></div>' + newBadge + '</div>';
+      });
+      html += '</div>';
+      return html;
+    }
+
+    // Row 1: Mon Tue Wed | Row 2: Thu Fri | Sat+Sun stacked
+    const row1 = '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">' + buildDayCol('mon') + buildDayCol('tue') + buildDayCol('wed') + '</div>';
+    const row2 = '<div style="display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;align-items:flex-start;">' + buildDayCol('thu') + buildDayCol('fri') + '<div style="flex:1;display:flex;flex-direction:column;gap:' + gap + 'px;">' + buildDayCol('sat') + buildDayCol('sun') + '</div></div>';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Jost,sans-serif;box-sizing:border-box;';
+    wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + row1 + row2 + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo 14+. Предварительная запись обязательна!</div>';
+    document.body.appendChild(wrapper);
+
+    html2canvas(wrapper, { backgroundColor:'#f5f0eb', scale:2, useCORS:true, logging:false, width:totalW })
+      .then(function(canvas) {
+        document.body.removeChild(wrapper);
+        saveCanvas(canvas, 'расписание-Eagle-Fitness.png');
+        if (dlBtn) { dlBtn.textContent = '⬇ Скачать'; dlBtn.disabled = false; }
+      }).catch(function() {
+        document.body.removeChild(wrapper);
+        if (dlBtn) { dlBtn.textContent = '⬇ Скачать'; dlBtn.disabled = false; }
+      });
+  });
 }
 </script>
 
@@ -846,6 +935,64 @@ function downloadFullSchedule() {
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
   <span>Приложение</span>
 </a>
+
+<!-- Week schedule modal -->
+<div class="wm" id="weekModal">
+  <div class="wm-head">
+    <div class="wm-title">Расписание на неделю</div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="btn-dl" style="white-space:nowrap;padding:9px 18px;font-size:10px;" onclick="downloadFullSchedule()">⬇ Скачать</button>
+      <button class="wm-close" onclick="closeWeekModal()">✕</button>
+    </div>
+  </div>
+  <div class="wm-body" id="weekModalBody"></div>
+</div>
+
+<script>
+function openWeekModal() {
+  const modal = document.getElementById('weekModal');
+  const body = document.getElementById('weekModalBody');
+
+  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
+  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+  const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
+
+  function buildCol(dayKey) {
+    const items = SCHEDULE[dayKey] || [];
+    let h = '<div class="wg-col"><div class="wg-title">' + dayTitles[dayKey] + '</div>';
+    items.forEach(function(i) {
+      const bg = colorBg[i.color] || '#97897f';
+      const tc = colorTxt[i.color] || '#f5f0eb';
+      const tp = i.time.includes('–') ? i.time.split('–') : [i.time, null];
+      const timeHtml = tp[1]
+        ? '<div class="wg-time" style="color:' + tc + ';">' + tp[0] + '<br><span style="opacity:.65;font-size:9px;">' + tp[1] + '</span></div>'
+        : '<div class="wg-time" style="color:' + tc + ';">' + tp[0] + '</div>';
+      const newBadge = i.isNew ? '<div class="wg-new">NEW</div>' : '';
+      h += '<div class="wg-card" style="background:' + bg + ';">' + timeHtml + '<div class="wg-info"><div class="wg-name" style="color:' + tc + ';">' + i.name + '</div><div class="wg-trainer" style="color:' + tc + ';">' + i.trainer + ' · ' + i.hall + '</div></div>' + newBadge + '</div>';
+    });
+    h += '</div>';
+    return h;
+  }
+
+  const html =
+    '<div class="wg-row">' + buildCol('mon') + buildCol('tue') + buildCol('wed') + '</div>' +
+    '<div class="wg-row">' + buildCol('thu') + buildCol('fri') +
+      '<div class="wg-col-sat">' + buildCol('sat') + buildCol('sun') + '</div>' +
+    '</div>' +
+    '<div class="wg-footer">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo 14+. Предварительная запись обязательна!</div>';
+
+  body.innerHTML = html;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeWeekModal() {
+  document.getElementById('weekModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeWeekModal();
+});
+</script>
 
 </body>
 </html>
