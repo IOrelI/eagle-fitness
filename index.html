@@ -136,6 +136,26 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
 .flinks{display:flex;gap:20px;}
 .flinks a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,235,.7);text-decoration:none;transition:color .2s;}
 .flinks a:hover{color:#fff;}
+/* Reviews */
+.rv-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;scrollbar-width:none;cursor:grab;}
+.rv-wrap::-webkit-scrollbar{display:none;}
+.rv-wrap.grabbing{cursor:grabbing;}
+.rv-row{display:flex;gap:18px;width:max-content;padding:4px 2px;}
+.rcard{width:320px;flex-shrink:0;background:#fff;border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;gap:12px;}
+.rcard-stars{color:#f5a623;font-size:14px;letter-spacing:2px;}
+.rcard-text{font-size:13px;line-height:1.8;color:var(--tm);flex:1;}
+.rcard-text em{font-style:normal;color:var(--td);font-weight:500;}
+.rcard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--beige);}
+.rcard-author{font-size:12px;color:var(--td);font-weight:500;}
+.rcard-date{font-size:11px;color:var(--taupe);}
+.rcard-source{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe);background:var(--beige);padding:3px 8px;border-radius:20px;}
+.rv-total{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
+.rv-score{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;line-height:1;color:var(--td);}
+.rv-stars-big{color:#f5a623;font-size:18px;letter-spacing:3px;display:block;}
+.rv-count{font-size:12px;color:var(--taupe);margin-top:4px;}
+.rv-source-link{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe);text-decoration:none;border:1px solid var(--beige);padding:8px 16px;border-radius:100px;transition:all .2s;}
+.rv-source-link:hover{background:var(--beige);color:var(--td);}
+@media(max-width:768px){.rcard{width:280px;}.rv-score{font-size:44px;}}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}.no-js .reveal{opacity:1;transform:none;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 /* Week modal */
@@ -589,6 +609,82 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
   </div>
 </section>
 
+<section id="reviews" class="sch-bg">
+  <div class="si">
+    <div class="slabel reveal">Что говорят клиенты</div>
+    <h2 class="stitle reveal">Отзывы</h2>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
+      <div class="rv-total reveal">
+        <div class="rv-score">5.0</div>
+        <div>
+          <span class="rv-stars-big">★★★★★</span>
+          <div class="rv-count">13 отзывов на 2ГИС</div>
+        </div>
+      </div>
+      <a href="https://2gis.ru/novosibirsk/firm/70000001091228143/tab/reviews" target="_blank" class="rv-source-link reveal">Все отзывы на 2ГИС →</a>
+    </div>
+    <div class="rv-wrap reveal" id="rvWrap">
+      <div class="rv-row">
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Лучшая фитнес-студия в Кольцово! Это та редкая студия, где всё сделано для людей. Чистота и стиль, профессионализм тренеров, разнообразные программы. <em>После других студий с их драконовскими условиями — просто глоток свежего воздуха.</em> Если вы ищете место, где вас будут ценить как клиента — вам сюда!</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Ксения Я</div><div class="rcard-date">5 февраля 2026</div></div>
+            <span class="rcard-source">2ГИС</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Специально ждала год, чтобы оставить отзыв. Прийти сюда было одним из лучших решений 2023 года. <em>По итогам года я стала сильнее, бодрее, перестали болеть шея и спина, сбросила 15 кг.</em> Настя влюбляет в себя мгновенно — тренер адаптирует упражнения под каждого.</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Alyona Seregina</div><div class="rcard-date">12 декабря 2024</div></div>
+            <span class="rcard-source">2ГИС</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Была в нескольких студиях в Кольцово, но с уверенностью могу сказать — <em>это лучшая студия!</em> Отличные тренеры групповых тренировок, приятная цена, всегда чисто, красиво, уютно и с заботой о клиентах! Самое классное — по одному абонементу можно посещать разные направления.</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Елена Амельченко</div><div class="rcard-date">18 февраля 2026</div></div>
+            <span class="rcard-source">2ГИС</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Хочу выразить благодарность тренеру Анастасии — <em>каждое занятие это не просто тренировка, а настоящее приключение.</em> Благодаря тренировкам справилась с болями в мышцах, вызванными грудным хондрозом. Жизнь стала легче и комфортнее.</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Ксения Варлапова</div><div class="rcard-date">28 августа 2024</div></div>
+            <span class="rcard-source">2ГИС</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Уютная, современная студия, очень разнообразные направления на любую физическую подготовку. Много классных тренеров, каждый ведёт в своём стиле. <em>По одному абонементу — йога, фитнес, пилатес.</em> Есть удобное приложение с записью и заморозкой.</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Irinka Perelygina</div><div class="rcard-date">5 февраля 2026</div></div>
+            <span class="rcard-source">2ГИС</span>
+          </div>
+        </div>
+
+        <div class="rcard">
+          <div class="rcard-stars">★★★★★</div>
+          <div class="rcard-text">Хожу с самого открытия. Очень нравятся тренировки, инвентарь, отношение. <em>Очень много направлений — на любой запрос практически.</em> У меня уже даже обе дочери сюда ходят с удовольствием!</div>
+          <div class="rcard-footer">
+            <div><div class="rcard-author">Олеся Григорьева</div><div class="rcard-date">30 марта 2026</div></div>
+            <span class="rcard-source">ВКонтакте</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="online" class="onl-bg">
   <div class="si">
     <div class="slabel reveal" style="color:var(--beige);">Скоро</div>
@@ -793,6 +889,15 @@ const tk=dk[new Date().getDay()];
 show(document.getElementById("dp-"+tk)?tk:"mon", true);
 document.getElementById("burger").addEventListener("click",()=>document.getElementById("mobMenu").classList.toggle("open"));
 function cm(){document.getElementById("mobMenu").classList.remove("open");}
+// Drag-scroll reviews
+const rv = document.getElementById('rvWrap');
+if (rv) {
+  let isDown = false, startX, scrollLeft;
+  rv.addEventListener('mousedown', e => { isDown = true; rv.classList.add('grabbing'); startX = e.pageX - rv.offsetLeft; scrollLeft = rv.scrollLeft; });
+  rv.addEventListener('mouseleave', () => { isDown = false; rv.classList.remove('grabbing'); });
+  rv.addEventListener('mouseup', () => { isDown = false; rv.classList.remove('grabbing'); });
+  rv.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); rv.scrollLeft = scrollLeft - (e.pageX - rv.offsetLeft - startX); });
+}
 // On mobile: skip animation entirely
 if(window.innerWidth<=768){
   document.querySelectorAll(".reveal").forEach(r=>r.classList.add("visible"));
