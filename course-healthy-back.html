@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Онлайн-курс «Здоровая спина» — Eagle Fitness Studio</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:300,300i,400,400i|raleway:300,400,500|jost:300,400,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--rose:#b89090;--dk:#6b5a55;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:Jost,sans-serif;color:var(--td);overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:8px 48px;background:rgba(245,240,235,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(151,137,127,0.18);}
+.nav-logo img{height:66px;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--td);}
+.nav-cta{padding:10px 24px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:Jost,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.nav-cta:hover{opacity:.82;}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px;}
+.burger span{width:22px;height:1.5px;background:var(--td);display:block;}
+.mob-menu{position:fixed;inset:0;background:var(--bg);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mob-menu.open{opacity:1;pointer-events:all;}
+.mob-menu a{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--td);text-decoration:none;}
+
+/* Hero */
+.hero{min-height:92vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden;background:var(--bg-dark);}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 30% 50%,rgba(151,137,127,0.12) 0%,transparent 70%);}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-tag{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--taupe);margin-bottom:20px;}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,7vw,88px);font-weight:300;line-height:1.05;color:#fff;letter-spacing:.02em;}
+.hero-title em{font-style:italic;color:var(--beige);}
+.hero-desc{margin-top:24px;font-size:15px;line-height:1.8;color:rgba(245,240,235,0.65);}
+.hero-price{margin-top:36px;display:flex;align-items:baseline;gap:12px;}
+.price-num{font-family:"Cormorant Garamond",serif;font-size:56px;font-weight:300;color:#fff;line-height:1;}
+.price-label{font-size:12px;color:var(--taupe);letter-spacing:.1em;text-transform:uppercase;}
+.hero-btns{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+.btn-p{padding:14px 36px;border-radius:100px;background:var(--dk);color:var(--tl);font-family:Jost,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;display:inline-block;}
+.btn-p:hover{opacity:.82;}
+.btn-o{padding:14px 36px;border-radius:100px;border:1.5px solid rgba(245,240,235,0.3);color:rgba(245,240,235,0.8);font-family:Jost,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:all .2s;display:inline-block;}
+.btn-o:hover{border-color:rgba(245,240,235,0.7);color:#fff;}
+.hero-visual{position:relative;}
+.trainer-card{background:rgba(245,240,235,0.06);border:1px solid rgba(245,240,235,0.1);border-radius:24px;padding:32px;backdrop-filter:blur(8px);}
+.trainer-photo{width:100%;aspect-ratio:3/4;border-radius:18px;overflow:hidden;margin-bottom:24px;}
+.trainer-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.trainer-name{font-family:Raleway,sans-serif;font-weight:400;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:4px;}
+.trainer-role{font-size:12px;color:var(--taupe);}
+.trainer-badge{display:inline-block;margin-top:12px;padding:6px 14px;border-radius:100px;background:rgba(151,137,127,0.2);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--beige);}
+
+/* Stats bar */
+.stats-bar{background:var(--beige);padding:32px 48px;}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+.stat-item{}
+.stat-n{font-family:"Cormorant Garamond",serif;font-size:38px;font-weight:300;color:var(--td);line-height:1;}
+.stat-l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-top:4px;}
+
+/* Sections */
+section{padding:88px 48px;}
+.si{max-width:1100px;margin:0 auto;}
+.slabel{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.stitle{font-family:Raleway,sans-serif;font-weight:300;font-size:clamp(26px,4vw,44px);letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:48px;}
+
+/* Workouts list */
+.workouts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.workout{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:var(--beige);transition:transform .15s;}
+.workout:hover{transform:translateY(-2px);}
+.workout-num{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:300;color:var(--taupe);width:36px;flex-shrink:0;line-height:1;}
+.workout-info{}
+.workout-name{font-size:13px;color:var(--td);font-weight:500;margin-bottom:3px;}
+.workout-dur{font-size:11px;color:var(--taupe);display:flex;align-items:center;gap:5px;}
+.workout-dur::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--taupe);flex-shrink:0;}
+
+/* For whom */
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0;}
+.for-card{padding:28px 24px;border-radius:20px;border:1px solid var(--beige);}
+.for-icon{font-size:24px;margin-bottom:14px;}
+.for-title{font-size:13px;font-weight:500;color:var(--td);margin-bottom:8px;letter-spacing:.04em;}
+.for-text{font-size:12px;line-height:1.75;color:var(--tm);}
+
+/* Access */
+.access-bg{background:var(--bg-dark);}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.access-card{border-radius:22px;padding:36px 32px;border:1px solid rgba(245,240,235,0.1);}
+.access-card.tg{background:rgba(39,174,228,0.08);border-color:rgba(39,174,228,0.2);}
+.access-card.mx{background:rgba(151,137,127,0.12);border-color:rgba(151,137,127,0.25);}
+.access-platform{font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px;}
+.access-card.tg .access-platform{color:#29b6f6;}
+.access-card.mx .access-platform{color:var(--beige);}
+.access-title{font-family:Raleway,sans-serif;font-weight:300;font-size:22px;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:12px;}
+.access-text{font-size:13px;line-height:1.8;color:rgba(245,240,235,0.55);}
+.access-btn{display:inline-block;margin-top:24px;padding:12px 28px;border-radius:100px;font-family:Jost,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:opacity .2s;}
+.access-card.tg .access-btn{background:#29b6f6;color:#fff;}
+.access-card.mx .access-btn{background:var(--dk);color:var(--tl);}
+.access-btn:hover{opacity:.82;}
+
+/* Price block */
+.price-block{background:var(--beige);border-radius:28px;padding:48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-top:56px;}
+.price-left{}
+.price-big{font-family:"Cormorant Garamond",serif;font-size:80px;font-weight:300;line-height:1;color:var(--td);}
+.price-unit{font-size:13px;color:var(--taupe);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
+.price-includes{font-size:13px;line-height:1.9;color:var(--tm);margin-top:16px;}
+.price-includes li{list-style:none;padding-left:18px;position:relative;}
+.price-includes li::before{content:"—";position:absolute;left:0;color:var(--taupe);}
+.price-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start;}
+
+footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.ft{font-size:11px;color:rgba(245,240,235,.7);letter-spacing:.06em;}
+.flinks{display:flex;gap:20px;}
+.flinks a{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,235,.7);text-decoration:none;}
+.flinks a:hover{color:#fff;}
+
+@media(max-width:900px){
+  .hero-inner,.access-grid,.workouts{grid-template-columns:1fr;}
+  .hero{padding:120px 24px 64px;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .for-grid{grid-template-columns:1fr;}
+  .price-block{flex-direction:column;}
+  section{padding:64px 24px;}
+  .stats-bar{padding:24px;}
+}
+@media(max-width:768px){
+  nav{padding:13px 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .burger{display:flex;}
+  .nav-logo img{height:40px;}
+  footer{flex-direction:column;text-align:center;padding:32px 20px;}
+  .flinks{justify-content:center;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo"><a href="index.html"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/logo_qreeb6.svg" alt="Eagle"></a></div>
+  <ul class="nav-links">
+    <li><a href="index.html#about">О студии</a></li>
+    <li><a href="directions.html">Направления</a></li>
+    <li><a href="index.html#schedule">Расписание</a></li>
+    <li><a href="index.html#prices">Цены</a></li>
+    <li><a href="index.html#contacts">Контакты</a></li>
+  </ul>
+  <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="nav-cta">Записаться</a>
+  <button class="burger" id="burger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="index.html" onclick="cm()">Главная</a>
+  <a href="directions.html" onclick="cm()">Направления</a>
+  <a href="index.html#schedule" onclick="cm()">Расписание</a>
+  <a href="index.html#prices" onclick="cm()">Цены</a>
+  <a href="index.html#contacts" onclick="cm()">Контакты</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Онлайн-курс · Eagle Fitness Studio</div>
+      <h1 class="hero-title">Здоровая<br><em>спина</em></h1>
+      <p class="hero-desc">10 тренировок дома — с реальным результатом. Курс от основателя и тренера студии Анастасии Орёл.</p>
+      <div class="hero-price">
+        <div class="price-num">1 500</div>
+        <div class="price-label">рублей<br>навсегда</div>
+      </div>
+      <div class="hero-btns">
+        <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="btn-p">Купить курс</a>
+        <a href="#program" class="btn-o">Программа</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="trainer-card">
+        <div class="trainer-photo">
+          <img src="https://res.cloudinary.com/dve1ywzim/image/upload/anastasiya-oryol-new_ahkgcs.webp" alt="Анастасия Орёл" loading="lazy">
+        </div>
+        <div class="trainer-name">Анастасия Орёл</div>
+        <div class="trainer-role">Основатель, руководитель и тренер студии</div>
+        <span class="trainer-badge">Автор курса</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-n">10</div><div class="stat-l">тренировок</div></div>
+    <div class="stat-item"><div class="stat-n">16–33</div><div class="stat-l">минут каждая</div></div>
+    <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">инструмента</div></div>
+    <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">доступ навсегда</div></div>
+  </div>
+</div>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="si">
+    <div class="slabel">Что внутри</div>
+    <h2 class="stitle">Программа курса</h2>
+    <div class="workouts">
+      <div class="workout"><div class="workout-num">01</div><div class="workout-info"><div class="workout-name">Стопы</div><div class="workout-dur">24 мин</div></div></div>
+      <div class="workout"><div class="workout-num">02</div><div class="workout-info"><div class="workout-name">Расслабление поясницы</div><div class="workout-dur">23 мин</div></div></div>
+      <div class="workout"><div class="workout-num">03</div><div class="workout-info"><div class="workout-name">Раскрытие грудного отдела</div><div class="workout-dur">16 мин</div></div></div>
+      <div class="workout"><div class="workout-num">04</div><div class="workout-info"><div class="workout-name">Мобильность тазобедренных суставов</div><div class="workout-dur">22 мин</div></div></div>
+      <div class="workout"><div class="workout-num">05</div><div class="workout-info"><div class="workout-name">Тотальное расслабление спины</div><div class="workout-dur">25 мин</div></div></div>
+      <div class="workout"><div class="workout-num">06</div><div class="workout-info"><div class="workout-name">Укрепление пресса и дыхание</div><div class="workout-dur">18 мин</div></div></div>
+      <div class="workout"><div class="workout-num">07</div><div class="workout-info"><div class="workout-name">Стопы и мобильность тазобедренных суставов</div><div class="workout-dur">24 мин</div></div></div>
+      <div class="workout"><div class="workout-num">08</div><div class="workout-info"><div class="workout-name">Раскрытие и МФР грудного отдела</div><div class="workout-dur">26 мин</div></div></div>
+      <div class="workout"><div class="workout-num">09</div><div class="workout-info"><div class="workout-name">Расслабление ног и поясницы</div><div class="workout-dur">33 мин</div></div></div>
+      <div class="workout"><div class="workout-num">10</div><div class="workout-info"><div class="workout-name">Расслабление рук и грудного отдела методом МФР</div><div class="workout-dur">25 мин</div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section style="background:#f0ebe4;">
+  <div class="si">
+    <div class="slabel">Что потребуется</div>
+    <h2 class="stitle">Инвентарь</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;">
+      <div style="background:#fff;border-radius:18px;padding:24px 20px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#9e9e9e;margin:0 auto 12px;"></div>
+        <div style="font-size:13px;font-weight:500;color:var(--td);margin-bottom:6px;">МФР-ролик</div>
+        <div style="font-size:11px;color:var(--taupe);line-height:1.6;">Для проработки мышц спины и ног</div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:24px 20px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#d4c5b5;margin:0 auto 12px;"></div>
+        <div style="font-size:13px;font-weight:500;color:var(--td);margin-bottom:6px;">МФР-мячик</div>
+        <div style="font-size:11px;color:var(--taupe);line-height:1.6;">Точечный массаж труднодоступных зон</div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:24px 20px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#f5f5f5;border:1px solid #e0dbd5;margin:0 auto 12px;"></div>
+        <div style="font-size:13px;font-weight:500;color:var(--td);margin-bottom:6px;">Двойной мяч</div>
+        <div style="font-size:11px;color:var(--taupe);line-height:1.6;">Для проработки паравертебральных мышц</div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:24px 20px;text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:#f2c4c4;margin:0 auto 12px;"></div>
+        <div style="font-size:13px;font-weight:500;color:var(--td);margin-bottom:6px;">Экспандер-резинка</div>
+        <div style="font-size:11px;color:var(--taupe);line-height:1.6;">Для силовых упражнений на спину</div>
+      </div>
+    </div>
+    <div style="background:var(--beige);border-radius:14px;padding:18px 22px;font-size:13px;color:var(--tm);line-height:1.8;">
+      📦 Ссылки на весь инвентарь с рекомендациями по выбору находятся прямо в канале курса — сразу после покупки.
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section style="background:#f0ebe4;">
+  <div class="si">
+    <div class="slabel">Кому подойдёт</div>
+    <h2 class="stitle">Для кого этот курс</h2>
+    <div class="for-grid">
+      <div class="for-card">
+        <div class="for-icon">💻</div>
+        <div class="for-title">Сидячая работа</div>
+        <div class="for-text">Если болит спина, шея или плечи после долгого сидения за компьютером — курс поможет снять хроническое напряжение.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">🏠</div>
+        <div class="for-title">Дома, без зала</div>
+        <div class="for-text">Только коврик и простой МФР-инвентарь. Тренируйтесь там, где удобно — ссылки на всё оборудование есть в канале курса.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">🌱</div>
+        <div class="for-title">Любой уровень</div>
+        <div class="for-text">Подходит новичкам и тем, кто давно не тренировался. Анастасия объясняет каждое движение понятно и безопасно.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">⚡</div>
+        <div class="for-title">Мало времени</div>
+        <div class="for-text">Тренировки от 16 минут — легко вписать в любой распорядок дня, даже самый плотный.</div>
+      </div>
+      <div class="for-card">
+        <div class="for-icon">📱</div>
+        <div class="for-title">Удобный формат</div>
+        <div class="for-text">Все тренировки в закрытом канале — смотрите с телефона, планшета или ноутбука в любое время.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access-bg">
+  <div class="si">
+    <div class="slabel" style="color:var(--beige);">Как получить доступ</div>
+    <h2 class="stitle" style="color:#fff;">Выберите платформу</h2>
+    <div class="access-grid">
+      <div class="access-card tg">
+        <div class="access-platform">Telegram</div>
+        <div class="access-title">Закрытый<br>канал</div>
+        <div class="access-text">Все тренировки в закрытом Telegram-канале. Доступ сразу после оплаты — навсегда, без подписки.</div>
+        <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="access-btn">Купить через Telegram</a>
+      </div>
+      <div class="access-card mx">
+        <div class="access-platform">MAX</div>
+        <div class="access-title">Закрытый<br>канал</div>
+        <div class="access-text">Те же тренировки в закрытом канале мессенджера MAX — российская альтернатива без риска блокировок.</div>
+        <a href="https://max.ru/u/f9LHodD0cOLAUZweQmoueQ-UqM9ToouhfojM2SWpyVxX2xdQdl7O6BuZlUs" target="_blank" class="access-btn">Купить через MAX</a>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="price-block">
+      <div class="price-left">
+        <div class="price-big">1 500 ₽</div>
+        <div class="price-unit" style="margin-top:12px;">единоразово · доступ навсегда</div>
+        <ul class="price-includes" style="margin-top:20px;">
+          <li>10 видеотренировок от 16 до 33 минут</li>
+          <li>Доступ навсегда — пересматривайте сколько угодно</li>
+          <li>Выбор платформы: Telegram или MAX</li>
+          <li>Ссылки на весь необходимый инвентарь в канале</li>
+        </ul>
+      </div>
+      <div class="price-cta">
+        <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="btn-p" style="background:var(--bg-dark);white-space:nowrap;">Купить в Telegram</a>
+        <a href="https://max.ru/u/f9LHodD0cOLAUZweQmoueQ-UqM9ToouhfojM2SWpyVxX2xdQdl7O6BuZlUs" target="_blank" class="btn-p" style="white-space:nowrap;">Купить в MAX</a>
+        <div style="font-size:11px;color:var(--taupe);letter-spacing:.06em;margin-top:4px;">Вопросы? Напишите нам</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl"><svg style="height:44px;width:auto;opacity:.85;" width="1336" height="251" viewBox="0 0 1336 251" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M59.2196 156.305C53.4076 159.379 42.0936 165.868 43.3528 174.172C44.2763 173.417 47.7351 170.901 54.1825 166.874L50.1529 170.649C50.5726 172.075 50.0017 174.927 44.3602 174.927C43.5207 175.515 41.6906 177.394 41.0861 180.212C40.5464 182.729 42.3454 188.265 52.1677 184.994C49.6491 184.071 47.6343 179.709 55.6936 175.682C67.5308 170.649 120.924 160.08 172.05 184.994C170.791 181.722 162.48 163.351 136.035 158.318C140.065 157.479 151.398 153.788 157.946 144.225C150.475 148.923 133.516 156.305 112.361 153.033C131.753 153.033 170.791 146.742 173.057 110.252C167.181 119.06 151.146 137.682 120.924 138.689C132.257 135.669 157.694 128.069 170.791 104.715C174.065 98.0045 178.346 82.0663 170.791 67.2186C170.791 77.2848 166.006 101.947 122.687 129.126C130.998 122.667 150.391 106.98 160.213 87.0994C161.998 83.4854 164.309 77.2848 164.494 68.4769C164.662 60.5078 160.465 42.4556 142.331 34C144.682 47.3378 145.706 79.2981 130.998 100.437C129.739 104.044 121.276 115.436 97.5014 134.159C88.1828 141.498 67.7826 151.775 59.2196 156.305Z" fill="#C8C4BF"/>
+<path d="M123.93 64.4562C144.747 91.1191 117.66 122.607 68 148C83.4665 131.071 108.882 86.8022 90.0711 35C103.531 38.1318 125.435 54.2989 116.657 92.8966C119.917 88.8337 123.93 79.6921 123.93 64.4562Z" fill="#C8C4BF"/>
+<path d="M282.795 109.588V117.526H255.887V130.928H280.011V138.454H255.887V151.959H283.619V160H247.331V109.588H282.795ZM311.612 148.557L306.56 160H297.488L319.756 109.588H328.828L350.993 160H341.921L336.87 148.557H311.612ZM333.468 140.619L324.292 119.897L315.117 140.619H333.468ZM402.963 135.464H411.416V152.68C406.674 157.973 399.87 160.619 391.004 160.619C383.512 160.619 377.258 158.144 372.241 153.196C367.224 148.247 364.715 142.062 364.715 134.639C364.715 127.216 367.258 120.997 372.344 115.979C377.499 110.893 383.719 108.351 391.004 108.351C398.289 108.351 404.337 110.447 409.148 114.639L404.612 121.134C401.107 118.179 396.811 116.701 391.726 116.701C386.571 116.701 382.241 118.385 378.736 121.753C375.299 125.052 373.581 129.347 373.581 134.639C373.581 139.931 375.231 144.227 378.53 147.526C381.897 150.756 386.055 152.371 391.004 152.371C395.815 152.371 399.801 151.34 402.963 149.278V135.464ZM432.702 160V109.588H441.258V151.959H464.248V160H432.702ZM518.986 109.588V117.526H492.079V130.928H516.202V138.454H492.079V151.959H519.811V160H483.522V109.588H518.986Z" fill="#C8C4BF"/>
+<path d="M576.463 117.526V131.34H598.835V139.175H576.463V160H567.907V109.588H601.515L601.412 117.526H576.463ZM617.559 109.588H626.116V160H617.559V109.588ZM665.092 117.32V160H656.536V117.32H641.278V109.588H680.35V117.32H665.092ZM733.507 109.588H741.961V160H732.786L704.229 123.196V160H695.672V109.588H704.229L733.507 147.216V109.588ZM797.488 109.588V117.526H770.581V130.928H794.704V138.454H770.581V151.959H798.313V160H762.024V109.588H797.488ZM821.996 122.268C821.996 124.399 822.786 125.945 824.367 126.907C825.948 128.076 829.316 129.278 834.47 130.515C839.9 131.821 843.852 133.608 846.326 135.876C848.869 138.144 850.14 141.409 850.14 145.67C850.14 150.137 848.457 153.746 845.089 156.495C841.79 159.244 837.46 160.619 832.099 160.619C824.333 160.619 817.323 157.869 811.068 152.371L816.429 145.979C821.652 150.447 826.945 152.68 832.305 152.68C834.986 152.68 837.151 152.096 838.8 150.928C840.45 149.691 841.274 148.11 841.274 146.186C841.274 144.261 840.518 142.749 839.006 141.649C837.563 140.55 834.951 139.553 831.171 138.66C824.642 137.148 820.106 135.361 817.563 133.299C814.608 131.031 813.13 127.56 813.13 122.887C813.13 118.351 814.78 114.811 818.079 112.268C821.378 109.656 825.604 108.351 830.759 108.351C837.701 108.351 843.646 110.378 848.594 114.433L844.058 120.825C842.546 119.45 840.518 118.351 837.975 117.526C835.433 116.632 832.924 116.186 830.45 116.186C827.907 116.186 825.845 116.735 824.264 117.835C822.752 118.866 821.996 120.344 821.996 122.268ZM873.504 122.268C873.504 124.399 874.294 125.945 875.875 126.907C877.456 128.076 880.823 129.278 885.978 130.515C891.408 131.821 895.36 133.608 897.834 135.876C900.377 138.144 901.648 141.409 901.648 145.67C901.648 150.137 899.964 153.746 896.597 156.495C893.298 159.244 888.968 160.619 883.607 160.619C875.841 160.619 868.83 157.869 862.576 152.371L867.937 145.979C873.16 150.447 878.452 152.68 883.813 152.68C886.494 152.68 888.659 152.096 890.308 150.928C891.957 149.691 892.782 148.11 892.782 146.186C892.782 144.261 892.026 142.749 890.514 141.649C889.071 140.55 886.459 139.553 882.679 138.66C876.15 137.148 871.614 135.361 869.071 133.299C866.116 131.031 864.638 127.56 864.638 122.887C864.638 118.351 866.287 114.811 869.586 112.268C872.885 109.656 877.112 108.351 882.267 108.351C889.208 108.351 895.153 110.378 900.102 114.433L895.566 120.825C894.054 119.45 892.026 118.351 889.483 117.526C886.94 116.632 884.432 116.186 881.957 116.186C879.415 116.186 877.353 116.735 875.772 117.835C874.26 118.866 873.504 120.344 873.504 122.268ZM950.836 122.268C950.836 124.399 951.626 125.945 953.207 126.907C954.788 128.076 958.156 129.278 963.31 130.515C968.74 131.821 972.692 133.608 975.166 135.876C977.709 138.144 978.98 141.409 978.98 145.67C978.98 150.137 977.296 153.746 973.929 156.495C970.63 159.244 966.3 160.619 960.939 160.619C953.173 160.619 946.162 157.869 939.908 152.371L945.269 145.979C950.492 150.447 955.784 152.68 961.145 152.68C963.826 152.68 965.991 152.096 967.64 150.928C969.29 149.691 970.114 148.11 970.114 146.186C970.114 144.261 969.358 142.749 967.846 141.649C966.403 140.55 963.791 139.553 960.011 138.66C953.482 137.148 948.946 135.361 946.403 133.299C943.448 131.031 941.97 127.56 941.97 122.887C941.97 118.351 943.619 114.811 946.918 112.268C950.217 109.656 954.444 108.351 959.599 108.351C966.54 108.351 972.485 110.378 977.434 114.433L972.898 120.825C971.386 119.45 969.358 118.351 966.815 117.526C964.272 116.632 961.764 116.186 959.29 116.186C956.747 116.186 954.685 116.735 953.104 117.835C951.592 118.866 950.836 120.344 950.836 122.268ZM1014.61 117.32V160H1006.06V117.32H990.797V109.588H1029.87V117.32H1014.61ZM1065.91 152.474C1069.83 152.474 1072.92 151.134 1075.19 148.454C1077.53 145.773 1078.7 142.131 1078.7 137.526V109.588H1087.25V137.835C1087.25 144.983 1085.3 150.55 1081.38 154.536C1077.46 158.522 1072.31 160.515 1065.91 160.515C1059.52 160.515 1054.37 158.522 1050.45 154.536C1046.53 150.55 1044.57 144.983 1044.57 137.835V109.588H1053.03V137.526C1053.03 142.199 1054.2 145.842 1056.53 148.454C1058.8 151.134 1061.93 152.474 1065.91 152.474ZM1123.98 109.588C1132.98 109.588 1139.93 111.787 1144.81 116.186C1149.68 120.515 1152.12 126.632 1152.12 134.536C1152.12 142.577 1149.72 148.832 1144.91 153.299C1140.1 157.766 1132.91 160 1123.36 160H1106.66V109.588H1123.98ZM1123.67 117.423H1115.22V151.959H1124.6C1130.78 151.959 1135.49 150.515 1138.72 147.629C1141.95 144.674 1143.57 140.378 1143.57 134.742C1143.57 123.196 1136.94 117.423 1123.67 117.423ZM1169.01 109.588H1177.57V160H1169.01V109.588ZM1220.77 116.082C1215.75 116.082 1211.52 117.869 1208.09 121.443C1204.65 125.017 1202.93 129.347 1202.93 134.433C1202.93 139.519 1204.65 143.849 1208.09 147.423C1211.52 150.928 1215.75 152.68 1220.77 152.68C1225.79 152.68 1230.01 150.928 1233.45 147.423C1236.89 143.849 1238.6 139.519 1238.6 134.433C1238.6 129.347 1236.89 125.017 1233.45 121.443C1230.01 117.869 1225.79 116.082 1220.77 116.082ZM1220.77 160.515C1213.21 160.515 1206.89 158.041 1201.8 153.093C1196.71 148.076 1194.17 141.856 1194.17 134.433C1194.17 127.01 1196.71 120.825 1201.8 115.876C1206.89 110.859 1213.21 108.351 1220.77 108.351C1228.33 108.351 1234.65 110.859 1239.74 115.876C1244.82 120.825 1247.37 127.01 1247.37 134.433C1247.37 141.856 1244.79 148.041 1239.63 152.99C1234.48 158.007 1228.19 160.515 1220.77 160.515Z" fill="#C8C4BF"/>
+</svg></div>
+  <div class="ft">© 2025 Eagle Fitness Studio · Наукоград Кольцово</div>
+  <div class="flinks">
+    <a href="index.html">Главная</a>
+    <a href="index.html#schedule">Расписание</a>
+    <a href="index.html#prices">Цены</a>
+    <a href="index.html#contacts">Контакты</a>
+  </div>
+</footer>
+<script>
+document.getElementById("burger").addEventListener("click",()=>document.getElementById("mobMenu").classList.toggle("open"));
+function cm(){document.getElementById("mobMenu").classList.remove("open");}
+</script>
+</body>
+</html>
