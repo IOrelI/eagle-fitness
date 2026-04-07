@@ -362,21 +362,21 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
 <nav>
   <div class="nav-logo"><a href="#hero"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/logo_qreeb6.svg" alt="Eagle"></a></div>
   <ul class="nav-links">
-    <li><a href="#about">О студии</a></li>
     <li><a href="directions.html">Направления</a></li>
     <li><a href="#trainers">Тренеры</a></li>
-    <li><a href="#schedule">Расписание</a></li>
     <li><a href="#prices">Цены</a></li>
     <li><a href="#app">Приложение</a></li>
     <li><a href="#online">Онлайн-курсы</a></li>
     <li><a href="#contacts">Контакты</a></li>
     <li><a href="rules.html">Правила</a></li>
   </ul>
-  <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="nav-cta">Записаться</a>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <a href="#schedule" class="nav-cta" style="background:transparent;border:1.5px solid var(--dk);color:var(--dk);">Расписание</a>
+    <a href="https://t.me/Eaglefitdancestudio" target="_blank" class="nav-cta">Записаться</a>
+  </div>
   <button class="burger" id="burger"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-menu" id="mobMenu">
-  <a href="#about" onclick="cm()">О студии</a>
   <a href="directions.html" onclick="cm()">Направления</a>
   <a href="#trainers" onclick="cm()">Тренеры</a>
   <a href="#schedule" onclick="cm()">Расписание</a>
