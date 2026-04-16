@@ -441,9 +441,9 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="dcard fit reveal"><div class="dn">Круговые тренировки</div><div class="dd">Ягодицы и ноги · Пресс, руки и спина · Всё тело. Эффективный формат для всего тела.</div></div>
       <div class="dcard fit reveal"><div class="dn">Здоровая спина</div><div class="dd">Укрепление мышц спины, коррекция осанки и избавление от болей. Подходит для всех уровней.</div></div>
       <div class="dcard fit reveal"><div class="dn">Функциональный тренинг</div><div class="dd">Тренировки на всё тело с акцентом на силу, выносливость и координацию движений.</div></div>
-      <div class="dcard yoga reveal"><div class="dn">Пилатес</div><div class="dd">Глубокая проработка мышц кора, улучшение осанки и гибкости. Для всех уровней подготовки.</div></div>
+      <div class="dcard yoga reveal"><div class="dn">Пилатес: мягкий и силовой</div><div class="dd">Глубокая проработка мышц кора, улучшение осанки и гибкости. Для всех уровней подготовки.</div></div>
       <div class="dcard yoga reveal"><div class="dn">Растяжка и МФР</div><div class="dd">Стретчинг и миофасциальный релиз для снятия напряжения, восстановления и гибкости.</div></div>
-      <div class="dcard fit reveal"><div class="dn">Fit Cardio</div><div class="dd">Высокоинтенсивное кардио для похудения, укрепления сердечно-сосудистой системы и прилива энергии.</div></div>
+      <div class="dcard fit reveal"><div class="dn">Fit Cardio и Strong Fitness</div><div class="dd">Высокоинтенсивные тренировки для выносливости и силы. Кардио-интервалы, силовые элементы, боевые искусства — всё в ритме музыки.</div></div>
       <div class="dcard yoga reveal"><div class="dn">Йога, акробатика и растяжка в гамаках</div><div class="dd">Воздушная акробатика, йога и глубокая растяжка в гамаках. Развивает силу, гибкость и координацию.</div></div>
       <div class="dcard dance reveal"><div class="dn">Танцы</div><div class="dd">Strip Choreo, Latina Solo, High Heels, Female Heels. Для тех, кто хочет двигаться красиво, чувствовать своё тело и получать удовольствие от танца.</div></div>
       <div class="dcard kids reveal"><div class="dn">Детские занятия</div><div class="dd">Детский танец, йога. Для детей от 3 до 16 лет.</div></div>
@@ -778,7 +778,7 @@ const SCHEDULE = {
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "12:30", name: "Хатха-йога",                        trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: true,  color: "taupe"  },
     { time: "15:00", name: "Йога для подростков 10+",           trainer: "Ирина Урсул",           hall: "Большой зал", isNew: false, color: "rose"  },
-    { time: "18:00", name: "Пилатес для подростков 10–14 лет",  trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "rose" },
+    { time: "18:00", name: "Силовой пилатес",                    trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: true,  color: "taupe" },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "18:20", name: "Детский танец 3–5 лет",             trainer: "Татьяна Клевцова",      hall: "Малый зал",   isNew: false, color: "rose" },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -810,7 +810,7 @@ const SCHEDULE = {
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "taupe" },
     { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: true,  color: "charcoal"  },
-    { time: "18:00", name: "Пилатес для подростков 10–14 лет",  trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "rose"  },
+    { time: "18:00", name: "Силовой пилатес",                    trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: true,  color: "taupe"  },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "18:20", name: "Детский танец 3–5 лет",             trainer: "Татьяна Клевцова",      hall: "Малый зал",   isNew: false, color: "rose" },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -857,6 +857,7 @@ const SCHEDULE = {
     { time: "11:10",       name: "Круговая. Всё тело",         trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "11:10",       name: "ZUMBA",                      trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "12:30–14:30", name: "Choreo Weekend 16+",         trainer: "Анжелина Пергамент",    hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "13:00",       name: "Strong Fitness",              trainer: "Мария Депутатова",      hall: "Большой зал", isNew: true,  color: "taupe"  },
   ],
 
   sun: [
