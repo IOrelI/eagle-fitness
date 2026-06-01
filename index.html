@@ -453,6 +453,8 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="dcard fit reveal"><div class="dn">Аштанга йога и стойки на руках</div><div class="dd">Динамичная практика йоги и воркаут с элементами акробатики. Сила тела и баланс. Не входит в фитнес-абонемент.</div></div>
       <div class="dcard special reveal"><div class="dn">Персональные занятия</div><div class="dd">Индивидуальные тренировки по любому направлению студии, а также классический бокс.</div></div>
       <div class="dcard fit reveal"><div class="dn">🌿 Бесплатные зарядки</div><div class="dd">Каждое воскресенье в 10:00 — бесплатная тренировка на свежем воздухе у Амфитеатра ЖК «Спектр».</div></div>
+      <div class="dcard fit reveal"><div class="dn">🏃 Беговой клуб EAGLE-слёт</div><div class="dd">Беговые тренировки для начинающих каждую субботу в 10:00. Правильная техника, доступный темп, дружная компания. Входит в фитнес-абонемент.</div></div>
+      <div class="dcard special reveal"><div class="dn">🍷🍺 Спецмероприятия</div><div class="dd">Пивная йога и винная растяжка — необычные форматы занятий для особого настроения. Следите за расписанием!</div></div>
       <div class="dcard special reveal"><div class="dn">Аренда зала</div><div class="dd">Сдаём зал в аренду для личных тренировок, персональных и групповых занятий, практик, лекций и мероприятий.</div></div>
     </div>
     <div style="text-align:center;margin-top:32px;">
@@ -841,22 +843,25 @@ const SCHEDULE = {
   fri: [
     { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "taupe" },
+    { time: "11:20", name: "Растяжка в гамаках",                trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "taupe" },
     { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "charcoal"  },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "18:30", name: "Детская йога 5–10 лет",             trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "19:20", name: "🍺 Пивная йога (19 июня)",          trainer: "Алиса Куприй",          hall: "Большой зал", isNew: true,  color: "rose"  },
     { time: "19:30", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "20:30", name: "🍷 Винная растяжка (12 июня)",      trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: true,  color: "rose"  },
     { time: "20:40", name: "Табата + МФР",                      trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
   ],
 
   sat: [
+    { time: "10:00",       name: "🏃 Беговые тренировки EAGLE-слёт", trainer: "Алиса Куприй",       hall: "На улице",    isNew: true,  color: "green" },
     { time: "10:00",       name: "Воркаут: Стойка на руках",   trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
     { time: "10:00",       name: "Пилатес",                    trainer: "Мария Меренкова",       hall: "Малый зал",   isNew: false, color: "taupe" },
     { time: "11:10",       name: "Круговая. Всё тело",         trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "11:10",       name: "ZUMBA",                      trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "12:30–14:30", name: "Choreo Weekend 16+",         trainer: "Анжелина Пергамент",    hall: "Большой зал", isNew: false, color: "charcoal"  },
-    { time: "13:00",       name: "Strong Fitness",              trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false,  color: "taupe"  },
+    { time: "13:00",       name: "Strong Fitness",             trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false,  color: "taupe"  },
   ],
 
   sun: [
