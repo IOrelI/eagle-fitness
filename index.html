@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=cormorant-garamond:300,300i,400,400i|raleway:300,400,500|jost:300,400,500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--rose:#b89090;--dk:#6b5a55;--sand:#d4c5b5;--charcoal:#635A56;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;--nt:#9e3a3a;}
+:root{--bg:#f5f0eb;--bg-dark:#2c2320;--beige:#d4c5b5;--taupe:#97897F;--rose:#b89090;--dk:#6b5a55;--sand:#d4c5b5;--charcoal:#635A56;--td:#2c2320;--tm:#5a4a44;--tl:#f5f0eb;--nt:#9e3a3a;--green:#8FA07A;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);font-family:'Jost',sans-serif;color:var(--td);overflow-x:hidden;}
@@ -98,6 +98,9 @@ section{padding:96px 24px;}
 .sc.beige .sc-n,.sc.sand .sc-n{color:var(--td);}
 .sc-m{font-size:11px;color:rgba(245,240,235,.7);margin-top:1px;}
 .sc.beige .sc-m,.sc.sand .sc-m{color:var(--tm);}
+.sc.green{background:var(--green);}
+.sc.green .sc-t,.sc.green .sc-n{color:#f5f0eb;}
+.sc.green .sc-m{color:rgba(245,240,235,.75);}
 .nbadge{width:32px;height:32px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:500;color:var(--nt);text-transform:uppercase;flex-shrink:0;}
 .sdiv{display:flex;align-items:center;gap:10px;margin:10px 0 6px;}
 .sdiv-l{flex:1;height:1px;background:var(--beige);}
@@ -449,6 +452,7 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="dcard kids reveal"><div class="dn">Детские занятия</div><div class="dd">Детский танец, йога. Для детей от 3 до 16 лет.</div></div>
       <div class="dcard fit reveal"><div class="dn">Аштанга йога и стойки на руках</div><div class="dd">Динамичная практика йоги и воркаут с элементами акробатики. Сила тела и баланс. Не входит в фитнес-абонемент.</div></div>
       <div class="dcard special reveal"><div class="dn">Персональные занятия</div><div class="dd">Индивидуальные тренировки по любому направлению студии, а также классический бокс.</div></div>
+      <div class="dcard fit reveal"><div class="dn">🌿 Бесплатные зарядки</div><div class="dd">Каждое воскресенье в 10:00 — бесплатная тренировка на свежем воздухе у Амфитеатра ЖК «Спектр».</div></div>
       <div class="dcard special reveal"><div class="dn">Аренда зала</div><div class="dd">Сдаём зал в аренду для личных тренировок, персональных и групповых занятий, практик, лекций и мероприятий.</div></div>
     </div>
     <div style="text-align:center;margin-top:32px;">
@@ -856,7 +860,8 @@ const SCHEDULE = {
   ],
 
   sun: [
-    { time: "18:00", name: "Fit Cardio",          trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "10:00", name: "Бесплатная зарядка на свежем воздухе",  trainer: "Амфитеатр ЖК «Спектр»",   hall: "На улице",    isNew: true,  color: "green" },
+    { time: "18:00", name: "Табата + МФР",        trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "18:00", name: "Детская йога 5–10 лет", trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "19:10", name: "Растяжка",            trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
   ],
@@ -967,8 +972,8 @@ function downloadSchedule() {
     if (!activeDay) { clearTimeout(timer); resetBtn(); return; }
     const dayKey = activeDay.dataset.key;
 
-    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
-    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56', green:'#8FA07A' };
+    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb', green:'#f5f0eb' };
     const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
 
     const items = SCHEDULE[dayKey] || [];
@@ -1019,8 +1024,8 @@ function downloadFullSchedule() {
 
   loadHtml2Canvas(function() {
 
-    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
-    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+    const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56', green:'#8FA07A' };
+    const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb', green:'#f5f0eb' };
     const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
 
     const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -1054,7 +1059,7 @@ function downloadFullSchedule() {
 
     const wrapper = document.createElement('div');
     wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + totalW + 'px;background:#f5f0eb;padding:' + pad + 'px;font-family:Jost,sans-serif;box-sizing:border-box;';
-    wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + row1 + row2 + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo 14+. Предварительная запись обязательна!</div>';
+    wrapper.innerHTML = '<div style="text-align:center;margin-bottom:20px;"><div style="font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#2c2320;">РАСПИСАНИЕ EAGLE STUDIO <span style="font-weight:300;color:#97897f;">' + dateStr + '</span></div></div>' + row1 + row2 + '<div style="margin-top:16px;font-size:10px;color:#5a4a44;line-height:1.7;">Все занятия длятся 1 час, за исключением Аштанга йоги и Choreo Weekend 16+. Предварительная запись обязательна!</div>';
     document.body.appendChild(wrapper);
 
     html2canvas(wrapper, { backgroundColor:'#f5f0eb', scale:2, useCORS:false, allowTaint:true, logging:false, width:totalW, windowWidth:totalW })
@@ -1091,8 +1096,8 @@ function openWeekModal() {
   const modal = document.getElementById('weekModal');
   const body = document.getElementById('weekModalBody');
 
-  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56' };
-  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb' };
+  const colorBg = { taupe:'#97897f', rose:'#b89090', sand:'#d4c5b5', dark:'#6b5a55', beige:'#d4c5b5', charcoal:'#635A56', green:'#8FA07A' };
+  const colorTxt = { taupe:'#f5f0eb', rose:'#f5f0eb', sand:'#2c2320', dark:'#f5f0eb', beige:'#2c2320', charcoal:'#f5f0eb', green:'#f5f0eb' };
   const dayTitles = {mon:'Понедельник',tue:'Вторник',wed:'Среда',thu:'Четверг',fri:'Пятница',sat:'Суббота',sun:'Воскресенье'};
 
   function buildCol(dayKey) {
@@ -1117,7 +1122,7 @@ function openWeekModal() {
     '<div class="wg-row">' + buildCol('thu') + buildCol('fri') +
       '<div class="wg-col-sat">' + buildCol('sat') + buildCol('sun') + '</div>' +
     '</div>' +
-    '<div class="wg-footer">Все занятия длятся 1 час, за исключением Аштанга йоги, Choreo Weekend 16+ и Latina Solo 14+. Предварительная запись обязательна!</div>';
+    '<div class="wg-footer">Все занятия длятся 1 час, за исключением Аштанга йоги и Choreo Weekend 16+. Предварительная запись обязательна!</div>';
 
   body.innerHTML = html;
   modal.classList.add('open');
