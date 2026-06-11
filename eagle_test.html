@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Какой тренер тебе подойдёт? — Eagle Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #e8e2d9;
+    --card: #f4f0ea;
+    --brown-dark: #2a1a0e;
+    --brown-mid: #5c3a20;
+    --brown-light: #a07850;
+    --brown-muted: #c8b89a;
+    --accent: #8b5e3c;
+    --white: #fff;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    padding: 40px 20px 60px;
+    color: var(--brown-dark);
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .header-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--brown-light);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Philosopher', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--brown-light);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 28px;
+  }
+
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--brown-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--brown-muted);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Question card */
+  .question-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 32px 28px;
+    margin-bottom: 16px;
+  }
+
+  .question-num {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--brown-muted);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-family: 'Philosopher', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    line-height: 1.35;
+    margin-bottom: 24px;
+  }
+
+  /* Options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    background: var(--bg);
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    color: var(--brown-mid);
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .option:hover {
+    border-color: var(--brown-muted);
+    background: #ede7de;
+  }
+
+  .option.selected {
+    border-color: var(--accent);
+    background: #f8f0e8;
+    color: var(--brown-dark);
+    font-weight: 500;
+  }
+
+  .option-letter {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--brown-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--brown-light);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .option.selected .option-letter {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+  }
+
+  /* Next button */
+  .btn-next {
+    width: 100%;
+    padding: 16px;
+    background: var(--brown-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .btn-next.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .btn-next.active:hover {
+    background: var(--accent);
+  }
+
+  /* Result */
+  .result {
+    display: none;
+    text-align: center;
+  }
+
+  .result-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 40px 28px;
+    margin-bottom: 16px;
+  }
+
+  .result-emoji {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .result-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--brown-light);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .result-name {
+    font-family: 'Philosopher', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 6px;
+  }
+
+  .result-direction {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .result-divider {
+    height: 1px;
+    background: var(--brown-muted);
+    opacity: 0.3;
+    margin: 20px 0;
+  }
+
+  .result-desc {
+    font-size: 14px;
+    color: var(--brown-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .btn-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+  }
+
+  .btn-cta:hover { background: var(--brown-mid); }
+
+  .btn-retry {
+    background: none;
+    border: 1.5px solid var(--brown-muted);
+    color: var(--brown-light);
+    border-radius: 12px;
+    padding: 14px;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-retry:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Booking form */
+  .booking-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .booking-title {
+    font-family: 'Philosopher', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brown-dark);
+    margin-bottom: 4px;
+  }
+
+  .booking-sub {
+    font-size: 12px;
+    color: var(--brown-light);
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .form-input, .form-select {
+    width: 100%;
+    padding: 13px 16px;
+    background: var(--bg);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: var(--brown-dark);
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-input::placeholder { color: var(--brown-muted); }
+
+  .form-input:focus, .form-select:focus {
+    border-color: var(--accent);
+  }
+
+  .form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a07850' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px;
+    background: #229ED9;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 4px;
+    text-decoration: none;
+  }
+
+  .btn-whatsapp:hover { background: #1a8bbf; }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+
+  .form-success-icon { font-size: 36px; margin-bottom: 10px; }
+
+  .form-success-text {
+    font-family: 'Philosopher', serif;
+    font-size: 18px;
+    color: var(--brown-dark);
+    margin-bottom: 6px;
+  }
+
+  .form-success-sub {
+    font-size: 12px;
+    color: var(--brown-light);
+    font-weight: 300;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--brown-muted);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-label">Eagle Studio</div>
+    <div class="header-title">Какой тренер тебе подойдёт?</div>
+    <div class="header-sub">10 вопросов - и мы подберём твоего идеального тренера</div>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quiz">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="progress-text">Вопрос 1 из 10</span>
+        <span id="progress-pct">10%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:10%"></div>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="question-num" id="q-num">Вопрос 01</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+    </div>
+
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Далее →</button>
+  </div>
+
+  <!-- Result -->
+  <div class="result" id="result">
+    <div class="result-card">
+      <div class="result-emoji" id="res-emoji"></div>
+      <div class="result-label">Твой тренер</div>
+      <div class="result-name" id="res-name"></div>
+      <div class="result-direction" id="res-direction"></div>
+      <div class="result-divider"></div>
+      <div class="result-desc" id="res-desc"></div>
+    </div>
+
+    <!-- Booking form -->
+    <div class="booking-card">
+      <div class="booking-title">Записаться на пробное занятие</div>
+      <div class="booking-sub">Оставь контакты - мы напишем тебе в WhatsApp и согласуем удобное время</div>
+
+      <div id="booking-form">
+        <div class="form-group">
+          <label class="form-label" for="inp-name">Твоё имя <span style="color:var(--accent)">*</span></label>
+          <input class="form-input" id="inp-name" type="text" placeholder="Как тебя зовут?">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-phone">Телефон <span style="color:var(--accent)">*</span></label>
+          <input class="form-input" id="inp-phone" type="tel" placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-time">Удобное время <span style="color:var(--brown-muted);font-size:9px;letter-spacing:0.1em">необязательно</span></label>
+          <select class="form-select" id="inp-time">
+            <option value="">Не важно, обсудим</option>
+            <option value="Утро (до 11:00)">Утро (до 11:00)</option>
+            <option value="День (11:00-16:00)">День (11:00-16:00)</option>
+            <option value="Вечер (16:00-19:00)">Вечер (16:00-19:00)</option>
+            <option value="Вечер (после 19:00)">Вечер (после 19:00)</option>
+            <option value="Выходные">Выходные</option>
+            <option value="Любое время">Любое время</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-comment">Пожелания <span style="color:var(--brown-muted);font-size:9px;letter-spacing:0.1em">необязательно</span></label>
+          <input class="form-input" id="inp-comment" type="text" placeholder="Например: есть травма колена, хочу в группу...">
+        </div>
+        <button class="btn-whatsapp" onclick="sendToTelegram()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 14.447l-2.95-.924c-.641-.204-.657-.641.136-.953l11.527-4.448c.537-.194 1.006.131.689.126z"/></svg>
+          Отправить заявку в Telegram
+        </button>
+      </div>
+
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">🦅</div>
+        <div class="form-success-text">Заявка отправлена!</div>
+        <div class="form-success-sub">Мы напишем тебе в ближайшее время и согласуем время первого занятия</div>
+      </div>
+    </div>
+
+    <button class="btn-retry" onclick="restartQuiz()">Пройти тест заново</button>
+  </div>
+
+  <div class="footer-logo">Eagle Studio · Кольцово</div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "Какая цель у тебя сейчас?",
+    options: [
+      { text: "Похудеть и подтянуть тело", score: "A" },
+      { text: "Научиться двигаться красиво", score: "B" },
+      { text: "Стать гибкой и расслабиться", score: "C" },
+      { text: "Начать бегать и стать выносливее", score: "D" }
+    ]
+  },
+  {
+    text: "Как ты относишься к спорту?",
+    options: [
+      { text: "Хочу результат, готова работать", score: "A" },
+      { text: "Люблю когда тренировка как праздник", score: "B" },
+      { text: "Мне важно удовольствие от процесса", score: "C" },
+      { text: "Только начинаю, хочу мягкий старт", score: "D" }
+    ]
+  },
+  {
+    text: "Идеальная тренировка для тебя - это:",
+    options: [
+      { text: "Интенсивно, в поту, с отдачей", score: "A" },
+      { text: "Под музыку, в движении, с эмоциями", score: "B" },
+      { text: "Плавно, осознанно, без спешки", score: "C" },
+      { text: "На свежем воздухе в хорошей компании", score: "D" }
+    ]
+  },
+  {
+    text: "Свободное время ты проводишь:",
+    options: [
+      { text: "Активно - спорт, прогулки, движение", score: "A" },
+      { text: "Творчески - музыка, танцы, арт", score: "B" },
+      { text: "Спокойно - йога, книги, медитация", score: "C" },
+      { text: "На улице - парки, пробежки, велик", score: "D" }
+    ]
+  },
+  {
+    text: "Что останавливало тебя от занятий раньше?",
+    options: [
+      { text: "Не знала с чего начать силовые", score: "A" },
+      { text: "Не находила то, что по-настоящему зажигает", score: "B" },
+      { text: "Всё было слишком интенсивно", score: "C" },
+      { text: "Не было компании и мотивации", score: "D" }
+    ]
+  },
+  {
+    text: "Тренер для тебя - это:",
+    options: [
+      { text: "Наставник который даёт чёткий план", score: "A" },
+      { text: "Энергия и вдохновение на тренировке", score: "B" },
+      { text: "Мягкий проводник в своё тело", score: "C" },
+      { text: "Друг который бежит рядом", score: "D" }
+    ]
+  },
+  {
+    text: "Какой формат занятий тебе ближе?",
+    options: [
+      { text: "Групповые силовые или функциональный тренинг", score: "A" },
+      { text: "Хореография, зумба, танцы", score: "B" },
+      { text: "Растяжка, йога, пилатес", score: "C" },
+      { text: "Бег, интервалы, уличные тренировки", score: "D" }
+    ]
+  },
+  {
+    text: "После тренировки ты хочешь чувствовать:",
+    options: [
+      { text: "Усталость и гордость", score: "A" },
+      { text: "Драйв и желание двигаться ещё", score: "B" },
+      { text: "Лёгкость и спокойствие", score: "C" },
+      { text: "Бодрость и свежесть", score: "D" }
+    ]
+  },
+  {
+    text: "Ты скорее:",
+    options: [
+      { text: "Любишь чёткую структуру и видимый прогресс", score: "A" },
+      { text: "Живёшь моментом и кайфуешь от процесса", score: "B" },
+      { text: "Слушаешь тело и идёшь в своём темпе", score: "C" },
+      { text: "Любишь ставить цели и идти к ним", score: "D" }
+    ]
+  },
+  {
+    text: "Ты пришла на День спорта потому что:",
+    options: [
+      { text: "Ищу серьёзные тренировки с результатом", score: "A" },
+      { text: "Люблю движение и атмосферу праздника", score: "B" },
+      { text: "Хочу найти что-то для себя без фанатизма", score: "C" },
+      { text: "Хочу попробовать бег или уличный спорт", score: "D" }
+    ]
+  }
+];
+
+const results = {
+  // Много А + Г или только Г
+  AG: {
+    emoji: "🏃",
+    name: "Алиса Куприй",
+    direction: "Фитнес · Беговой клуб Eagle-слёт",
+    desc: "Ты любишь движение, результат и активный образ жизни. Алиса ведёт фитнес-направления и беговой клуб Eagle-слёт — для тех, кто хочет бегать правильно с нуля. Поддержка, техника и живая компания гарантированы."
+  },
+  // А + В
+  AC: {
+    emoji: "🌿",
+    name: "Анастасия Орёл",
+    direction: "Основатель · Фитнес · Здоровая спина",
+    desc: "Тебе важен и результат, и бережный подход к телу. Настя — основатель студии, ведёт круговые тренировки, функционал и направление «Здоровая спина». Работает с каждым индивидуально и умеет адаптировать нагрузку под тебя."
+  },
+  // Много А (без явного перевеса)
+  A: {
+    emoji: "🔥",
+    name: "Алиса Куприй или Анастасия Орёл",
+    direction: "Фитнес · Функционал · Результат",
+    desc: "Ты нацелена на результат и готова работать. Алиса и Настя ведут фитнес-направления — круговые, функционал, силовые. Обе дадут тебе чёткий план и доведут до цели. Приходи на пробное к любой из них!"
+  },
+  // Много В
+  C: {
+    emoji: "✨",
+    name: "Мария Меренкова",
+    direction: "Пилатес · Интенсивные круговые",
+    desc: "Тебе близок осознанный подход к телу — без фанатизма, но с глубокой проработкой. Маша ведёт пилатес и интенсивные круговые тренировки. Мягко, технично, с вниманием к каждому движению."
+  },
+  // А + Б или много Б
+  AB: {
+    emoji: "💃",
+    name: "Мария Депутатова",
+    direction: "Zumba",
+    desc: "Тебе нужна тренировка, где можно двигаться, смеяться и при этом реально устать. Маша ведёт Zumba — латиноамериканские танцы в формате фитнеса. Ни одна тренировка не похожа на предыдущую."
+  },
+  // Б + В
+  BC: {
+    emoji: "🎭",
+    name: "Анжелина Пергамент и Дарья Коршакова",
+    direction: "Choreo · Strip Plastic · Акробатика в гамаках",
+    desc: "Ты хочешь двигаться красиво и чувствовать своё тело. Анжелина ведёт Choreo Weekend, Даша — Strip Plastic и акробатику в гамаках. Оба направления про пластику, выразительность и удовольствие от движения."
+  },
+  // Поровну А + Б + В
+  ABC: {
+    emoji: "⚡",
+    name: "Екатерина Гусева",
+    direction: "Фитнес направления",
+    desc: "Ты разносторонняя и тебе сложно выбрать одно направление — это хорошо! Катя ведёт фитнес-направления и умеет сочетать разные форматы в одной тренировке. Именно то, что тебе нужно."
+  }
+};
+
+let current = 0;
+let scores = { A: 0, B: 0, C: 0, D: 0 };
+let selected = null;
+
+function renderQuestion() {
+  const q = questions[current];
+  const letters = ['А', 'Б', 'В', 'Г'];
+
+  document.getElementById('q-num').textContent = 'Вопрос ' + String(current + 1).padStart(2, '0');
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('progress-text').textContent = `Вопрос ${current + 1} из ${questions.length}`;
+  const pct = Math.round(((current + 1) / questions.length) * 100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const optionsEl = document.getElementById('q-options');
+  optionsEl.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt.text}</span>`;
+    btn.onclick = () => selectOption(i, opt.score, btn);
+    optionsEl.appendChild(btn);
+  });
+
+  selected = null;
+  document.getElementById('btn-next').classList.remove('active');
+}
+
+function selectOption(idx, score, el) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selected = score;
+  document.getElementById('btn-next').classList.add('active');
+}
+
+function nextQuestion() {
+  if (!selected) return;
+  scores[selected]++;
+  current++;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function getResult() {
+  const a = scores.A, b = scores.B, c = scores.C, d = scores.D;
+  const total = a + b + c + d;
+  const max = Math.max(a, b, c, d);
+
+  // Порог "много" - больше 40% ответов
+  const isHigh = (x) => x / total >= 0.4;
+  // Порог "примерно поровну" - разница между топ-3 не больше 2
+  const sorted = [a, b, c, d].sort((x, y) => y - x);
+
+  // Поровну А + Б + В
+  if (a >= 2 && b >= 2 && c >= 2 && d <= 2 && sorted[0] - sorted[2] <= 2) return results.ABC;
+
+  // Много А + Г или только Г
+  if (isHigh(a) && isHigh(d)) return results.AG;
+  if (isHigh(d) && !isHigh(b) && !isHigh(c)) return results.AG;
+
+  // А + В
+  if (isHigh(a) && isHigh(c) && !isHigh(b) && !isHigh(d)) return results.AC;
+
+  // Б + В
+  if (isHigh(b) && isHigh(c) && !isHigh(a)) return results.BC;
+
+  // А + Б или много Б
+  if (isHigh(b) && !isHigh(c)) return results.AB;
+  if (isHigh(a) && isHigh(b) && !isHigh(c)) return results.AB;
+
+  // Много В
+  if (isHigh(c) && !isHigh(a) && !isHigh(b)) return results.C;
+
+  // Много А (по умолчанию если А лидирует)
+  if (a === max && !isHigh(d)) return results.A;
+
+  // Fallback - победитель
+  const winner = ['A','B','C','D'].sort((x,y) => scores[y]-scores[x])[0];
+  if (winner === 'A') return results.A;
+  if (winner === 'B') return results.AB;
+  if (winner === 'C') return results.C;
+  if (winner === 'D') return results.AG;
+  return results.A;
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display = 'none';
+  const res = document.getElementById('result');
+  res.style.display = 'block';
+
+  const r = getResult();
+
+  document.getElementById('res-emoji').textContent = r.emoji;
+  document.getElementById('res-name').textContent = r.name;
+  document.getElementById('res-direction').textContent = r.direction;
+  document.getElementById('res-desc').textContent = r.desc;
+}
+
+function sendToTelegram() {
+  const name = document.getElementById('inp-name').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+  const time = document.getElementById('inp-time').value;
+  const trainer = document.getElementById('res-name').textContent;
+  const comment = document.getElementById('inp-comment').value.trim();
+
+  if (!name) { alert('Пожалуйста, укажи своё имя'); return; }
+  if (!phone) { alert('Пожалуйста, укажи телефон'); return; }
+
+  const timeText = time ? `\nУдобное время: ${time}` : '';
+  const commentText = comment ? `\nПожелания: ${comment}` : '';
+  const msg = `Привет! Меня зовут ${name}.\nЯ прошла тест на сайте и мне подошёл тренер: ${trainer}.\nМой телефон: ${phone}${timeText}${commentText}\nХочу записаться на пробное занятие 🦅`;
+
+  const url = `https://t.me/eaglefitdancestudio?text=${encodeURIComponent(msg)}`;
+
+  window.open(url, '_blank');
+
+  document.getElementById('booking-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+function restartQuiz() {
+  current = 0;
+  scores = { A: 0, B: 0, C: 0, D: 0 };
+  selected = null;
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('booking-form').style.display = 'block';
+  document.getElementById('form-success').style.display = 'none';
+  document.getElementById('inp-name').value = '';
+  document.getElementById('inp-phone').value = '';
+  document.getElementById('inp-time').value = '';
+  document.getElementById('inp-comment').value = '';
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
