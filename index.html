@@ -161,7 +161,50 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
 @media(max-width:768px){.rcard{width:280px;}.rv-score{font-size:44px;}}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}.no-js .reveal{opacity:1;transform:none;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-/* Week modal */
+/* Direction popup modal */
+.dp-overlay{position:fixed;inset:0;z-index:400;background:rgba(44,35,32,.45);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s;}
+.dp-overlay.open{opacity:1;pointer-events:all;}
+.dp-modal{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);z-index:401;width:100%;max-width:580px;max-height:88vh;background:var(--bg);border-radius:24px 24px 0 0;overflow-y:auto;transition:transform .35s cubic-bezier(.32,.72,0,1);padding:0 0 env(safe-area-inset-bottom);}
+.dp-overlay.open .dp-modal{transform:translateX(-50%) translateY(0);}
+@media(min-width:640px){
+  .dp-modal{bottom:50%;top:auto;border-radius:24px;transform:translateX(-50%) translateY(50%) scale(.95);max-height:80vh;}
+  .dp-overlay.open .dp-modal{transform:translateX(-50%) translateY(50%) scale(1);}
+}
+.dp-handle{width:40px;height:4px;background:var(--beige);border-radius:2px;margin:14px auto 0;}
+.dp-head{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 24px 0;}
+.dp-cat{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px;}
+.dp-title{font-family:'Raleway',sans-serif;font-weight:300;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--td);line-height:1.2;}
+.dp-close{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--taupe);background:transparent;cursor:pointer;color:var(--tm);font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;margin-left:12px;margin-top:2px;}
+.dp-close:hover{background:var(--beige);}
+.dp-body{padding:12px 24px 24px;}
+.dp-desc{font-size:13px;color:var(--td);line-height:1.6;margin-bottom:12px;}
+.dp-for{background:var(--beige);border-radius:12px;padding:10px 14px;font-size:12px;color:var(--td);line-height:1.55;margin-bottom:12px;}
+.dp-for strong{display:block;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);margin-bottom:4px;font-weight:500;}
+.dp-section{margin-bottom:12px;}
+.dp-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);margin-bottom:8px;}
+.dp-trainer{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.dp-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--beige);}
+.dp-avatar-init{width:34px;height:34px;border-radius:50%;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--tm);flex-shrink:0;}
+.dp-tname{font-size:13px;font-weight:500;color:var(--td);}
+.dp-trole{font-size:11px;color:var(--taupe);}
+.dp-price-row{display:flex;justify-content:space-between;font-size:13px;color:var(--td);padding:6px 0;border-bottom:1px solid rgba(151,137,127,.12);}
+.dp-price-row:last-child{border-bottom:none;}
+.dp-price-note{font-size:10px;color:var(--taupe);margin-top:4px;}
+.dp-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.dp-pill{background:var(--beige);border-radius:20px;padding:4px 10px;font-size:11px;color:var(--td);}
+.dp-btn{display:block;width:100%;text-align:center;background:var(--td);color:var(--bg);border-radius:50px;padding:12px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;margin-top:16px;transition:opacity .2s;}
+.dp-btn:hover{opacity:.85;}
+.dp-diff{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.dp-diff-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--taupe);}
+.dp-dots{display:flex;gap:4px;}
+.dp-dot{width:10px;height:10px;border-radius:50%;background:var(--beige);}
+.dp-dot.on{background:var(--td);}
+.dp-dot.half{background:linear-gradient(90deg,var(--td) 50%,var(--beige) 50%);}
+.sc{cursor:pointer;transition:opacity .15s;}
+.sc:hover{opacity:.82;}
+.sched-hint{position:absolute;top:14px;left:calc(50% + 280px);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;}
+.sched-hint span{font-size:10px;color:var(--taupe);letter-spacing:.06em;line-height:1.6;text-align:center;}
+@media(max-width:860px){.sched-hint{display:none;}}
 .wm{position:fixed;inset:0;z-index:300;background:var(--bg);display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .25s;}
 .wm.open{opacity:1;pointer-events:all;}
 .wm-head{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid rgba(151,137,127,.18);background:rgba(245,240,235,.97);backdrop-filter:blur(10px);flex-shrink:0;gap:12px;}
@@ -367,7 +410,6 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
   <ul class="nav-links">
     <li><a href="directions.html">Направления</a></li>
     <li><a href="#trainers">Тренеры</a></li>
-    <li><a href="eagle_test.html">Выбрать тренера</a></li>
     <li><a href="#prices">Цены</a></li>
     <li><a href="#app">Приложение</a></li>
     <li><a href="#online">Онлайн-курсы</a></li>
@@ -449,7 +491,7 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="dcard yoga reveal"><div class="dn">Растяжка и МФР</div><div class="dd">Стретчинг и миофасциальный релиз для снятия напряжения, восстановления и гибкости.</div></div>
       <div class="dcard fit reveal"><div class="dn">Strong Fitness</div><div class="dd">Кардио, силовые упражнения, элементы боевых искусств и функциональный тренинг — всё синхронизировано с музыкой. Сложность 5/5.</div></div>
       <div class="dcard yoga reveal"><div class="dn">Йога, акробатика и растяжка в гамаках</div><div class="dd">Воздушная акробатика, йога и глубокая растяжка в гамаках. Развивает силу, гибкость и координацию.</div></div>
-      <div class="dcard dance reveal"><div class="dn">Танцы</div><div class="dd">Strip Choreo, Latina Solo, High Heels, Female Heels. Для тех, кто хочет двигаться красиво, чувствовать своё тело и получать удовольствие от танца.</div></div>
+      <div class="dcard dance reveal"><div class="dn">Танцы</div><div class="dd">Strip Choreo, High Heels, Female Heels. Для тех, кто хочет двигаться красиво, чувствовать своё тело и получать удовольствие от танца.</div></div>
       <div class="dcard kids reveal"><div class="dn">Детские занятия</div><div class="dd">Детский танец, йога. Для детей от 3 до 16 лет.</div></div>
       <div class="dcard fit reveal"><div class="dn">Аштанга йога и стойки на руках</div><div class="dd">Динамичная практика йоги и воркаут с элементами акробатики. Сила тела и баланс. Не входит в фитнес-абонемент.</div></div>
       <div class="dcard special reveal"><div class="dn">Персональные занятия</div><div class="dd">Индивидуальные тренировки по любому направлению студии, а также классический бокс.</div></div>
@@ -478,8 +520,7 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp" loading="lazy" alt="Мария Меренкова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Меренкова</div><div class="trole">Пилатес, интенсивные круговые</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0303_1_pzoihf.webp" loading="lazy" alt="Ирина Урсул" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Ирина Урсул</div><div class="trole">Хатха-йога</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/tatyana-klevtsova-new_wmfuj0.webp" loading="lazy" alt="Татьяна Клевцова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Татьяна Клевцова</div><div class="trole">Детский танец</div></div>
-      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-bratton-new_l4lpau.webp" loading="lazy" alt="Мария Браттон" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Браттон</div><div class="trole">Latina Solo</div></div>
-      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp" loading="lazy" alt="Анджелина Пергамент" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Анджелина Пергамент</div><div class="trole">Choreo Weekend</div></div>
+      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp" loading="lazy" alt="Анжелина Пергамент" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Анжелина Пергамент</div><div class="trole">Choreo Weekend</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp" loading="lazy" alt="Дарья Коршакова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Дарья Коршакова</div><div class="trole">Strip Plastic, акробатика в гамаках</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp" loading="lazy" alt="Мария Депутатова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Депутатова</div><div class="trole">Zumba</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0036_1_ssqhhc.webp" loading="lazy" alt="Анастасия Колмогорова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Анастасия Колмогорова</div><div class="trole">Аштанга йога, Стойки на руках</div></div>
@@ -488,20 +529,12 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
   </div>
 </section>
 
-<section style="background:var(--bg-dark);padding:72px 24px;">
-  <div class="si" style="text-align:center;">
-    <div class="slabel reveal" style="color:var(--beige);">Не знаешь с чего начать?</div>
-    <h2 class="stitle reveal" style="color:var(--tl);margin-bottom:20px;">Найди своего тренера</h2>
-    <p class="reveal" style="font-size:15px;color:rgba(245,240,235,.65);max-width:480px;margin:0 auto 40px;line-height:1.8;">Пройди короткий тест — и мы подберём тренера, который подходит именно тебе по стилю, целям и характеру.</p>
-    <a href="eagle_test.html" class="btn-p reveal" style="display:inline-block;padding:16px 48px;font-size:12px;letter-spacing:.2em;">Пройти тест →</a>
-  </div>
-</section>
-
 <section id="schedule" class="sch-bg">
   <div class="si">
     <div class="slabel reveal">Когда приходить</div>
     <h2 class="stitle reveal">Расписание</h2>
     <div class="tabs-w reveal"><div class="tabs-r" id="tabsR"></div></div>
+    <div style="text-align:center;margin:0 0 12px;font-size:11px;color:var(--taupe);letter-spacing:.08em;">нажми на занятие, чтобы узнать подробнее</div>
     <div id="schedR"></div>
     <div style="max-width:540px;margin:12px auto 0;font-size:11px;color:var(--taupe);letter-spacing:.06em;text-align:center;">Количество мест ограничено, предварительная запись обязательна!</div>
     <div style="text-align:center;margin-top:24px;">
@@ -795,17 +828,17 @@ const SCHEDULE = {
     { time: "19:20", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
     { time: "20:30", name: "Круговая. Ягодицы и ноги",          trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
-    { time: "20:30", name: "Choreo 16+",                          trainer: "Анджелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
-    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "20:30", name: "Choreo 16+",                          trainer: "Анжелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
     { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
   ],
 
   tue: [
     { time: "8:40",        name: "Круговая. Пресс, руки, спина", trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "9:00",        name: "ZUMBA",                        trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
-    { time: "10:00",       name: "Пилатес",                      trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe" },
-    { time: "10:00",       name: "Здоровая спина",               trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false,  color: "taupe" },
-    { time: "11:10",       name: "Табата + МФР",                  trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
+    { time: "10:00",       name: "Пилатес",                      trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
+    { time: "10:00",       name: "Здоровая спина",               trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
+    { time: "10:00",       name: "Беговая тренировка EAGLE-слёт",   trainer: "Алиса Куприй",          hall: "На улице",    isNew: false,  color: "green"  },
+    { time: "11:10",       name: "Табата + МФР",                    trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
     { time: "18:00",       name: "Растяжка в гамаках",           trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false,  color: "taupe"  },
     { time: "18:30–20:00", name: "Аштанга йога",                 trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
     { time: "19:10",       name: "Круговая. Ягодицы и ноги",     trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe" },
@@ -828,8 +861,7 @@ const SCHEDULE = {
     { time: "19:20", name: "Йога в гамаках",                    trainer: "Дарья Колесникова",     hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
     { time: "20:30", name: "Круговая. Пресс, руки, спина",      trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
-    { time: "20:30", name: "Choreo 16+",                          trainer: "Анджелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
-    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
+    { time: "20:30", name: "Choreo 16+",                          trainer: "Анжелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
     { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
   ],
 
@@ -837,7 +869,7 @@ const SCHEDULE = {
     { time: "8:40",        name: "Круговая. Ягодицы и ноги",    trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "9:00",        name: "ZUMBA",                       trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "10:00",       name: "Пилатес",                     trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "10:00",       name: "Здоровая спина",              trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false,  color: "taupe" },
+    { time: "10:00",       name: "Здоровая спина",              trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
     { time: "11:10",       name: "Табата + МФР",                 trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
     { time: "12:30",       name: "Хатха-йога",                  trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "18:00",       name: "Растяжка в гамаках",          trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false, color: "taupe"  },
@@ -865,7 +897,7 @@ const SCHEDULE = {
   ],
 
   sat: [
-    { time: "10:00",       name: "🏃 Беговые тренировки EAGLE-слёт", trainer: "Алиса Куприй",       hall: "На улице",    isNew: true,  color: "green" },
+    { time: "10:00",       name: "🏃 Беговая тренировка EAGLE-слёт", trainer: "Алиса Куприй",       hall: "На улице",    isNew: true,  color: "green" },
     { time: "10:00",       name: "Воркаут: Стойка на руках",   trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
     { time: "10:00",       name: "Пилатес",                    trainer: "Мария Меренкова",       hall: "Малый зал",   isNew: false, color: "taupe" },
     { time: "11:10",       name: "Круговая. Всё тело",         trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
@@ -893,7 +925,7 @@ const DAYS=[
 ];
 function gm(t){const s=t.split("–")[0].trim();const[h,m]=s.split(":").map(Number);return h*60+(m||0);}
 function sdiv(l){return`<div class="sdiv"><div class="sdiv-l"></div><span class="sdiv-t">${l}</span><div class="sdiv-l"></div></div>`;}
-function scard(i){const b=i.isNew?`<span class="nbadge">NEW</span>`:"";const tp=i.time.includes('–')?i.time.split('–'):[i.time,null];const thtml=tp[1]?`<span class="sc-t" style="line-height:1.3;">${tp[0]}<br><span style="opacity:.65">${tp[1]}</span></span>`:`<span class="sc-t">${tp[0]}</span>`;return`<div class="sc ${i.color}">${thtml}<div class="sc-i"><div class="sc-n">${i.name}</div><div class="sc-m">${i.trainer} · ${i.hall}</div></div>${b}</div>`;}
+function scard(i){const b=i.isNew?`<span class="nbadge">NEW</span>`:"";const tp=i.time.includes('–')?i.time.split('–'):[i.time,null];const thtml=tp[1]?`<span class="sc-t" style="line-height:1.3;">${tp[0]}<br><span style="opacity:.65">${tp[1]}</span></span>`:`<span class="sc-t">${tp[0]}</span>`;const esc=i.name.replace(/'/g,"\\'");return`<div class="sc ${i.color}" onclick="openDirPopup('${esc}')">${thtml}<div class="sc-i"><div class="sc-n">${i.name}</div><div class="sc-m">${i.trainer} · ${i.hall}</div></div>${b}</div>`;}
 function build(){
   const te=document.getElementById("tabsR");
   const se=document.getElementById("schedR");
@@ -1150,6 +1182,306 @@ function closeWeekModal() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeWeekModal();
 });
+</script>
+
+<!-- Direction popup -->
+<div class="dp-overlay" id="dpOverlay" onclick="closeDirPopup(event)">
+  <div class="dp-modal" id="dpModal">
+    <div class="dp-handle"></div>
+    <div class="dp-head">
+      <div><div class="dp-cat" id="dpCat"></div><div class="dp-title" id="dpTitle"></div></div>
+      <button class="dp-close" onclick="closeDirPopup()">✕</button>
+    </div>
+    <div class="dp-body" id="dpBody"></div>
+  </div>
+</div>
+
+<script>
+// ── Данные направлений ────────────────────────────────────────
+const DIR_DATA = {
+  "Круговые тренировки": {
+    cat: "Фитнес", title: "Круговые тренировки",
+    desc: "Интенсивные круговые тренировки с чередованием упражнений на разные группы мышц. Три варианта: ягодицы и ноги, пресс/руки/спина, всё тело. Эффективный формат для тонуса и сжигания калорий.",
+    forWho: "Для всех уровней подготовки. Подходит тем, кто хочет похудеть, укрепить тело или поддерживать форму.",
+    trainers: [{name:"Анастасия Орёл",role:"Основатель, тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0547_1_u89xpc.webp"},{name:"Мария Меренкова",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "Здоровая спина": {
+    cat: "Фитнес", title: "Здоровая спина",
+    desc: "Занятие направлено на укрепление мышц спины и кора, улучшение осанки и снятие болевых синдромов. Упражнения выполняются в медленном темпе с акцентом на правильную технику.",
+    forWho: "Для всех, кто страдает от болей в спине, ведёт сидячий образ жизни или хочет улучшить осанку. Без противопоказаний.",
+    trainers: [{name:"Алиса Куприй",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"},{name:"Анастасия Орёл",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0547_1_u89xpc.webp"},{name:"Екатерина Гусева",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 1
+  },
+  "Функциональный тренинг": {
+    cat: "Фитнес", title: "Функциональный тренинг",
+    desc: "Тренировки на всё тело с акцентом на силу, выносливость и координацию движений. Упражнения имитируют естественные движения и развивают функциональные возможности организма.",
+    forWho: "Для тех, кто хочет стать сильнее, выносливее и улучшить качество движений в повседневной жизни.",
+    trainers: [{name:"Алиса Куприй",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "Пилатес": {
+    cat: "Мягкий фитнес", title: "Пилатес",
+    desc: "Классический пилатес — система упражнений для глубоких мышц кора, улучшения осанки и гибкости. Медленный темп, концентрация на качестве движений и правильном дыхании.",
+    forWho: "Для всех уровней подготовки, в том числе для тех, кто восстанавливается после травм или ведёт малоподвижный образ жизни.",
+    trainers: [{name:"Мария Меренкова",role:"Тренер пилатес",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Силовой пилатес": {
+    cat: "Фитнес", title: "Силовой пилатес",
+    desc: "Сочетание классического пилатеса с силовыми упражнениями. Более интенсивный формат: развивает силу, тонус мышц и выносливость, сохраняя точность движений пилатеса.",
+    forWho: "Для тех, кто уже знаком с пилатесом и хочет добавить нагрузку, или для тех, кто ищет баланс между силовыми и мягкими тренировками.",
+    trainers: [{name:"Мария Меренкова",role:"Тренер пилатес",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "Табата + МФР": {
+    cat: "Фитнес", title: "Табата + МФР",
+    desc: "Интенсивные интервальные тренировки по протоколу Табата (20 сек работы / 10 сек отдых) в сочетании с миофасциальным релизом для восстановления мышц после нагрузки.",
+    forWho: "Для тех, кто хочет сжечь калории, развить выносливость и при этом правильно восстановиться после тренировки.",
+    trainers: [{name:"Екатерина Гусева",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"},{name:"Анастасия Орёл",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0547_1_u89xpc.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 4
+  },
+  "Растяжка + МФР": {
+    cat: "Мягкий фитнес", title: "Растяжка и МФР",
+    desc: "Стретчинг и миофасциальный релиз — занятие для снятия мышечного напряжения, восстановления после нагрузок и улучшения гибкости. МФР помогает прорабатывать глубокие слои мышц и фасций с помощью роллов и мячей.",
+    forWho: "Для всех. Особенно полезно тем, кто много тренируется или ведёт сидячий образ жизни.",
+    trainers: [{name:"Анастасия Орёл",role:"Основатель, тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0547_1_u89xpc.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 1
+  },
+  "Растяжка": {
+    cat: "Мягкий фитнес", title: "Растяжка",
+    desc: "Классическое занятие по растяжке: плавная работа с мышцами и суставами, увеличение амплитуды движений и снятие накопленного напряжения. Без резких движений — только мягкий, осознанный стретчинг в комфортном темпе.",
+    forWho: "Для всех уровней подготовки. Особенно рекомендуется тем, кто хочет улучшить гибкость, снять мышечные зажимы или расслабиться после интенсивной недели.",
+    trainers: [{name:"Екатерина Гусева",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 1
+  },
+  "Растяжка в гамаках": {
+    cat: "Гамаки", title: "Растяжка в гамаках",
+    desc: "Глубокая растяжка с использованием воздушного гамака. Гамак помогает тянуться глубже и снимает нагрузку с позвоночника, обеспечивая мягкое вытяжение и декомпрессию.",
+    forWho: "Для всех, кто хочет улучшить гибкость. Особенно полезно для спины и суставов.",
+    trainers: [{name:"Екатерина Гусева",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"},{name:"Дарья Коршакова",role:"Тренер акробатики в гамаках",img:"https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 1
+  },
+  "Йога в гамаках": {
+    cat: "Йога / Гамаки", title: "Йога в гамаках",
+    desc: "Йога с использованием воздушного гамака как опоры и инструмента. Занятие развивает гибкость, силу и баланс, позволяя выполнять позы глубже и безопаснее. Включает элементы воздушной акробатики.",
+    forWho: "Для любого уровня подготовки. Идеально для тех, кто хочет разнообразить практику йоги или попробовать воздушную акробатику.",
+    trainers: [{name:"Дарья Колесникова",role:"Тренер йоги в гамаках",img:"https://res.cloudinary.com/dve1ywzim/image/upload/darya-kolesnikova-new_pwyvev.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Хатха-йога": {
+    cat: "Йога", title: "Хатха-йога",
+    desc: "Классическая хатха-йога — сочетание статических поз (асан), дыхательных практик (пранаяма) и медитации. Занятия развивают гибкость, силу и помогают достичь гармонии тела и ума.",
+    forWho: "Для всех, кто хочет начать практику йоги или углубить её. Подходит для любого возраста и уровня подготовки.",
+    trainers: [{name:"Ирина Урсул",role:"Тренер хатха-йоги",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0303_1_pzoihf.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Аштанга йога": {
+    cat: "Йога", title: "Аштанга йога",
+    desc: "Динамичная практика с фиксированной последовательностью поз, которая развивает силу, гибкость и концентрацию. Занятия проходят в формате 18:30–20:00.",
+    forWho: "Для тех, кто готов к регулярной осознанной практике. Требует базового уровня физической подготовки.",
+    trainers: [{name:"Анастасия Колмогорова",role:"Тренер аштанга йоги и стоек на руках",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0036_1_ssqhhc.webp"}],
+    prices: [{l:"Разовое занятие",r:"900 ₽"},{l:"4 занятия",r:"2 700 ₽"},{l:"8 занятий",r:"4 400 ₽"}],
+    priceNote: "Не входит в фитнес-абонемент",
+    diff: 4
+  },
+  "Воркаут: Стойка на руках": {
+    cat: "Йога / Воркаут", title: "Стойка на руках",
+    desc: "Специализированное занятие по освоению и совершенствованию стойки на руках. Включает подготовительные упражнения для плечевого пояса и кора, отработку баланса у стены и в свободном пространстве.",
+    forWho: "Для тех, кто хочет освоить стойку на руках — с нуля или улучшить технику. Требуется базовая физическая подготовка.",
+    trainers: [{name:"Анастасия Колмогорова",role:"Тренер аштанга йоги и стоек на руках",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0036_1_ssqhhc.webp"}],
+    prices: [{l:"Разовое занятие",r:"900 ₽"},{l:"4 занятия",r:"2 700 ₽"},{l:"8 занятий",r:"4 400 ₽"}],
+    priceNote: "Не входит в фитнес-абонемент",
+    diff: 4
+  },
+  "ZUMBA": {
+    cat: "Танцы / Фитнес", title: "Zumba",
+    desc: "Зажигательный танцевальный фитнес на латиноамериканских ритмах. Кардио-тренировка в формате танца — весело, энергично и эффективно для всего тела.",
+    forWho: "Для всех без исключения. Специальной подготовки не требуется — только желание двигаться и хорошее настроение!",
+    trainers: [{name:"Мария Депутатова",role:"Тренер Zumba",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Strong Fitness": {
+    cat: "Фитнес", title: "Strong Fitness",
+    desc: "Кардио, силовые упражнения, элементы боевых искусств и функциональный тренинг — всё синхронизировано с музыкой. Максимальная нагрузка за минимальное время.",
+    forWho: "Для подготовленных. Рекомендуется тем, кто уже занимается фитнесом и готов к интенсивным нагрузкам.",
+    trainers: [{name:"Мария Депутатова",role:"Тренер фитнес направлений",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 5
+  },
+  "Choreo 16+": {
+    cat: "Танцы 16+", title: "Choreo",
+    desc: "Хореография на современные треки: постановка связок, работа с музыкальностью и телом. Занятия развивают чувство ритма, координацию и артистизм.",
+    forWho: "Для девушек от 16 лет. Опыт не обязателен — важно желание танцевать.",
+    trainers: [{name:"Анжелина Пергамент",role:"Тренер хореографии",img:"https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Choreo Weekend 16+": {
+    cat: "Танцы 16+", title: "Choreo Weekend",
+    desc: "Углублённый формат хореографии по субботам. Расширенное время занятия для детальной проработки постановки и техники движений.",
+    forWho: "Для девушек от 16 лет, кто хочет серьёзнее подойти к изучению хореографии.",
+    trainers: [{name:"Анжелина Пергамент",role:"Тренер хореографии",img:"https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp"}],
+    prices: [{l:"Пробное занятие (2 ч)",r:"800 ₽"},{l:"4 занятия по 2 ч",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "High Heels 18+": {
+    cat: "Танцы 18+", title: "Strip Choreo и High Heels",
+    desc: "Танцевальные направления на каблуках — для тех, кто хочет чувствовать себя уверенно и сексуально. High Heels развивает пластику, координацию и умение двигаться в туфлях на каблуке.",
+    forWho: "Для женщин от 18 лет. Специальный опыт не нужен — только желание раскрыться.",
+    trainers: [{name:"Мария Карамышева",role:"Тренер Strip Choreo и High Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "Strip Choreo 18+": {
+    cat: "Танцы 18+", title: "Strip Choreo и High Heels",
+    desc: "Strip Choreo — пластичный чувственный танец, объединяющий элементы стрип-пластики и хореографии. Развивает женственность, уверенность в себе и умение владеть своим телом.",
+    forWho: "Для женщин от 18 лет. Специальный опыт не нужен — только желание раскрыться.",
+    trainers: [{name:"Мария Карамышева",role:"Тренер Strip Choreo и High Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 3
+  },
+  "Female Heels 16+": {
+    cat: "Танцы 16+", title: "Female Heels",
+    desc: "Женственный танец на каблуках с акцентом на пластику, грацию и чувственность движений. Сочетает хореографию, элементы contemporary и работу с образом.",
+    forWho: "Для девушек от 16 лет. Танцевальный опыт приветствуется, но не обязателен.",
+    trainers: [{name:"Екатерина Гусева",role:"Тренер Female Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Strip Plastic 18+": {
+    cat: "Танцы 18+", title: "Strip Plastic",
+    desc: "Стрип-пластика — плавный пластичный танец, развивающий женственность и уверенность. Занятие включает работу с телом, партерную технику и постановку сольных связок.",
+    forWho: "Для женщин от 18 лет без специальной подготовки.",
+    trainers: [{name:"Дарья Коршакова",role:"Тренер Strip Plastic",img:"https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 2
+  },
+  "Детский танец 3–5 лет": {
+    cat: "Детские занятия", title: "Детский танец",
+    desc: "Танцевальные занятия для самых маленьких. Дети в игровой форме знакомятся с ритмом, координацией и базовыми танцевальными движениями. Развивает музыкальность, пластику и уверенность.",
+    forWho: "Для детей от 3 до 5 лет.",
+    trainers: [{name:"Татьяна Клевцова",role:"Тренер детского танца",img:"https://res.cloudinary.com/dve1ywzim/image/upload/tatyana-klevtsova-new_wmfuj0.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 0
+  },
+  "Детская йога 5–10 лет": {
+    cat: "Детские занятия", title: "Детская йога",
+    desc: "Йога для детей в игровой и доступной форме. Занятия развивают гибкость, координацию, концентрацию и умение расслабляться. Позы подаются через образы и истории.",
+    forWho: "Для детей от 5 до 10 лет.",
+    trainers: [{name:"Анастасия Колмогорова",role:"Тренер детской йоги",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0036_1_ssqhhc.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 0
+  },
+  "Бесплатная зарядка на улице": {
+    cat: "Бесплатно", title: "Бесплатные зарядки",
+    desc: "Каждое воскресенье в 10:00 — бесплатная тренировка на свежем воздухе у Амфитеатра ЖК «Спектр». Каждую неделю новый тренер и своя тема.",
+    forWho: "Для всех без исключения. Приходите сами и приводите друзей!",
+    trainers: [],
+    prices: [{l:"Бесплатно"}],
+    diff: 0
+  },
+  "Беговая тренировка EAGLE-слёт": {
+    cat: "Беговой клуб", title: "Беговая тренировка EAGLE-слёт",
+    desc: "Беговые тренировки для начинающих каждую субботу в 10:00. Правильная техника бега, доступный темп и дружная компания. Занятия проходят на улице — присоединяйтесь!",
+    forWho: "Для всех, кто хочет начать бегать или улучшить технику. Специальная подготовка не нужна.",
+    trainers: [{name:"Алиса Куприй",role:"Тренер беговых тренировок",img:"https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"}],
+    prices: [{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}],
+    diff: 1
+  },
+  "Пивная йога (19 июня)": {
+    cat: "Спецмероприятие", title: "Пивная йога",
+    desc: "Необычный формат: йога под живую музыку и с бокалом пива в руке. Лёгкая практика, отличная атмосфера и много смеха. Следующее занятие — 19 июня.",
+    forWho: "Для взрослых 18+. Никакого опыта в йоге не нужно — только хорошее настроение!",
+    trainers: [{name:"Алиса Куприй",role:"Тренер",img:"https://res.cloudinary.com/dve1ywzim/image/upload/alisa-kupriy-new_eldrhu.webp"}],
+    prices: [{l:"Занятие",r:"800 ₽"}],
+    diff: 1
+  },
+  "Винная растяжка (12 июня)": {
+    cat: "Спецмероприятие", title: "Винная растяжка",
+    desc: "Расслабляющая растяжка с бокалом вина. Приятная атмосфера, мягкие упражнения и хорошая компания. Следующее занятие — 12 июня.",
+    forWho: "Для взрослых 18+. Опыт не нужен.",
+    trainers: [{name:"Анастасия Орёл",role:"Основатель, тренер студии",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0547_1_u89xpc.webp"}],
+    prices: [{l:"Занятие + напиток",r:"900 ₽"}],
+    diff: 1
+  }
+};
+const DIR_MAP = {
+  "Круговая. Ягодицы и ноги": "Круговые тренировки",
+  "Круговая. Пресс, руки, спина": "Круговые тренировки",
+  "Круговая. Всё тело": "Круговые тренировки",
+  "Аштанга йога": "Аштанга йога",
+  "Воркаут: Стойка на руках": "Воркаут: Стойка на руках",
+  "🏃 Беговая тренировка EAGLE-слёт": "Беговая тренировка EAGLE-слёт",
+  "Беговая тренировка EAGLE-слёт": "Беговая тренировка EAGLE-слёт",
+  "Беговая тренировка EAGLE-слёт": "Беговая тренировка EAGLE-слёт",
+  "Бесплатная зарядка на свежем воздухе": "Бесплатная зарядка на улице",
+  "Бесплатная зарядка на улице": "Бесплатная зарядка на улице",
+  "🍺 Пивная йога (19 июня)": "Пивная йога (19 июня)",
+  "🍷 Винная растяжка (12 июня)": "Винная растяжка (12 июня)",
+};
+
+function getDirData(name) {
+  return DIR_DATA[DIR_MAP[name] || name] || null;
+}
+
+function openDirPopup(name) {
+  const d = getDirData(name);
+  if (!d) return;
+  document.getElementById('dpCat').textContent = d.cat;
+  document.getElementById('dpTitle').textContent = d.title;
+
+  let html = '';
+  if (d.desc) html += `<p class="dp-desc">${d.desc}</p>`;
+  if (d.forWho) html += `<div class="dp-for"><strong>Для кого</strong>${d.forWho}</div>`;
+  if (d.diff > 0) {
+    const dots = Array.from({length:5},(_,i)=>`<div class="dp-dot${i<d.diff?' on':''}"></div>`).join('');
+    html += `<div class="dp-diff"><span class="dp-diff-label">Сложность</span><div class="dp-dots">${dots}</div></div>`;
+  }
+  if (d.trainers && d.trainers.length) {
+    const label = d.trainers.length > 1 ? 'Тренеры' : 'Тренер';
+    html += `<div class="dp-section"><div class="dp-label">${label}</div>`;
+    d.trainers.forEach(t => {
+      const initials = t.name.split(' ').map(w=>w[0]).slice(0,2).join('');
+      html += `<div class="dp-trainer"><img class="dp-avatar" src="${t.img}" alt="${t.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="dp-avatar-init" style="display:none">${initials}</div><div><div class="dp-tname">${t.name}</div><div class="dp-trole">${t.role}</div></div></div>`;
+    });
+    html += `</div>`;
+  }
+  if (d.prices && d.prices.length) {
+    html += `<div class="dp-section"><div class="dp-label">Цены</div>`;
+    d.prices.forEach(p => {
+      if (p.r) html += `<div class="dp-price-row"><span>${p.l}</span><span><b>${p.r}</b></span></div>`;
+      else html += `<div class="dp-price-row"><span>${p.l}</span></div>`;
+    });
+    if (d.priceNote) html += `<div class="dp-price-note">${d.priceNote}</div>`;
+    html += `</div>`;
+  }
+  html += `<a class="dp-btn" href="https://t.me/Eaglefitdancestudio" target="_blank">Записаться</a>`;
+
+  document.getElementById('dpBody').innerHTML = html;
+  document.getElementById('dpOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDirPopup(e) {
+  if (e && e.target !== document.getElementById('dpOverlay')) return;
+  document.getElementById('dpOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDirPopup(); });
 </script>
 
 </body>
