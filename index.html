@@ -511,7 +511,6 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-kolesnikova-new_pwyvev.webp" loading="lazy" alt="Дарья Колесникова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Дарья Колесникова</div><div class="trole">Йога в гамаках</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-merenkova-new_zfh8cm.webp" loading="lazy" alt="Мария Меренкова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Меренкова</div><div class="trole">Пилатес, интенсивные круговые</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0303_1_pzoihf.webp" loading="lazy" alt="Ирина Урсул" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Ирина Урсул</div><div class="trole">Хатха-йога</div></div>
-      <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-bratton-new_l4lpau.webp" loading="lazy" alt="Мария Браттон" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Браттон</div><div class="trole">Latina Solo</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/andzhelina-pergament-new_yqwulp.webp" loading="lazy" alt="Анджелина Пергамент" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Анджелина Пергамент</div><div class="trole">Choreo Weekend</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp" loading="lazy" alt="Дарья Коршакова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Дарья Коршакова</div><div class="trole">Strip Plastic, акробатика в гамаках</div></div>
       <div class="tcard reveal"><div class="tphoto" style="background:none;padding:0;overflow:hidden;"><img src="https://res.cloudinary.com/dve1ywzim/image/upload/mariya-deputatova-new_tzeguz.webp" loading="lazy" alt="Мария Депутатова" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:18px;"></div><div class="tname">Мария Депутатова</div><div class="trole">Zumba</div></div>
@@ -809,9 +808,9 @@ footer{background:var(--bg-dark);padding:40px 48px;display:flex;justify-content:
 const SCHEDULE = {
 
   mon: [
+    { time: "8:00", name: "Хатха-йога",                        trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "12:30", name: "Хатха-йога",                        trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "18:10", name: "Силовой пилатес",                    trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false,  color: "taupe" },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -819,7 +818,6 @@ const SCHEDULE = {
     { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
     { time: "20:30", name: "Круговая. Ягодицы и ноги",          trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
     { time: "20:30", name: "Choreo 16+",                          trainer: "Анджелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
-    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
     { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
   ],
 
@@ -827,8 +825,6 @@ const SCHEDULE = {
     { time: "8:40",        name: "Круговая. Пресс, руки, спина", trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "9:00",        name: "ZUMBA",                        trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "10:00",       name: "Пилатес",                      trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe" },
-    { time: "10:00",       name: "Здоровая спина",               trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false,  color: "taupe" },
-    { time: "11:10",       name: "Табата + МФР",                  trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
     { time: "18:00",       name: "Растяжка в гамаках",           trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false,  color: "taupe"  },
     { time: "18:30–20:00", name: "Аштанга йога",                 trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
     { time: "19:10",       name: "Круговая. Ягодицы и ноги",     trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe" },
@@ -842,8 +838,7 @@ const SCHEDULE = {
   wed: [
     { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "taupe" },
-    { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "charcoal"  },
+    { time: "11:20", name: "Растяжка в гамаках",                          trainer: "Анастасия Орёл",       hall: "Большой зал", isNew: false,  color: "taupe" },
     { time: "18:10", name: "Силовой пилатес",                    trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -851,17 +846,14 @@ const SCHEDULE = {
     { time: "20:30", name: "Пилатес",                           trainer: "Мария Меренкова",       hall: "Йога зал",    isNew: false, color: "taupe"  },
     { time: "20:30", name: "Круговая. Пресс, руки, спина",      trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe"  },
     { time: "20:30", name: "Choreo 16+",                          trainer: "Анджелина Пергамент",   hall: "Малый зал",   isNew: false,  color: "charcoal"  },
-    { time: "21:40", name: "Latina Solo 14+",                   trainer: "Мария Браттон",         hall: "Большой зал", isNew: false, color: "charcoal"  },
     { time: "21:40", name: "Растяжка + МФР",                    trainer: "Анастасия Орёл",        hall: "Йога зал",    isNew: false, color: "taupe"  },
   ],
 
   thu: [
+    { time: "8:00",       name: "Хатха-йога",                  trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "8:40",        name: "Круговая. Ягодицы и ноги",    trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "9:00",        name: "ZUMBA",                       trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "10:00",       name: "Пилатес",                     trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "10:00",       name: "Здоровая спина",              trainer: "Екатерина Гусева",      hall: "Малый зал",   isNew: false,  color: "taupe" },
-    { time: "11:10",       name: "Табата + МФР",                 trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false,  color: "taupe" },
-    { time: "12:30",       name: "Хатха-йога",                  trainer: "Ирина Урсул",           hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "18:00",       name: "Растяжка в гамаках",          trainer: "Екатерина Гусева",      hall: "Большой зал", isNew: false, color: "taupe"  },
     { time: "18:30–20:00", name: "Аштанга йога",                trainer: "Анастасия Колмогорова", hall: "Йога зал",    isNew: false, color: "sand" },
     { time: "19:10",       name: "Круговая. Пресс, руки, спина",trainer: "Анастасия Орёл",        hall: "Большой зал", isNew: false, color: "taupe" },
@@ -876,8 +868,7 @@ const SCHEDULE = {
   fri: [
     { time: "9:00",  name: "Здоровая спина",                   trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "10:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Большой зал", isNew: false, color: "taupe" },
-    { time: "11:20", name: "Растяжка в гамаках",                trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "taupe" },
-    { time: "12:30", name: "Strip Plastic 18+",                 trainer: "Дарья Коршакова",       hall: "Большой зал", isNew: false,  color: "charcoal"  },
+    { time: "11:20", name: "Растяжка в гамаках",                trainer: "Анастасия Орёл",       hall: "Большой зал", isNew: false,  color: "taupe" },
     { time: "18:10", name: "Функциональный тренинг",            trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "18:30", name: "Детская йога 5–10 лет",             trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "19:20", name: "Здоровая спина",                    trainer: "Алиса Куприй",          hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -891,13 +882,13 @@ const SCHEDULE = {
     { time: "10:00",       name: "Пилатес",                    trainer: "Мария Меренкова",       hall: "Малый зал",   isNew: false, color: "taupe" },
     { time: "11:10",       name: "Круговая. Всё тело",         trainer: "Мария Меренкова",       hall: "Большой зал", isNew: false, color: "taupe" },
     { time: "11:10",       name: "ZUMBA",                      trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false, color: "taupe" },
+    { time: "12:30",       name: "Strong Fitness",             trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false,  color: "taupe"  },
     { time: "12:30–14:30", name: "Choreo Weekend 16+",         trainer: "Анжелина Пергамент",    hall: "Большой зал", isNew: false, color: "charcoal"  },
-    { time: "13:00",       name: "Strong Fitness",             trainer: "Мария Депутатова",      hall: "Йога зал",    isNew: false,  color: "taupe"  },
   ],
 
   sun: [
-    { time: "10:00", name: "Заплыв на сапах (19.07)",       trainer: "Анастасия Орёл",        hall: "На улице",    isNew: true,  color: "green" },
     { time: "10:00", name: "Бесплатная зарядка на свежем воздухе",  trainer: "Амфитеатр ЖК «Спектр»",   hall: "На улице",    isNew: true,  color: "green" },
+    { time: "12:00", name: "Заплыв на сапах (19.07)",       trainer: "Анастасия Орёл",        hall: "Центральный пляж Академгородка",    isNew: true,  color: "green" },
     { time: "18:00", name: "Табата + МФР",        trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
     { time: "18:00", name: "Детская йога 5–10 лет", trainer: "Анастасия Колмогорова", hall: "Большой зал", isNew: false, color: "rose"  },
     { time: "19:10", name: "Растяжка",            trainer: "Екатерина Гусева",      hall: "Йога зал",    isNew: false, color: "taupe" },
@@ -1208,7 +1199,6 @@ const DIR_DATA = {
   "High Heels 18+": { cat:"Танцы 18+", title:"Strip Choreo и High Heels", desc:"Танцевальные направления на каблуках. High Heels развивает пластику, координацию и умение двигаться на каблуке.", forWho:"Для женщин от 18 лет.", trainers:[{name:"Мария Карамышева",role:"Тренер Strip Choreo и High Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp"}], prices:[{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}], diff:3 },
   "Strip Choreo 18+": { cat:"Танцы 18+", title:"Strip Choreo и High Heels", desc:"Strip Choreo — пластичный чувственный танец, объединяющий элементы стрип-пластики и хореографии.", forWho:"Для женщин от 18 лет.", trainers:[{name:"Мария Карамышева",role:"Тренер Strip Choreo и High Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/mariya-karamysheva-new_q64o71.webp"}], prices:[{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}], diff:3 },
   "Female Heels 16+": { cat:"Танцы 16+", title:"Female Heels", desc:"Женственный танец на каблуках с акцентом на пластику, грацию и чувственность движений.", forWho:"Для девушек от 16 лет.", trainers:[{name:"Екатерина Гусева",role:"Тренер Female Heels",img:"https://res.cloudinary.com/dve1ywzim/image/upload/ekaterina-guseva-new_y2hesr.webp"}], prices:[{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}], diff:2 },
-  "Strip Plastic 18+": { cat:"Танцы 18+", title:"Strip Plastic", desc:"Стрип-пластика — плавный пластичный танец, развивающий женственность и уверенность.", forWho:"Для женщин от 18 лет.", trainers:[{name:"Дарья Коршакова",role:"Тренер Strip Plastic",img:"https://res.cloudinary.com/dve1ywzim/image/upload/darya-korshakova-new_vmnrej.webp"}], prices:[{l:"Пробное занятие",r:"400 ₽"},{l:"4 занятия",r:"2 200 ₽"},{l:"8 занятий",r:"3 800 ₽"}], diff:2 },
   "Детская йога 5–10 лет": { cat:"Детские занятия", title:"Детская йога", desc:"Йога для детей в игровой форме. Развивает гибкость, координацию и концентрацию.", forWho:"Для детей от 5 до 10 лет.", trainers:[{name:"Анастасия Колмогорова",role:"Тренер детской йоги",img:"https://res.cloudinary.com/dve1ywzim/image/upload/_DSF0036_1_ssqhhc.webp"}], prices:[{l:"Пробное занятие",r:"400 ₽"},{l:"8 занятий",r:"3 800 ₽"}], diff:0 },
   "Бесплатная зарядка на улице": { cat:"Бесплатно", title:"Бесплатные зарядки", desc:"Каждое воскресенье в 10:00 — бесплатная тренировка на свежем воздухе у Амфитеатра ЖК «Спектр». Каждую неделю новый тренер и своя тема.", forWho:"Для всех без исключения!", trainers:[], prices:[{l:"Бесплатно"}], diff:0 },
   "Бесплатная зарядка на свежем воздухе": { cat:"Бесплатно", title:"Бесплатные зарядки", desc:"Каждое воскресенье в 10:00 — бесплатная тренировка на свежем воздухе у Амфитеатра ЖК «Спектр».", forWho:"Для всех без исключения!", trainers:[], prices:[{l:"Бесплатно"}], diff:0 },
